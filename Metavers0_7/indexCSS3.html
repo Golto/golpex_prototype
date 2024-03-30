@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+		<meta charset="utf-8">
+		<title>Metavers v0.7css3d</title>
+		<link rel="icon" type="image/png" href="favicon.png">
+		<style>
+	 		body { margin: 0;
+				touch-action: none; /*disabling double tap zoom in*/
+				overflow: hidden;
+			}
+			canvas {
+				/*display: block;*/
+				/*background: linear-gradient(blue, lightblue);*/
+				/*background: linear-gradient(black, black);*/
+
+				position: fixed;
+				top: 0;
+				z-index: -1;
+	  		}
+
+	  		h1{
+	  			color: white;
+	  		}
+
+		</style>
+  	</head>
+  	<body id="output">
+		
+		<div id="renderDiv"></div>
+		<div id="renderDiv2"></div>
+
+		<script src="./threeLibs/three.js"></script>
+		<script src="./threeLibs/PointerLockControls.js"></script>
+		<script src="./threeLibs/Capsule.js"></script>
+		<script src="./threeLibs/Octree.js"></script>
+		<script src="./threeLibs/GLTFLoader.js"></script>
+		<script src="./threeLibs/CSS3DRenderer.js"></script>
+
+		<script src="./mainCSS3.js"></script>
+  </body>
+</html>
