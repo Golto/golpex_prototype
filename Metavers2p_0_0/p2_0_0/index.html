@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!--Afficher des icônes-->
+	<script src="https://kit.fontawesome.com/b858757988.js" crossorigin="anonymous"></script>
+	<title>Golpex p2.0.0</title>
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<link type="image/png" rel="icon" href="favicon.png">
+
+</head>
+<body>
+	<!--  ========================================== IMPORTS ==========================================  -->
+
+	<!-- THREE.js -->
+	<!-- Import maps polyfill -->
+	<!-- Remove this when import maps will be widely supported -->
+	<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://threejs.org/build/three.module.js",
+				"three/addons/": "https://threejs.org/examples/jsm/"
+			}
+		}
+	</script>
+
+	<!--  ========================================== HEADER ==========================================  -->
+	<header class="header" id="header">
+		<div class="row">
+			<div class="column flex1"><span class="name-golpex text-resize1">Golpex</span></div>
+			<div class="column flex1"><span class="text-resize1">Main</span></div>
+			<div class="column flex1"><i class="fa-solid fa-bars"></i></div>
+		</div>
+	</header>
+	<!--  ========================================== NAVI-MENU ==========================================  -->
+	<!--<div class="navimenu">
+		
+	</div>-->
+	<!--  ========================================== SECTION 1 : MAIN ==========================================  -->
+	<div class="row screen-high" id="section1_main ">
+		<!-- -------------------- SECTION 1.1 -------------------- -->
+		<div class="column flex1 div-centered">
+			<img class="logo-main padding" src="./logo.svg" data-inviewport="slide"/>
+			<h1 class="text-resize3" data-inviewport="slide">
+				Bienvenue<br>
+				<small>dans</small><br>
+				<span class="name-golpex">Golpex</span>
+			</h1>
+		</div>
+
+	</div>
+	<!--  ========================================== SECTION 2 : INTRO ==========================================  -->
+	<div class="row screen-high" id="section2_intro ">
+		<div class="column flex2 div-centered">
+			<p class="text-resize1_5" data-inviewport="slide">
+				Explore and learn<br>
+				Mathematics<br>
+				<span class="text-orange">while playing</span>
+			</p>
+			<button class="button text-resize1" data-inviewport="slide" onclick="">
+				Explorer le monde
+			</button>
+		</div>
+	</div>
+	<!--  ========================================== SECTION 3 : PHYSICS ==========================================  -->
+	<div class="row screen-high" id="section3_physics ">
+		
+		<div class="column flex1">
+			
+		</div>
+		<div class="column flex3">
+			<div class="div-centered">
+				<div id="renderer-physics" data-inviewport="fade" class="renderer-test"></div>
+			</div>
+			
+			
+		</div>
+		<div class="column flex1">
+			
+		</div>
+	</div>
+	<!--  ========================================== SECTION 4 : ... ==========================================  -->
+	<div class="row screen-high" id="section4_... ">
+		
+		<div class="column flex1">
+			
+		</div>
+		<div class="column flex3">
+			<div class="div-centered">
+				<div id="renderer-fps" data-inviewport="fade" class="renderer-test"></div>
+			</div>
+			
+			
+		</div>
+		<div class="column flex1">
+			
+		</div>
+	</div>
+
+	<!--  ========================================== FOOTER ==========================================  -->
+	<footer class="footer" id="footer">
+		<div class="column padding">
+			<a href="https://www.youtube.com/channel/UC3lRCtBb8ssim8FdTqZ-hug" target="_blank" title="Youtube's channel">
+				<i class="fa-brands fa-youtube text-resize2 transition"></i>
+			</a>
+
+			<a href="https://discord.gg/WnWpuHj5SA" target="_blank" title="Discord Server">
+				<i class="fa-brands fa-discord text-resize2 transition"></i>
+			</a>
+		</div>
+		<div class="padding">
+			Version p2.0.0 by Golto (FOUCAUD Guillaume)<br>
+			© Tout droit réservé
+		</div>
+	</footer>
+
+	<!--  ========================================== SCRIPT : THREEJS ==========================================  -->
+
+	<script src="https://threejs.org/examples/js/libs/ammo.wasm.js"></script>
+	<!--<script src="https://threejs.org/build/three.module.js"></script>-->
+
+	<!-- Import maps polyfill -->
+	<!-- Remove this when import maps will be widely supported -->
+	<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "https://threejs.org/build/three.module.js",
+				"three/addons/": "https://threejs.org/examples/jsm/",
+			}
+		}
+	</script>
+
+	<!--  ========================================== SCRIPT : RENDERER ==========================================  -->
+
+	<script type="module" src="./renderer_physics2.js"></script>
+	<!--<script type="module" src="./renderer_fps.js"></script>-->
+
+	<!--  ========================================== SCRIPT : EXPORTER ==========================================  -->
+
+	<script type="text/javascript">
+		/*
+		// Exporter une scène
+
+		import { OBJExporter } from 'three/addons/exporters/OBJExporter.js';
+
+		function exportToObj() {
+
+			const exporter = new OBJExporter();
+			const result = exporter.parse( scene );
+			saveString( result, 'object.obj' );
+
+		}
+
+		*/
+	</script>
+
+	<!--  ========================================== SCRIPT : IN-VIEWPORT ==========================================  -->
+
+	<script type="text/javascript">
+			//Toggle animations when visible
+			//https://stackoverflow.com/questions/27462306/css3-animate-elements-if-visible-in-viewport-page-scroll
+
+
+			/*
+			use data-inviewport="NAME" in HTML elements like that : <a data-inviewport="slide">example</a>
+	
+			use [data-inviewport="NAME"] in CSS like that :
+
+			[data-inviewport="slide"] { 
+				transition: 2s ease-out;
+				opacity: 0.0;
+				transform: translate(0, -20%);
+
+			}
+			[data-inviewport="slide"].is-inViewport { 
+				opacity: 1.0; 
+				transform: translate(0, 0);
+			}
+			*/
+
+			const inViewport = (entries, observer) => {
+			  entries.forEach(entry => {
+			    entry.target.classList.toggle("is-inViewport", entry.isIntersecting);
+			  });
+			};
+
+			const Obs = new IntersectionObserver(inViewport);
+			const obsOptions = {}; //See: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options
+
+			// Attach observer to every [data-inviewport] element:
+			const ELs_inViewport = document.querySelectorAll('[data-inviewport]');
+			ELs_inViewport.forEach(EL => {
+			  Obs.observe(EL, obsOptions);
+			});
+		</script>
+
+</body>
+</html>
