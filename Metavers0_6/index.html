@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+		<meta charset="utf-8">
+		<title>Metavers v0.6</title>
+		<link rel="icon" type="image/png" href="favicon.png">
+		<style>
+	 		body { margin: 0;
+				touch-action: none; /*disabling double tap zoom in*/
+			}
+			canvas {
+				display: block;
+				background: linear-gradient(blue, lightblue);
+				/*background: linear-gradient(black, black);*/
+	  		}
+	  		/*
+	  		100% = 1em
+	  		*/
+	  		button {
+				margin-top: 5px;
+				margin-left: 5px;
+				line-height: 30px;
+				font-weight: bold;
+				padding: 0 10px;
+				background: red;
+				border: solid;
+				border-radius: 30px;
+			}
+			button:hover {
+				background: lightcoral;
+				border-radius: 30px;
+			}
+
+			#onCanvas {
+				position: fixed;
+				
+				top: 0%;
+				left: 0%;
+				right: 0%;
+				bottom: 0%;
+
+				/*border: solid;*/
+			}
+
+			#info {
+				position: absolute;
+				font-weight: bold;
+				font-size: calc(100vw / 40);
+				
+				margin: 5px;
+				border: solid;
+				padding: 5px;
+				background-color: skyblue;
+
+				opacity: 0.4;
+			}
+
+			#loading {
+				position: absolute;
+				font-weight: bold;
+				font-size: calc(100vw / 30);
+				
+				border: solid;
+				border-radius: 10%;
+				background: linear-gradient(dimgray, lightcyan);
+
+				padding: 5%;
+				text-align: center;
+
+				opacity: 1.0; /*mettre à 1.0*/
+
+				top: 10%;
+				left: 20%;
+				width: 50%;
+				height: 80%;
+			}
+
+			#forward {
+				position: absolute;
+
+				bottom: 10%;
+				right: 5%;
+
+				width: 20%; /*voir main_update()*/
+				height: 20%;
+
+				/*max-height: 15%;*/
+
+				/*text-align: center;
+				font-size: calc(100vw / 10);*/
+
+				margin: 0%;
+				border: solid;
+				border-radius: 100%;
+				padding: 0%;
+
+				background: white;
+				opacity: 0.1;
+				
+			}
+			
+			#throwball {
+				position: absolute;
+
+				bottom: 10%;
+				left: 5%;
+
+				width: 20%;		/*voir main_update()*/
+				height: 20%;
+
+				margin: 0%;
+				border: solid;
+				border-radius: 100%;
+				padding: 0%;
+				
+				background: lightcoral;
+				opacity: 0.1;
+			}
+
+			.touchArea {		/*A remplacer par un swipe*/
+				/*border: solid;*/
+				background: white;
+				opacity: 0.0;
+
+				position: absolute;
+			}
+
+			#touchAreaLeft {
+				top: 0%;
+				left: 0%;
+
+				width: 30%;
+				height: 100%;
+			}
+
+			#touchAreaRight {
+				top: 0%;
+				left: 70%;
+
+				width: 30%;
+				height: 100%;
+			}
+
+			#touchAreaMiddle {
+				top: 0%;
+				left: 30%;
+				right: 70%;
+
+				width: 40%;
+				height: 100%;
+			}
+
+		</style>
+  	</head>
+  	<body id="output">
+		
+		<!--<div>Hello</div>-->
+		<div id="renderDiv" onclick="pointer.lock()">
+			<div id="onCanvas">
+				<!---<button>start</button>--->
+				<p id="info">info</p>
+				<canvas class="touchArea" id="touchAreaLeft"></canvas>
+				<canvas class="touchArea" id="touchAreaRight"></canvas>
+				<canvas class="touchArea" id="touchAreaMiddle"></canvas>
+				<canvas id="forward"></canvas>
+				<canvas id="throwball"></canvas>
+
+
+				<p id="loading">
+					Chargement...<br>
+					Le temps d'attente doit être <br>
+					de 5 à 20 sec<br>
+					Contrôles ordinateurs :<br>
+					 * zqsd + souris<br>
+					Contrôles téléphones/tablettes : <br>
+					 * appui sur la zone à gauche/droite : tourner la tête à gauche/droite
+
+				</p>
+			</div>
+		</div>
+
+		<script src="./threeLibs/three.js"></script>
+		<script src="./threeLibs/PointerLockControls.js"></script>
+		<script src="./threeLibs/Capsule.js"></script>
+		<script src="./threeLibs/Octree.js"></script>
+		<script src="./threeLibs/GLTFLoader.js"></script>
+		<script src="./threeLibs/CSS3DRenderer.js"></script>
+
+
+		<script src="./perlin.js"></script>
+		<script src="./maths.js"></script>
+		<script src="./navigator.js"></script>
+
+		<script src="./sceneSetup.js"></script>
+		
+		<script src="./skeleton.js"></script>
+		<script src="./collision.js"></script>
+		<script src="./playerSetup.js"></script>
+
+		<script src="./chunk.js"></script>
+		<script src="./light.js"></script>
+
+		<script src="./marchingCubes.js"></script>
+		<script src="./decoration.js"></script>
+
+		<script src="./main.js"></script>
+
+		
+
+
+
+	
+  </body>
+</html>
