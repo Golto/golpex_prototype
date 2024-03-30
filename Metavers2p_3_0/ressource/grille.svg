@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg9"
+   width="720"
+   height="720"
+   viewBox="0 0 720 720"
+   sodipodi:docname="grille.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs13">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient2189">
+      <stop
+         style="stop-color:#ff0000;stop-opacity:1;"
+         offset="0"
+         id="stop2185" />
+      <stop
+         style="stop-color:#ff6600;stop-opacity:1"
+         offset="1"
+         id="stop2187" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient2189"
+       id="linearGradient2191"
+       x1="614.19086"
+       y1="97.983765"
+       x2="192.38275"
+       y2="560.41931"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="namedview11"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="0.83687338"
+     inkscape:cx="316.65483"
+     inkscape:cy="301.71828"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g4087" />
+  <g
+     inkscape:groupmode="layer"
+     id="g4087"
+     inkscape:label="Image 3"
+     style="display:inline;opacity:1;fill:url(#linearGradient2191);fill-opacity:1"
+     transform="matrix(1.2536312,0,0,1.2536312,-147.36501,-75.886955)">
+    <rect
+       style="fill:#190f0a;stroke-width:0.418607"
+       id="rect351"
+       width="15.953655"
+       height="574.3316"
+       x="396.7395"
+       y="60.533714"
+       rx="0" />
+    <rect
+       style="display:inline;fill:#190f0a;fill-opacity:1;stroke-width:0.418607"
+       id="rect351-4"
+       width="15.953655"
+       height="574.3316"
+       x="339.72269"
+       y="-691.88214"
+       rx="0"
+       transform="rotate(90)" />
+  </g>
+</svg>

@@ -1,0 +1,3776 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--
+
+
+		Title Tag: The title tag appears in the header of a web page and should provide a concise and descriptive title for the page. It's the most important meta tag for SEO.
+
+		Meta Description Tag: The meta description provides a brief summary of the content of the page and appears below the title in SERPs.
+
+		Open Graph Tags: These tags allow you to control how your content appears when it's shared on social media platforms like Facebook and Twitter.
+
+		Robots Meta Tag: This tag tells search engines whether or not to index a page, follow any links on the page, and display the page in search results.
+
+		Canonical Tag: The canonical tag helps to avoid duplicate content issues by indicating the primary version of a page on your website.
+
+		Viewport Meta Tag: This tag is necessary for creating a responsive website that can be viewed on different devices.
+
+	-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Le projet Golpex est une plateforme innovante qui permet aux utilisateurs de découvrir les mathématiques de manière ludique et interactive. En utilisant des éléments de jeu vidéo, les utilisateurs pourront s'immerger dans un univers où ils pourront résoudre des problèmes mathématiques et relever des défis stimulants.
+
+Le but de Golpex est de rendre les mathématiques accessibles et amusantes pour tous les utilisateurs, qu'ils soient débutants ou experts. En utilisant une approche pédagogique basée sur le jeu, Golpex encourage l'apprentissage des mathématiques tout en offrant une expérience utilisateur immersive et divertissante.
+
+Les fonctionnalités de la plateforme incluent des défis, des jeux et des quiz mathématiques, ainsi qu'un système de progression qui permet aux utilisateurs de suivre leur évolution et de relever des défis de plus en plus complexes. Golpex offre également des ressources pédagogiques pour aider les utilisateurs à comprendre les concepts mathématiques de base et à approfondir leur compréhension.
+
+En somme, Golpex est une plateforme passionnante qui permet aux utilisateurs de s'engager dans l'apprentissage des mathématiques de manière amusante et interactive. Si vous êtes à la recherche d'une manière ludique d'apprendre les mathématiques, Golpex est la solution idéale pour vous." />
+	<meta name="author" content="Guillaume FOUCAUD" />
+	<meta name="copyright" content="Copyright © 2023 Golpex"/>
+
+	
+	<title>Golpex p2.3.0</title>
+	<!--<link type="text/css" rel="stylesheet" href="style.css">-->
+	<link type="image/png" rel="icon" href="favicon.png">
+
+	<meta property="og:title" content="Golpex p2.3.0">
+	<meta property="og:description" content="Play liberating and relaxing Mathematics">
+	<meta property="og:image" content="https://golp.w3spaces.com/favicon.png">
+	<meta property="og:url" content="https://golp.w3spaces.com">
+
+	<meta name="robots" content="index, follow">
+	<!--This tag tells search engines to index the page and follow any links on the page. If you wanted to prevent the page from being indexed, you would change "index" to "noindex". Similarly, if you wanted to prevent search engines from following links on the page, you would change "follow" to "nofollow". -->
+
+	<link rel="canonical" href="https://golp.w3spaces.com">
+
+	<!--Afficher des icônes-->
+	<script src="https://kit.fontawesome.com/b858757988.js" crossorigin="anonymous"></script>
+
+	<!-- MathJax : Permet d'avoir des formules mieux intégrées -->
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+	<!-- Desmos : Permet d'afficher des graphiques -->
+	<script src="https://www.desmos.com/api/v1.8/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
+
+	<!-- pdf.js ; Permet de lire, rechercher dans un pdf-->
+	<script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script>
+	<!--<script src='https://cdn.jsdelivr.net/npm/pdfjs-dist@2.12.313/build/pdf.min.js'></script>-->
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<!-- texte -->
+	<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
+	
+	<!-- code -->
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet"> 
+	
+	<!-- video game -->
+	<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<style>
+	.material-symbols-outlined {
+		font-variation-settings:
+		'FILL' 1,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 48
+	}
+	</style>
+
+
+	<script type="text/javascript" src="DOMPexTest.js">console.log('Penser à retirer :')</script>
+	<script type="text/javascript" src="golpexCodeEngine.js">console.log('Penser à retirer :')</script>
+
+	<script type="text/javascript">
+
+		pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js?v=3.10.78';
+
+		async function searchPDF(path, text) {
+			const pdf = await pdfjsLib.getDocument(path).promise;
+			text = text.toLowerCase()
+
+			const matches = [];
+
+			for (let i = 1; i <= pdf.numPages; i++) {
+				const page = await pdf.getPage(i);
+				const content = await page.getTextContent();
+				//console.log(page, content)
+				const items = content.items;
+				//console.log(items)
+
+
+/*
+				let textpdf = `\nPAGE ${i} : \n\n`;
+
+				for (let item of items) {
+					textpdf += item.str;
+				}
+				matches.push(textpdf
+					.replaceAll('´e', 'é').replaceAll('´ e', 'é')
+					.replaceAll('`e', 'è').replaceAll('` e', 'é')
+					.replaceAll('`a', 'à').replaceAll('` a', 'à')
+					.replaceAll('¸c', 'ç')
+					.replaceAll('.', '. ')
+					//.replaceAll('˜t', '')
+				);*/
+
+
+
+				for (let item of items) {
+					if (item.str.toLowerCase().includes(text)) {
+						matches.push({
+							page: i,
+							match: item.str 
+						});
+					}
+				}
+			}
+
+			return matches;
+		}
+//searchPDF('./ressource/pdf/Fiches_TheorieGroupes.pdf', 'cayley')
+
+
+		async function readPDF(path, page) {
+			const pdf = await pdfjsLib.getDocument(path).promise;  
+			const pdfPage = await pdf.getPage(page);
+			return pdfPage
+		}
+
+
+		async function renderPDFpage(path, page, canvas) {
+			const pageObj = await readPDF(path, page);
+			const pageContent = await pageObj.getTextContent();
+
+			const ctx = canvas.getContext('2d');
+
+			const viewport = pageObj.getViewport({scale: 2});
+			canvas.height = viewport.height;
+			canvas.width = viewport.width;
+
+			await pageObj.render({
+				canvasContext: ctx,
+				viewport
+			}).promise;
+		}
+		// algèbre linéaire
+		// https://www-fourier.ujf-grenoble.fr/~peyre/enseignement/mat_201.pdf
+
+		//pdf = await searchPDF('https://www-fourier.ujf-grenoble.fr/~peyre/enseignement/mat_201.pdf', 'pivot')
+
+		// Fiches_AnalyseNumerique2.pdf
+
+		//pdf = await searchPDF('Fiches_AnalyseNumerique2.pdf', 'Cauchy')
+		//pdf = await searchPDF('Fiches_AnalyseNumerique2.pdf', 2, new Element('canvas').element)
+
+		/*
+
+A = new Element('canvas')
+A.attachTo($0)
+await renderPDFpage('Fiches_AnalyseNumerique2.pdf', 2, A.element)
+		*/
+	</script>
+
+
+	<style type="text/css">
+
+		*,
+		:after,
+		:before {
+			margin: 0;
+			padding: 0;
+			box-sizing: inherit
+		}
+
+		:root {
+			--vh: 100vh;
+			box-sizing: border-box;
+
+			--color-red: #ff4d4d;
+			--color-orange: #ff8c00;
+			--color-pink: #ff3699;
+
+			--color-red-semi: rgba(255, 77, 77, 0.5);
+			--color-orange-semi: rgba(255, 140, 0, 0.5);
+			--color-pink-semi: rgba(255, 54, 153, 0.5);
+
+			--color-select: rgb(57, 47, 42);
+			--color-select_9: rgb(57 47 42 / 90%);
+			--color-select_7: rgb(57 47 42 / 70%);
+			--color-select_5: rgb(57 47 42 / 50%);
+
+			--color-shadow: rgba(0, 0, 0, .25);
+
+			--color-black: #190f0a;
+			--color-black_9 : rgb(25 15 10 / 90%);
+
+			--color-darkgray: #655c59;
+			--color-lightgray: #c6bfbe;
+			--color-white: #f1ebeb;
+
+			--color-white-semi: rgba(241, 235, 235, 0.5);
+			--color-white-quarter: rgba(241, 235, 235, 0.25);
+
+			--max-width: 1920px;
+			--gutter-cap: 32px;
+		}
+
+		@media (min-width: 0px) and (max-width: 426px) {
+			/* mobile S/M/L : 425px */
+			:root {
+				--gutter-cap: 16px;
+			}
+		}
+
+		@media (min-width:0px) {
+			:root {
+				--spacer-micro:8px;
+				--spacer-small:16px;
+				--spacer-medium:32px;
+				--spacer-large:64px;
+				--spacer-huge:128px
+			}
+			.spacer-micro-mt {
+				margin-top:var(--spacer-micro)
+			}
+			.spacer-micro-mb {
+				margin-bottom:var(--spacer-micro)
+			}
+			.spacer-micro-pt {
+				padding-top:var(--spacer-micro)
+			}
+			.spacer-micro-pb {
+				padding-bottom:var(--spacer-micro)
+			}
+			.spacer-small-mt {
+				margin-top:var(--spacer-small)
+			}
+			.spacer-small-mb {
+				margin-bottom:var(--spacer-small)
+			}
+			.spacer-small-pt {
+				padding-top:var(--spacer-small)
+			}
+			.spacer-small-pb {
+				padding-bottom:var(--spacer-small)
+			}
+			.spacer-medium-mt {
+				margin-top:var(--spacer-medium)
+			}
+			.spacer-medium-mb {
+				margin-bottom:var(--spacer-medium)
+			}
+			.spacer-medium-pt {
+				padding-top:var(--spacer-medium)
+			}
+			.spacer-medium-pb {
+				padding-bottom:var(--spacer-medium)
+			}
+			.spacer-large-mt {
+				margin-top:var(--spacer-large)
+			}
+			.spacer-large-mb {
+				margin-bottom:var(--spacer-large)
+			}
+			.spacer-large-pt {
+				padding-top:var(--spacer-large)
+			}
+			.spacer-large-pb {
+				padding-bottom:var(--spacer-large)
+			}
+			.spacer-huge-mt {
+				margin-top:var(--spacer-huge)
+			}
+			.spacer-huge-mb {
+				margin-bottom:var(--spacer-huge)
+			}
+			.spacer-huge-pt {
+				padding-top:var(--spacer-huge)
+			}
+			.spacer-huge-pb {
+				padding-bottom:var(--spacer-huge)
+			}
+		}
+		@media (min-width:700px) {
+			:root {
+				--spacer-micro:10px;
+				--spacer-small:20px;
+				--spacer-medium:40px;
+				--spacer-large:80px;
+				--spacer-huge:160px
+			}
+			.spacer-micro-mt {
+				margin-top:var(--spacer-micro)
+			}
+			.spacer-micro-mb {
+				margin-bottom:var(--spacer-micro)
+			}
+			.spacer-micro-pt {
+				padding-top:var(--spacer-micro)
+			}
+			.spacer-micro-pb {
+				padding-bottom:var(--spacer-micro)
+			}
+			.spacer-small-mt {
+				margin-top:var(--spacer-small)
+			}
+			.spacer-small-mb {
+				margin-bottom:var(--spacer-small)
+			}
+			.spacer-small-pt {
+				padding-top:var(--spacer-small)
+			}
+			.spacer-small-pb {
+				padding-bottom:var(--spacer-small)
+			}
+			.spacer-medium-mt {
+				margin-top:var(--spacer-medium)
+			}
+			.spacer-medium-mb {
+				margin-bottom:var(--spacer-medium)
+			}
+			.spacer-medium-pt {
+				padding-top:var(--spacer-medium)
+			}
+			.spacer-medium-pb {
+				padding-bottom:var(--spacer-medium)
+			}
+			.spacer-large-mt {
+				margin-top:var(--spacer-large)
+			}
+			.spacer-large-mb {
+				margin-bottom:var(--spacer-large)
+			}
+			.spacer-large-pt {
+				padding-top:var(--spacer-large)
+			}
+			.spacer-large-pb {
+				padding-bottom:var(--spacer-large)
+			}
+			.spacer-huge-mt {
+				margin-top:var(--spacer-huge)
+			}
+			.spacer-huge-mb {
+				margin-bottom:var(--spacer-huge)
+			}
+			.spacer-huge-pt {
+				padding-top:var(--spacer-huge)
+			}
+			.spacer-huge-pb {
+				padding-bottom:var(--spacer-huge)
+			}
+		}
+		@media (min-width:1250px) {
+			:root {
+				--spacer-micro:12px;
+				--spacer-small:24px;
+				--spacer-medium:48px;
+				--spacer-large:96px;
+				--spacer-huge:192px
+			}
+			.spacer-micro-mt {
+				margin-top:var(--spacer-micro)
+			}
+			.spacer-micro-mb {
+				margin-bottom:var(--spacer-micro)
+			}
+			.spacer-micro-pt {
+				padding-top:var(--spacer-micro)
+			}
+			.spacer-micro-pb {
+				padding-bottom:var(--spacer-micro)
+			}
+			.spacer-small-mt {
+				margin-top:var(--spacer-small)
+			}
+			.spacer-small-mb {
+				margin-bottom:var(--spacer-small)
+			}
+			.spacer-small-pt {
+				padding-top:var(--spacer-small)
+			}
+			.spacer-small-pb {
+				padding-bottom:var(--spacer-small)
+			}
+			.spacer-medium-mt {
+				margin-top:var(--spacer-medium)
+			}
+			.spacer-medium-mb {
+				margin-bottom:var(--spacer-medium)
+			}
+			.spacer-medium-pt {
+				padding-top:var(--spacer-medium)
+			}
+			.spacer-medium-pb {
+				padding-bottom:var(--spacer-medium)
+			}
+			.spacer-large-mt {
+				margin-top:var(--spacer-large)
+			}
+			.spacer-large-mb {
+				margin-bottom:var(--spacer-large)
+			}
+			.spacer-large-pt {
+				padding-top:var(--spacer-large)
+			}
+			.spacer-large-pb {
+				padding-bottom:var(--spacer-large)
+			}
+			.spacer-huge-mt {
+				margin-top:var(--spacer-huge)
+			}
+			.spacer-huge-mb {
+				margin-bottom:var(--spacer-huge)
+			}
+			.spacer-huge-pt {
+				padding-top:var(--spacer-huge)
+			}
+			.spacer-huge-pb {
+				padding-bottom:var(--spacer-huge)
+			}
+		}
+		@media (min-width:1920px) {
+			:root {
+				--spacer-micro:14px;
+				--spacer-small:28px;
+				--spacer-medium:56px;
+				--spacer-large:112px;
+				--spacer-huge:224px
+			}
+			.spacer-micro-mt {
+				margin-top:var(--spacer-micro)
+			}
+			.spacer-micro-mb {
+				margin-bottom:var(--spacer-micro)
+			}
+			.spacer-micro-pt {
+				padding-top:var(--spacer-micro)
+			}
+			.spacer-micro-pb {
+				padding-bottom:var(--spacer-micro)
+			}
+			.spacer-small-mt {
+				margin-top:var(--spacer-small)
+			}
+			.spacer-small-mb {
+				margin-bottom:var(--spacer-small)
+			}
+			.spacer-small-pt {
+				padding-top:var(--spacer-small)
+			}
+			.spacer-small-pb {
+				padding-bottom:var(--spacer-small)
+			}
+			.spacer-medium-mt {
+				margin-top:var(--spacer-medium)
+			}
+			.spacer-medium-mb {
+				margin-bottom:var(--spacer-medium)
+			}
+			.spacer-medium-pt {
+				padding-top:var(--spacer-medium)
+			}
+			.spacer-medium-pb {
+				padding-bottom:var(--spacer-medium)
+			}
+			.spacer-large-mt {
+				margin-top:var(--spacer-large)
+			}
+			.spacer-large-mb {
+				margin-bottom:var(--spacer-large)
+			}
+			.spacer-large-pt {
+				padding-top:var(--spacer-large)
+			}
+			.spacer-large-pb {
+				padding-bottom:var(--spacer-large)
+			}
+			.spacer-huge-mt {
+				margin-top:var(--spacer-huge)
+			}
+			.spacer-huge-mb {
+				margin-bottom:var(--spacer-huge)
+			}
+			.spacer-huge-pt {
+				padding-top:var(--spacer-huge)
+			}
+			.spacer-huge-pb {
+				padding-bottom:var(--spacer-huge)
+			}
+		}
+		@media (min-width:2160px) {
+			:root {
+				--spacer-micro:16px;
+				--spacer-small:32px;
+				--spacer-medium:64px;
+				--spacer-large:128px;
+				--spacer-huge:256px
+			}
+			.spacer-micro-mt {
+				margin-top:var(--spacer-micro)
+			}
+			.spacer-micro-mb {
+				margin-bottom:var(--spacer-micro)
+			}
+			.spacer-micro-pt {
+				padding-top:var(--spacer-micro)
+			}
+			.spacer-micro-pb {
+				padding-bottom:var(--spacer-micro)
+			}
+			.spacer-small-mt {
+				margin-top:var(--spacer-small)
+			}
+			.spacer-small-mb {
+				margin-bottom:var(--spacer-small)
+			}
+			.spacer-small-pt {
+				padding-top:var(--spacer-small)
+			}
+			.spacer-small-pb {
+				padding-bottom:var(--spacer-small)
+			}
+			.spacer-medium-mt {
+				margin-top:var(--spacer-medium)
+			}
+			.spacer-medium-mb {
+				margin-bottom:var(--spacer-medium)
+			}
+			.spacer-medium-pt {
+				padding-top:var(--spacer-medium)
+			}
+			.spacer-medium-pb {
+				padding-bottom:var(--spacer-medium)
+			}
+			.spacer-large-mt {
+				margin-top:var(--spacer-large)
+			}
+			.spacer-large-mb {
+				margin-bottom:var(--spacer-large)
+			}
+			.spacer-large-pt {
+				padding-top:var(--spacer-large)
+			}
+			.spacer-large-pb {
+				padding-bottom:var(--spacer-large)
+			}
+			.spacer-huge-mt {
+				margin-top:var(--spacer-huge)
+			}
+			.spacer-huge-mb {
+				margin-bottom:var(--spacer-huge)
+			}
+			.spacer-huge-pt {
+				padding-top:var(--spacer-huge)
+			}
+			.spacer-huge-pb {
+				padding-bottom:var(--spacer-huge)
+			}
+		}
+
+		body.loading {
+			cursor: wait;
+		}
+
+
+		::selection {
+			background-color: var(--color-select);
+		}
+
+		body{
+			background-color: var(--color-white);
+			min-height: var(--vh);
+			
+			font-family: 'Geologica', 'Helvetica', 'Arial', sans-serif;
+			font-weight: bold;
+			font-size: 16px;
+			letter-spacing: 1.6px;
+			font-weight: 500;
+			line-height: 1.7em;
+			color: var(--color-black);
+		}
+
+		header{
+			height: var(--vh);
+			background-color: transparent;
+			background-size: cover;
+			overflow: clip;
+		}
+
+		section {
+			min-height: var(--vh);
+		}
+
+		footer {
+			background-color: var(--color-black);
+			color: var(--color-white);
+		}
+
+		button,
+		input,
+		select,
+		textarea {
+			font:inherit
+		}
+
+		.cover {
+			height: 100%;
+		}
+
+		a {
+			text-decoration: none;
+			color: var(--color-darkgray);
+		}
+
+		.wrapper {
+			margin-left:auto;
+			margin-right:auto;
+			max-width:calc(var(--max-width) + var(--gutter-cap)*2);
+			padding-left:var(--gutter-cap);
+			padding-right:var(--gutter-cap);
+			width:100%
+		}
+
+		img {
+			vertical-align: middle;
+		}
+
+		img.asset {
+			object-fit: contain;
+			width: 100%
+		}
+
+		img,
+		video {
+			max-width:100%
+		}
+
+		hr {
+			background-color: var(--color-darkgray);
+			height: 1px;
+			border: none;
+		}
+
+		.flex {
+			display: flex;
+		}
+
+		.flex-start {
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		.flex-end {
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		.flex-sb {
+			display: flex;
+			justify-content: space-between;
+		}
+		.flex-se {
+			display: flex;
+			justify-content: space-evenly;
+		}
+		.flex-sa {
+			display: flex;
+			justify-content: space-around;
+		}
+		.flex-gap20 {
+			display: flex;
+			gap: 20px;
+		}
+		.flex-gap10 {
+			display: flex;
+			gap: 10px;
+		}
+
+		.flex-row {
+			display: flex;
+			flex-direction: row;
+		}
+
+		.flex-column {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.flex-row-reverse {
+			display: flex;
+			flex-direction: row-reverse;
+		}
+
+		.flex-column-reverse {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+
+		.center-line {
+			display: flex;
+			align-items: center;
+		}
+		.flex-center {
+			display: flex;
+			justify-content: center;
+		}
+		.flex-grow1 {
+			flex-grow: 1;
+		}
+		.flex-grow2 {
+			flex-grow: 2;
+		}
+		.flex-grow3 {
+			flex-grow: 3;
+		}
+
+		.center {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.order-1 {
+			order:1
+		}
+
+		.order-2 {
+			order:2
+		}
+
+		
+
+		@media (max-width:699px) {
+			.hide-on-mobile {
+				display:none!important
+			}
+		}
+
+		@media (min-width:700px) {
+			.hide-on-desktop {
+				display:none!important
+			}
+		}
+/*
+		#main-sections {
+
+			background-repeat: no-repeat, repeat, repeat;
+			background-position: 0 0, 0 0, 15px 20px;
+			background-size: auto, 900px, 900px;
+
+			background-image: linear-gradient(45deg, var(--color-orange-semi), var(--color-red-semi)), url('ressource/triangles.svg'), url('ressource/triangles.svg');
+			background-blend-mode: normal, difference;
+		}
+
+		#main-sections .filter {
+			backdrop-filter: blur(1px);
+			background-image: linear-gradient(50deg, var(--color-red-semi), transparent, var(--color-pink-semi));
+		}*/
+
+		#main-sections {
+
+			background-repeat: no-repeat, repeat, repeat;
+			background-position: 0 0, 0 0, 500px 600px;
+			background-size: auto, 1500px, 2500px;
+
+			background-image: linear-gradient(45deg, var(--color-orange-semi), var(--color-red-semi)), url('ressource/fond01.svg'), url('ressource/fond01.svg');
+			background-blend-mode: normal, color-burn;
+		}
+
+		#main-sections .filter {
+			backdrop-filter: blur(20px);
+			background-image: linear-gradient(50deg, var(--color-red-semi), var(--color-orange-semi), var(--color-pink-semi));
+		}
+		
+		.page-container {
+			min-height:var(--vh)
+		}
+
+		.huge-text {
+			font-size: 3.5em;
+			height: auto;
+			line-height: 4rem;
+		}
+
+		.large-text {
+			font-size: 2.5em;
+			height: auto;
+			line-height: 3.2rem;
+		}
+
+		.medium-text {
+			font-size: 1.5em;
+			height: auto;
+			line-height: 2.5rem;
+		}
+
+		.small-text {
+			font-size: 1.1em;
+			height: auto;
+			line-height: 2.0rem;
+		}
+
+		.micro-text {
+			font-size: 0.7em;
+			height: auto;
+			line-height: 1.5rem;
+		}
+
+		.font-exo {
+			font-family: Exo;
+		}
+
+		.text-center {
+			text-align: center
+		}
+
+		.text-left {
+			text-align: left
+		}
+
+		.text-right {
+			text-align: right
+		}
+
+		.fa-discord {
+			transition: .5s;
+		}
+		.fa-discord:hover {
+			color: #5865f2;
+		}
+
+		.fa-youtube {
+			transition: .5s;
+		}
+		.fa-youtube:hover {
+			color: #ff0000;
+		}
+
+		.fa-envelope {
+			transition: .5s;
+		}
+		.fa-envelope:hover {
+			/*508df8*/
+			color: var(--color-white);
+		}
+
+		#navbar {
+			z-index: 5;
+		}
+
+		.nav-core {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.nav-logo-core {
+			height: 32px;
+			transition-duration: 0.2s;
+		}
+		.nav-logo-core img {
+			height: 100%;
+		}
+
+		.nav-items-core {
+			display: flex;
+			flex-direction: row;
+			gap: 20px;
+		}
+
+		.nav-items-core > .nav-option {
+			transition-duration: 0.5s;
+		}
+
+		.nav-items-core > .nav-option:after {
+			content: "_";
+			position: relative;
+			left: -50%;
+			top: 0;
+			opacity: 0;
+			transition-duration: 0.1s;
+		}
+
+		.nav-items-core > .nav-option:hover {
+			transition-duration: 0.1s;
+			transform: scale(1.1);
+			cursor: pointer;
+		}
+
+		.nav-items-core > .nav-option:hover:after {
+			top: 10px;
+			opacity: 1;
+		}
+
+		.text-white {
+			color: var(--color-white);
+		}
+
+		.nav-bars {
+			font-size: 1.5rem;
+			transition-duration: 0.3s;
+		}
+
+		.nav-bars:hover {
+			cursor: pointer;
+			transform: scale(1.1);
+		}
+
+		@media (max-width:0px) {
+			.nav-bars {
+				display: flex;
+			}
+		}
+		@media (min-width:900px) {
+			.nav-bars {
+				display: none;
+			}
+		}
+
+		@media (min-width:900px) {
+			.nav-items-core {
+				display: flex;
+			}
+
+			.nav-items-core .nav-back {
+				display: none;
+			}
+		}
+		@media (max-width:900px) {
+			.nav-items-core {
+				/*display: none;*/
+
+				display: flex;
+				flex-direction: column;
+				position: absolute;
+				top: 0;
+				background-color: var(--color-black);
+				color: var(--color-white);
+				width: 100%;
+				height: var(--vh);
+				left: -100%;
+				justify-content: center;
+				align-items: center;
+				transition-duration: 0.5s;
+			}
+
+			.nav-items-core.active {
+				left: 0;
+			}
+
+			.nav-items-core .nav-back {
+				display: flex;
+			}
+		}
+		
+		.logo-bright .nav-logo-core {
+			filter: brightness(10.0);
+		}
+
+
+		.header-core {
+			display: flex;
+			justify-content: space-evenly;
+		}
+
+		.name-golpex {
+			background-color: var(--color-orange);
+			background: -webkit-linear-gradient(45deg, var(--color-orange), var(--color-red) 80%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+
+			font-size: 8rem;
+			padding-top: 4rem;
+			padding-bottom: 4rem;
+		}
+
+		.logo-container {
+			width: 256px;
+		}
+
+		@media (max-width:1000px) {
+			.header-core > * > .logo-container {
+				display: none;
+			}
+
+			.header-core {
+				flex-direction: column;
+			}
+
+			.header-core > * {
+				flex-direction: row;
+			}
+		}
+
+		@media (max-width:800px) {
+			.header-core > * > .name-golpex {
+				font-size: 4rem;
+			}
+
+			.header-core > * > * > .large-text {
+				font-size: 2rem;
+				line-height: 2.5rem;
+			}
+
+			.header-core > * > * > .medium-text {
+				font-size: 1rem;
+				line-height: 1.5rem;
+			}
+
+			.header-core > * > .spacer-huge-pt {
+				padding-top: var(--spacer-medium);
+			}
+
+			.header-core .flex-column {
+				gap: 20px
+			}
+
+			.header-core > * {
+				flex-direction: column;
+			}
+		}
+
+		@media (max-height:400px) {
+			.header-core > * > .name-golpex {
+				display: none;
+			}
+
+			.header-core > * > * > .large-text {
+				font-size: 2rem;
+				line-height: 2.5rem;
+			}
+
+			.header-core > * > * > .medium-text {
+				display: none;
+			}
+
+			.header-core > * > .spacer-large-pt {
+				padding-top: 20px;
+			}
+			.header-core > * > .spacer-medium-pb {
+				padding-bottom: 20px;
+			}
+		}
+
+		.header-bg {
+			background-repeat: no-repeat, repeat;
+			background-position: 0 0;
+			background-size: auto, 200px;
+
+			background-image: linear-gradient(45deg, var(--color-orange-semi), var(--color-red-semi)), url('ressource/noise.svg');
+			background-blend-mode: normal;
+			filter: brightness(1.2);
+		}
+
+
+		button.fun-button {
+			background-color: var(--color-red);
+			background-image: linear-gradient(45deg, var(--color-pink-semi), var(--color-orange-semi));
+			border-radius: 30px;
+			border: none;
+			box-shadow: 10px 10px 20px 3px var(--color-shadow);
+			overflow: clip;
+			transition-duration: 0.5s;
+			font-family: Exo;
+			color: inherit;
+		}
+
+		button.fun-button:hover {
+			background-color: var(--color-orange);
+			transition-duration: 0.1s;
+			transform: scale(1.1);
+			cursor: pointer;
+		}
+
+		button.fun-button > * > :after {
+			content: "==>";/*⩾*/
+			font-family: 'JetBrains mono',monospace;
+			opacity: 0;
+			transition-duration: 0.3s;
+			position: relative;
+			left: -5px;
+		}
+		button.fun-button:hover > * > :after {
+			opacity: 1;
+			left: 10px;
+		}
+
+		.cards {
+			display: flex;
+			gap: 30px;
+		}
+		@media (max-width:1000px) {
+			.cards {
+				flex-direction: column;
+			}
+
+			.cards > .card {
+				width: 350px;
+				height: 550px;
+			}
+		}
+
+		@media (max-width:400px) {
+
+			.cards > .card {
+				width: 300px;
+				height: 650px;
+			}
+		}
+
+		.card {
+			width: 280px;
+			height: 500px;
+			background-color: var(--color-select_9);
+			color: var(--color-white);
+			border-radius: 30px;
+			box-shadow: 10px 10px 20px 3px var(--color-shadow);
+			overflow: clip;
+			transition-duration: 0.5s;
+		}
+
+		.card:hover {
+			background-color: var(--color-select);
+			transition-duration: 0.1s;
+			transform: scale(1.02);
+		}
+
+		.code {
+			letter-spacing: 0;
+		}
+
+		.in-shadow {
+			box-shadow: inset 0px 0px 50px 0px var(--color-shadow);
+		}
+
+		.in-shadow-dark {
+			box-shadow: inset 0px 0px 50px 0px var(--color-black);
+		}
+
+		*:hover.in-shadow-dark {
+			box-shadow: inset 0px 0px 50px 0px var(--color-shadow);
+		}
+
+		.sticky {
+			position: fixed;
+			top: 0;
+			width: 100%;
+		}
+
+		.blur {
+			backdrop-filter: blur(10px);
+		}
+
+		/* ---------------------------------------------- APP elements ---------------------------------------------- */
+
+		button.back {
+			width: 48px;
+			height: 48px;
+			background-color: var(--color-red);
+			border: none;
+			transition-duration: 0.5s;
+		}
+
+		button.back:hover {
+			background-color: var(--color-orange);
+			cursor: pointer;
+		}
+
+		button.fake {
+			width: 48px;
+			height: 48px;
+			visibility: hidden;
+		}
+
+		.topbar {
+			min-height: var(--gutter-cap);
+			background-color: var(--color-white-quarter);
+		}
+
+		.bottombar {
+			min-height: var(--gutter-cap);
+			background-color: var(--color-white-quarter);
+		}
+
+		@media (max-width: 550px) {
+			.page-container > * > * > .flex-grow1 {
+				flex-grow: 0;
+			}
+
+			.chatbot-temp {
+				display: none;
+			}
+		}
+
+		.bubble {
+			background-color: var(--color-white-semi);
+			border-radius: 20px;
+		}
+
+		@media (min-width: 0px) and (max-width: 321px) {
+			/* mobile S : 320px*/
+			.youtube {
+				width: 160px;
+				height: 90px;
+			}
+		}
+		@media (min-width: 321px) and (max-width: 376px) {
+			/* mobile M : 375px */
+			.youtube {
+				width: 240px;
+				height: 135px;
+			}
+		}
+		@media (min-width: 376px) and (max-width: 426px) {
+			/* mobile L : 425px */
+			.youtube {
+				width: 288px;
+				height: 162px;
+			}
+		}
+		@media (min-width: 426px) and (max-width: 769px) {
+			/* tablet : 768px */
+			.youtube {
+				width: 320px;
+				height: 180px;
+			}
+			output .youtube {
+				width: 240px;
+    			height: 135px;
+			}
+		}
+		@media (min-width: 769px) and (max-width: 1025px) {
+			/* laptop : 1024px */
+			.youtube {
+				width: 496px;
+				height: 279px;
+			}
+			output .youtube {
+				width: 384px;
+    			height: 216px;
+			}
+		}
+		@media (min-width: 1025px) and (max-width: 1441px) {
+			/* laptop L : 1440px */
+			.youtube {
+				width: 816px;
+				height: 459px;
+			}
+			output .youtube {
+				width: 512px;
+    			height: 288px;
+			}
+		}
+		@media (min-width: 1441px) {
+			/* 4k : 2560px */
+			.youtube {
+				width: 1200px;
+				height: 675px;
+			}
+			output .youtube {
+				width: 720px;
+    			height: 405px;
+			}
+		}
+		
+		
+
+		/* ---------------------------------------------- Chatbot ---------------------------------------------- */
+
+		/* à refaire quand le code de app_chatbot sera refait avec "new Element(...)"*/
+
+		output > .message {
+			border-radius: 50px;
+				background-color: var(--color-white-semi);
+				transition-duration: 0.5s;
+		}
+
+		output > .message:hover {
+			border-radius: 50px;
+				background-color: var(--color-white);
+		}
+
+		output > .message .container {
+			border-radius: 20px 20px 0px 0px;
+			overflow: clip;
+			box-shadow: 15px 15px 30px 0px var(--color-shadow);
+		}
+
+		output > .message .container .topbar {
+			background: var(--color-black);
+				min-height: 50px;
+				display: flex;
+				justify-content: space-between;
+		}
+		
+		output > .message .container .code {
+			background: var(--color-black_9);
+			overflow-x: auto;
+			font-family: 'JetBrains mono',monospace;
+
+			padding: 10px; /* remplacer !!*/
+		}
+
+		output > .message .container .code * {
+			font-family: inherit;
+		}
+		
+		output > .message .container .topbar button {
+			width: 50px;
+			height: 50px;
+			border: none;
+			background: var(--color-darkgray);
+			cursor: pointer;
+			transition: 0.2s;
+		}
+
+		output .wikipedia,
+		output .mathcha,
+		output .huggingface,
+		output .desmos,
+		output .desmos.graph {
+			height: 0; /* init */
+			min-height: 500px;
+			min-width: 100%;
+			border-radius: 20px;
+		}
+
+		/* ---------------------------------------------- IN-VIEWPORT ---------------------------------------------- */
+
+
+		[data-inviewport="fade"] {
+			transition: 3s ease-out;
+			opacity: 0.0;
+		}
+
+		[data-inviewport="fade"].is-inViewport { 
+			opacity: 1.0;
+		}
+
+		[data-inviewport="slide"] { 
+			transition: 0.7s ease-in-out;
+			opacity: 0.0;
+			transform: translate(0, -10%);
+
+		}
+					
+		[data-inviewport="slide"].is-inViewport { 
+			opacity: 1.0; 
+			transform: translate(0, 0);
+		}
+
+		/* ---------------------------------------------- LOADER ---------------------------------------------- */
+
+
+		.lds {
+			display: inline-block;
+			position: relative;
+			width: 80px;
+			height: 80px;
+			transition: 0.5s;
+		}
+		.lds div {
+			display: inline-block;
+			position: absolute;
+			left: 8px;
+			width: 16px;
+			background: var(--color-black);
+			animation: lds 1.2s cubic-bezier(.68,-0.55,.27,1.55) infinite;
+			/*cubic-bezier(0.0, 0.5, 0.5, 1.0)*/
+		}
+		.lds div:nth-child(1) {
+			left: 8px;
+			animation-delay: -0.24s;
+		}
+		.lds div:nth-child(2) {
+			left: 32px;
+			animation-delay: -0.12s;
+		}
+		.lds div:nth-child(3) {
+			left: 56px;
+			animation-delay: 0;
+		}
+		@keyframes lds {
+			0% {
+				top: 8px;
+				height: 64px;
+			}
+			50%, 100% {
+				top: 24px;
+				height: 32px;
+			}
+		}
+
+		/* ---------------------------------------------- No Display ---------------------------------------------- */
+
+		.display-none {
+			display: none;
+		}
+
+
+
+	</style>
+
+
+<!--
+===============================================================================================================
+===============================================================================================================
+												CUSTOM ELEMENTS
+===============================================================================================================
+-->
+
+	<script type="text/javascript">
+
+		/*
+		=======================================================================================================
+												ELEMENT : card
+		*/
+
+		Element.customElements.set('card', ({text, url, btn_text, media = 'img', destination}) => {
+			
+			if (!['img', 'video'].includes(media)) {
+				console.warn('media non-valide');
+				media = 'img';
+				url = 'logo.svg';
+			}
+			
+			let mediaMap = {
+				'img' : new Map([
+							['src', url],
+						]),
+				'video' : new Map([
+							['src', url],
+							['muted', true],
+							['loop', true],
+						]),
+			}
+
+			//video.element.autoplay = true; // ne fonctionne pas car : interaction avec utilisateur obligatoire (mais page vient d'être chargée = pas encore d'interaction)
+
+			const card = new Element('div')
+				.class('card')
+				.append(
+					new Element('div')
+						.class('cover').class('in-shadow-dark')
+						.append(
+							new Element('div')
+								.class('cover').class('wrapper')
+								.class('spacer-medium-pt').class('spacer-medium-pb')
+								.class('flex-gap20').class('flex-column').class('flex-sb')
+								.append(
+									new Element('div')
+										.class('media')
+										.append(
+											new Element(media)
+												.attrFromMap(mediaMap[media])
+												.addEventListener('mouseover', function (){
+													if (media === 'video') {
+														this.play();
+													}
+												})
+												.addEventListener('mouseout', function (){
+													if (media === 'video') {
+														this.pause();
+													}
+												})
+										)
+								)
+								.append(
+									new Element('div').text(text)
+								)
+								.append(
+									new Element('fun-button', {
+										text : btn_text,
+										destination
+									})
+								)
+								
+						)
+				)
+
+			return card.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : fun-button
+		*/
+
+		Element.customElements.set('fun-button', ({text, destination = 'main-page'}) => {
+			//
+			return new Element('button')
+				.class('fun-button')
+				.addEventListener( 'click' , () => {
+					if (destination) {
+						GO_TO_RENDERER(destination);
+					}
+					
+				})
+				.append(
+					new Element('div')
+						.class('cover').class('in-shadow')
+						.append(
+							new Element('div')
+								.class('cover').class('wrapper')
+								.class('spacer-small-pt').class('spacer-small-pb')
+								.text(text)
+						)
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : prompt-input
+		*/
+
+		Element.customElements.set('prompt-input', ({placeholder, isResettingAfter = true, onExec = ()=>{console.log('change')} }) => {
+
+			//
+			return new Element('input')
+				.class('prompt', 'width-control')
+				.attrFromMap(
+					new Map([['placeholder', placeholder], ['onExec', onExec]])
+				)
+				.addEventListener( 'keyup', function(e) {
+					const input = this.value;
+					if(e.key === 'Enter'){
+						this.onExec(input, e);
+						if (isResettingAfter) { this.value = '';}
+					}
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : code-input
+		*/
+
+
+		Element.customElements.set('code-input', ({placeholder}) => {
+			//
+			return new Element('input')
+				.class('code', 'width-control')
+				.attrFromMap(
+					new Map([['placeholder', placeholder]])
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : code-textarea
+		*/
+
+
+		Element.customElements.set('code-textarea', ({placeholder}) => {
+			//
+			return new Element('textarea')
+				.class('code')
+				.attrFromMap(
+					new Map([['placeholder', placeholder], ['spellcheck', false]])
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : nav-input
+		*/
+
+
+		Element.customElements.set('nav-input', ({placeholder, isResettingAfter = true, onExec = ()=>{console.log('change')}}) => {
+			//
+
+			
+
+			navInput = new Element('input')
+				.class('nav', 'width-control')
+				.attrFromMap(
+					new Map([['placeholder', placeholder], ['onExec', onExec]])
+				)
+				.addEventListener( 'keyup', function(e) {
+					const input = this.value;
+					if(e.key === 'Enter'){
+						this.onExec(input, e);
+						if (isResettingAfter) { this.value = '';}
+					}
+				}).element
+			
+			window.addEventListener( 'scroll', function() {
+				if (window.pageYOffset > window.innerHeight) {
+					navInput.classList.add("display-none")
+				}
+				else {
+					navInput.classList.remove("display-none")
+				}
+			})
+
+			return navInput
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : lds (loader)
+		*/
+
+		Element.customElements.set('lds', ({}) => {
+			//
+			return new Element('div')
+				.class('lds')
+				.append( new Element('div') )
+				.append( new Element('div') )
+				.append( new Element('div') )
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : fa-icon
+		*/
+
+		Element.customElements.set('fa-icon', ({name}) => {
+			//
+			return new Element('i')
+				.class('fa-solid', `fa-${name}`)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : youtube
+		*/
+
+		Element.customElements.set('youtube', ({videoid}) => {
+			//
+			/*
+			const video = new Element('iframe')
+				.class('youtube')
+				.attrFromMap( new Map([
+					['src', `https://www.youtube-nocookie.com/embed/${videoid}`],
+					['width', '560'],
+					['height', '315'],
+					['frameBorder', '0'],
+					['title', 'Youtube video player'],
+					['allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'],
+					//['allowFullScreen', true],
+				]))
+				.attr({
+					allowFullScreen : true,
+				})
+				.css({
+					borderRadius : '20px',
+				})
+
+				
+
+
+			return video.element*/
+
+			// comme allowFullScreen ne fonctionne pas, solution de secours :
+
+			const regex = /[(){}\[\],;:./%]/;
+			if (videoid.length !== 11 || regex.test(videoid)) return new Element('div').text(' videoid incorrect ').element
+
+			const videoHTML = `<iframe class="youtube" src="https://www.youtube-nocookie.com/embed/${videoid}" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" style="border-radius: 20px;" allowfullscreen sandbox, sandbox="allow-same-origin allow-scripts allow-presentation"></iframe>`
+
+			const div = new Element('div');
+			div.element.innerHTML = videoHTML;
+			return div.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : wikipedia
+		*/
+
+		Element.customElements.set('wikipedia', ({title}) => {
+			//
+			return new Element('iframe')
+				.class('wikipedia')
+				.attrFromMap( new Map([
+					['src', `https://fr.wikipedia.org/wiki/${title}`],
+				]))
+				.css({
+					borderRadius : '20px',
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : mathcha
+		*/
+
+		Element.customElements.set('mathcha', ({pageid}) => {
+			//
+			return new Element('iframe')
+				.class('mathcha')
+				.attrFromMap( new Map([
+					['src', `https://www.mathcha.io/editor/${pageid}?embedded=true`],
+					['frameBorder', '0'],
+				]))
+				.css({
+					borderRadius : '20px',
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : huggingface
+		*/
+
+		Element.customElements.set('huggingface', ({spaceName}) => {
+			//
+			return new Element('iframe')
+				.class('huggingface')
+				.attrFromMap( new Map([
+					['src', `https://${spaceName}.hf.space`],
+					['frameBorder', '0'],
+				]))
+				.css({
+					borderRadius : '20px',
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : desmos
+		*/
+
+		Element.customElements.set('desmos', ({id}) => {
+			//
+			return new Element('iframe')
+				.class('desmos')
+				.attrFromMap( new Map([
+					['src', `https://www.desmos.com/calculator/${id}?embed`],
+					['frameBorder', '0'],
+				]))
+				.css({
+					borderRadius : '20px',
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : desmos-graph
+		*/
+
+		Element.customElements.set('desmos-graph', ({equation = 'f(x)=x'}) => {
+			//
+			console.log('https://www.desmos.com/api/v1.8/docs/index.html?lang=fr#document-basic-calculators');
+
+			const graph = new Element('div')
+				.class('desmos', 'graph')
+				.css({
+					borderRadius : '20px',
+				})
+
+			const calculator = Desmos.GraphingCalculator(graph.element);
+			calculator.setExpression({
+				latex: equation,
+				color: '#ff8c00'
+			});
+			return graph.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : back-button
+		*/
+
+		Element.customElements.set('back-button', ({is_corner = true}) => {
+			//
+			const button = new Element('button')
+				.class('back')
+				.addEventListener( 'click' , () => {
+					GO_TO_RENDERER('main-page');
+				})
+				.attrFromMap(
+					new Map([['alt', 'back to main-page button']])
+				)
+				.append(
+					new Element('fa-icon', {
+						name : 'right-from-bracket',
+					})
+				)
+
+			if (is_corner) {button.css({borderRadius : '0 0 15px 0'})}
+
+			return button.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : fake-button
+		*/
+
+		Element.customElements.set('fake-button', ({}) => {
+			//
+			return new Element('button')
+				.class('fake')
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : title-h1
+		*/
+
+		Element.customElements.set('title-h1', ({text}) => {
+			//
+			return new Element('h1')
+				.class('wrapper', 'spacer-small-pb', 'spacer-small-pt', 'text-center')
+				.text(text)
+				.element
+		})
+
+
+		
+		/*
+		=======================================================================================================
+												ELEMENT : title-h1
+		*/
+
+		Element.customElements.set('pdf-canvas', ({path, page}) => {
+			//
+			const canvas = new Element('canvas')
+				.css({
+					borderRadius : '20px',
+				})
+				.element
+
+			renderPDFpage(path, Number(page), canvas);
+
+			return canvas
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-topbar
+		*/
+
+		Element.customElements.set('app-topbar', ({title}) => {
+			//
+			return new Element('div')
+				.class('topbar', 'flex-row', 'flex-sb')
+				.append(
+					new Element('back-button', {})
+				)
+				.append(
+					new Element('title-h1', {
+						text : title
+					})
+				)
+				.append(
+					new Element('fake-button', {})
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-bottombar
+		*/
+
+		Element.customElements.set('app-bottombar', ({placeholder, text_under}) => {
+			//
+			return new Element('div')
+				.class('bottombar', 'flex-row', 'flex-sb')
+				.append(
+					new Element('fake-button', {})
+				)
+				.append(
+					new Element('div')
+					.class('flex-column', 'flex-gap10', 'spacer-micro-pb', 'spacer-small-pt')
+					.append(
+						new Element('prompt-input', {placeholder})
+					)
+					.append(
+						new Element('span').text(text_under).class('text-center', 'micro-text')
+					)
+				)
+				.append(
+					new Element('fake-button', {})
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : page-bottombar
+		*/
+
+		Element.customElements.set('page-bottombar', ({text_under}) => {
+			//
+			return new Element('div')
+				.class('bottombar', 'flex-row', 'flex-sb')
+				.append(
+					new Element('fake-button', {})
+				)
+				.append(
+					new Element('div')
+					.class('flex-column', 'flex-gap10', 'spacer-micro-pb', 'spacer-small-pt')
+					.append(
+						new Element('span').text(text_under).class('text-center', 'micro-text')
+					)
+				)
+				.append(
+					new Element('fake-button', {})
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-input
+		*/
+
+		Element.customElements.set('app-input', ({id, title, input_placeholder, input_text_under, innerContainer = new Element('div')}) => {
+
+			const topbar = new Element('app-topbar', {title});
+			const bottombar = new Element('app-bottombar', {
+							placeholder : input_placeholder,
+							text_under : input_text_under
+						})
+			function resize() {
+				innerContainer.element.style.height = `calc(var(--vh) - ${topbar.element.clientHeight + bottombar.element.clientHeight + 1}px)`;
+			}
+			window.addEventListener( 'resize', resize );
+
+			document.addEventListener( 'loadeddata', resize ); 
+
+
+			return new Element('div')
+				.class('page-container', 'display-none', 'flex')
+				// IL FAUDRA PEUT ÊTRE APPELER resize POUR CHAQUE /send !! (pour mobile)
+				.addEventListener( 'change', resize )
+				.id(id)
+				.css({
+					backgroundImage : 'url(ressource/fond01.svg), url(ressource/fond01.svg)',
+					backgroundPosition : '0 0, 450px -1200px',
+					backgroundSize : '1400px, 1800px'
+				})
+				.append(
+					new Element('div')
+					.class('flex-column', 'flex-sb', 'flex-grow1')
+					.css({
+						backdropFilter : 'blur(150px)',
+						backgroundImage : 'linear-gradient(45deg, var(--color-red-semi), var(--color-orange-semi))',
+						backgroundSize : 'contain'
+					})
+					.append(
+						topbar
+					)
+					.append(
+						innerContainer
+						.class('flex-grow1')
+					)
+					.append(
+						bottombar
+					)
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : page
+		*/
+
+		Element.customElements.set('page', ({id, title, text_under, innerContainer = new Element('div')}) => {
+
+			const topbar = new Element('app-topbar', {title});
+			const bottombar = new Element('page-bottombar', {
+							text_under
+						})
+
+
+			return new Element('div')
+				.class('page-container', 'display-none', 'flex')
+				.id(id)
+				.css({
+					backgroundImage : 'url(ressource/fond01.svg), url(ressource/fond01.svg)',
+					backgroundPosition : '0 0, 450px -1200px',
+					backgroundSize : '1400px, 1800px'
+				})
+				.append(
+					new Element('div')
+					.class('flex-column', 'flex-sb', 'flex-grow1')
+					.css({
+						backdropFilter : 'blur(150px)',
+						backgroundImage : 'linear-gradient(45deg, var(--color-red-semi), var(--color-orange-semi))',
+						backgroundSize : 'contain'
+					})
+					.append(
+						topbar.css({ position : "absolute", left : '0', right: '0' })
+					)
+					.append(
+						innerContainer
+						.class('flex-grow1')
+					)
+					.append(
+						bottombar
+					)
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-CHATBOT
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('app-chatbot', ({id, title, input_placeholder, input_text_under}) => {
+
+			return new Element('app-input', {
+					id,
+					title,
+					input_placeholder,
+					input_text_under,
+					innerContainer : new Element('div')
+						.class('flex-row')
+						.append(
+							new Element('div')
+							.class('flex-column', 'chatbot-temp', 'center', 'wrapper', 'flex-gap10')
+							.append(
+								new Element('div').text('Arrive bientôt').class('large-text')
+							)
+							.append(
+								new Element('div').text('Section pour le dialogue entre Algebrity et le Chatbot')
+							)
+							.append(
+								new Element('fun-button', {
+									text : 'Essayer Algebrity',
+									destination : 'appAlgebrity',
+								})
+							)
+							.append(
+								new Element('div').text('Algebrity est un langage de programmation fraichement crée orienté structures mathématiques')
+							)
+							.class('flex-grow1')
+							.css({width : '0'})
+						)
+						.append(
+							new Element('div')
+							.css({overflow : 'clip auto'})
+							.append(
+								new Element('output').class('wrapper', 'flex-gap20', 'flex-column')
+							)
+							.class('flex-grow2', 'spacer-medium-pt', 'spacer-micro-pb')
+							.css({width : '0'})
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : PROJECT-advancement
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('page-advancement', ({id, title, text_under}) => {
+
+			return new Element('page', {
+					id,
+					title,
+					text_under,
+					innerContainer : new Element('container').class('spacer-small-pt', 'spacer-huge-pb')
+						.append(
+							//SECTION 1
+							new Element('section').class('spacer-large-pt', 'center', 'flex-column', 'wrapper')
+								.class('flex-gap20', 'flex-column-reverse')
+								// under bubble 0p_...
+								.append(
+									new Element('div').class('wrapper', 'flex-column-reverse', 'flex-gap10')
+										// bubble 1
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Création moteur 3D (python + tkinter)'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Initiation aux mécaniques de base des moteurs 3d.')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+															.text('À savoir : matrices de rotations, matrice de perspective, matrice de projection, normales, algèbre vectorielle, lumière directionelle et ".obj loaders"')
+												)
+												.append(
+													new Element('div').class('flex-center', 'spacer-medium-pt', 'spacer-medium-pb')
+													.append(
+														new Element('youtube', {videoid : 'EITD0vMsUbQ'})
+													)
+												)
+										)
+								)
+								// bubble 0p_...
+								.append(
+									new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb')
+										.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+										.append(
+											new Element('title-h1', {text : 'Initiation'})
+												.class('large-text')
+										)
+										.append(
+											new Element('title-h1', {text : '[septembre - décembre 2021]'})
+												.class('large-text')
+										)
+								)
+								// under bubble 1p_...
+								.append(
+									new Element('div').class('wrapper', 'flex-column-reverse', 'flex-gap10')
+										// bubble 1
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.1 [05 janvier 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Créations d\'objets three.js')
+												)
+										)
+										// bubble 2
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.2 [05 février 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création/Gestion des chunks (client only)')
+												)
+										)
+										// bubble 3
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.3 [05 mars 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Lumière + génération d\'un 2D-terrain')
+												)
+										)
+										// bubble 4
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.4 [05 avril 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('vue FPS + collision/gravité')
+												)
+										)
+										// bubble 5
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.5 [05 mai 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('génération procédurale (client only)')
+												)
+												.append(
+													new Element('div').class('flex-center', 'spacer-medium-pt', 'spacer-medium-pb')
+													.append(
+														new Element('youtube', {videoid : 'WYHmgYt9oqI'})
+													)
+												)
+										)
+										// bubble 6
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.6 [05 juin 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('génération procédurale MarchingCubes, grottes/Lune (client only)')
+												)
+										)
+										// bubble 7
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.0.7 [05 juillet 2022]'})
+												)
+												.append(
+													new Element('title-h1', {text : 'Non-publié'})
+														.class('medium-text')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Test du build-mode et terraforming')
+												)
+										)
+										// bubble 8
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.1.0 [05 août 2022]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Réécriture totale du code, Objets de CSS3Renderer pris en charge, création du système de PortalCSS3 et UI, Build-Mode, Création d\'une page d\'acceuil pour naviguer dans les différentes instances de Golpex, Création du système de multi-monde, création du monde hub et du monde labo. Dans le monde \'sandbox\' : Ajout du ciel (basé sur l\'heure locale), Ajout de la mer, Ajout des brouillards, Amélioration de la génération du monde, Possibilité d\'importer ces propres objets en Build-Mode (seulement sur PC)')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img1p_1_0.png']
+														]))
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img1p_1_0_sandbox.png']
+														]))
+												)
+												.append(
+													new Element('div').class('flex-center', 'spacer-medium-pt', 'spacer-medium-pb')
+													.append(
+														new Element('youtube', {videoid : 'i0s4rAa1e1M'})
+													)
+												)
+										)
+										// bubble 9
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.1.1 [05 septembre 2022]'})
+												)
+												.append(
+													new Element('title-h1', {text : 'Non-publié'})
+														.class('medium-text')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Tests du Marching Cube avec interpolation, Tests sur un monde "gameLand" d\'une implémentation d\'une représentation des mathématiques ("théorie des bulles et des flèches"), développement de la gravité Newtonienne pour préparer les graphes et leur comportement spatial.')
+												)
+										)
+										// bubble 10
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 1p.1.2 [05 octobre 2022]'})
+												)
+												.append(
+													new Element('title-h1', {text : 'Non-publié'})
+														.class('medium-text')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Initiation à Ammo.wasm, librairie qui rajoute à Three.js la physique des objets.')
+												)
+												.append(
+													new Element('a')
+														.class('font-exo')
+														.text('Voir un exemple de Ammo.wasm sur le site de Three.js')
+														.attrFromMap(new Map([
+															['href', 'https://threejs.org/examples/?q=ammo#physics_ammo_instancing'],
+															['target', "_blank"],
+															['alt', "lien vers exemple ammo.wasm"],
+														]))
+													
+												)
+										)
+								)
+								// bubble 1p_...
+								.append(
+									new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb')
+										.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+										.append(
+											new Element('title-h1', {text : 'Versions : 1er Prototype'})
+												.class('large-text')
+										)
+										.append(
+											new Element('title-h1', {text : '[~ année 2022]'})
+												.class('large-text')
+										)
+								)
+								// under bubble 2p_...
+								.append(
+									new Element('div').class('wrapper', 'flex-column-reverse', 'flex-gap10')
+										// bubble 1
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.0.0 [12 novembre 2022]'})
+												)
+												.append(
+													new Element('title-h1', {text : 'Non-publié'})
+														.class('medium-text')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Tests de nouveaux designs et nouveaux plans. Arrivée de ChatGPT3.5')
+												)
+										)
+										// bubble 2
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.0.1 [26 novembre 2022]'})
+												)
+												.append(
+													new Element('title-h1', {text : 'Non-publié'})
+														.class('medium-text')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création d\'environnements pour expérimenter avec Three.js x Ammo.wasm')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Versions : 2p.0.1 / 2p.0.2 / 2p.0.3')
+												)
+										)
+										// bubble 3
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.0 [17 février 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Refonte complète du site et intégration du créateur de tier list')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_0.png']
+														]))
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_0_tierlist.png']
+														]))
+												)
+										)
+										// bubble 4
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.1 [23 février 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Développement de la calculatrice qui prend en charge les structures suivantes :')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Nombres Entiers')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Nombres rationnels')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Nombres réels')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Nombres complexes')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Algorithme de Shunting Yard (ordre des opérations) et intégration de MathJax')
+												)
+										)
+										// bubble 5
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.2 [22 avril 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Reconnaissance de structures mathématiques par IA (ici, un LLM)')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_2.png']
+														]))
+												)
+										)
+										// bubble 6
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.3 [27 avril 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création de brainPex.js, une librairie permettant de discuter avec l\'API d\'Hugging Face et d\'effectuer des commandes sur les prompts.')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Proof Of Concept : Création d\'un jeu sur le principe de Little Alchemy mais utilisant les LLM pour créer des éléments à l\'infini, le but du jeu est de trouver un maximum d\'éléments et/ou de trouver ceux qui nous intéressent')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création d\'un chatbot rudimentaire (pas de mémoire/écrasement des anciens messages/tâches très simples)')
+												)
+												/*.append(
+													new Element('video')
+														.attrFromMap(new Map([
+															['src', 'ressource/video2p_1_3.mp4'],
+															['loop', true],
+														]))
+														.addEventListener('mouseover', function() {this.play()} )
+														.addEventListener('mouseout', function() {this.pause()} )
+												)*/
+
+										)
+										// bubble 7
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.4 [6 mai 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Amélioration du chatbot, et intégration de la calculatrice au chatbot. Capacité multiple (code, mathématiques, traductions, écriture, etc...)')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_4(0).png']
+														]))
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_4(1).png']
+														]))
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Voici un plan du fonctionnement de ce chatbot')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_4_plan.png']
+														]))
+												)
+										)
+										// bubble 8
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.5 [31 mai 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Expérimentation sur le chatbot pour éviter le phénomène d\'hallucination. Lorsque le chatbot détecte que la tâche nécessite une information objective, il se base sur les informations de la page Wikipédia du sujet.')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_5_plan.png']
+														]))
+												)
+										)
+										// bubble 9
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.6 [1er juin 2023]'})
+												)
+												.append(
+													new Element('title-h1', {text : 'Non-publié'})
+														.class('medium-text')
+												)
+										)
+										// bubble 10
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.7 [2 juillet 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création d\'un navigateur intelligent. Plus qu\'une simple barre de recherche, pour rechercher une section ou information du site, vous avez la possibilité de poser des questions directement sans forcément devoir écrire un mot en lien avec la recherche. Par exemple, si vous cherchez où trouver un jeu sur un certain thème : "montre moi un jeu comme Little Alchemy", le navigateur cherchera la destination qui a le plus de probabilité de correspondre à la demande.')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création du jeu idle : Il s\'agit d\'un jeu où vous avez des ingrédients de base et des outils comme une pioche et une hâche, à partir de là vous pouvez crafter d\'autres outils et matériaux. Pour débloquer plus de crafts, demandez simplement à l\'IA un élément que vous voudriez avoir et l\'IA vous créera le craft que vous devez faire pour l\'obtenir. Ce qui fait que vous pouvez obtenir une infinité d\'éléments.')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Ajout d\'un système de mémoire au chatbot à la manière de ChatGPT. Vous avez désormais un fil de conversation et le chatbot aura accès aux derniers messages envoyés rendant possible une conversation plus cohérente.')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_7_plan.png']
+														]))
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Ajout de la commande /retry pour recommencer la drnière interaction entre vous et le chatbot.')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Ajout de la commande /clear pour effacer la conversation.')
+												)
+										)
+										// bubble 11
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.1.8 [22 juillet 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création d\'un monde "sandbox" reprenant les idées développées dans la version Prototype 1 de Golpex. Rajout de l\'interpolation dans l\'algorithme MarchingCubes. (Non disponible au public)')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_8_sandbox.png']
+														]))
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Création de la libraire mathPex.js qui permet de créer des pseudo-classes correspondant chacune à une structure mathématique. Comme par exemple : les vecteurs, les nombres complexes, les nombres rationnels, les polynômes etc...')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Pour rajouter des méthodes à ces pseudo-classes (comme par exemple : évaluer un polynôme, additionner deux nombres rationnels ou faire le produit scalaire de deux vecteurs), un langage de programmation volontairement restrictif a été crée. Voici un exemple de syntaxe pour évaluer un polynôme en la valeur x.')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_1_8_syntax.png']
+														]))
+												)
+										)
+										// bubble 12
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.2.0 [25 juillet 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Refactorisation et nettoyage du CSS. "Idle", "Alchemy", "Info" stylisés. Chatbot plus beau.')
+												)
+												/*.append(
+													new Element('video')
+														.attrFromMap(new Map([
+															['src', 'ressource/video2p_2_0.mp4'],
+															['loop', true],
+														]))
+														.addEventListener('mouseover', function() {this.play()} )
+														.addEventListener('mouseout', function() {this.pause()} )
+												)*/
+										)
+										// bubble 13
+										.append(
+											new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb', 'flex-gap20', 'flex-column')
+												.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+												.append(
+													new Element('title-h1', {text : 'Golpex version 2p.2.1 [3 août 2023]'})
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Chatbot désormais plus robuste. Quand vous demandez une ou des tâches au chatbot, un agent détermine quelles sont les tâches et préviligie celles qui sont reconnues dans le système. Une fois ces tâches déterminées, elles sont redirigées vers des agents spécialisés qui peuvent créer ou non un élément DOM (une vidéo, un graphique, une fenêtre de code, etc...). L\'utilisateur a aussi la possibilité d\'écrire des commandes en commençant par "/". Pour accéder à ces commandes, tapez /help dans le chatbot.')
+												)
+
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Gestion des erreurs, Gestion du temps de chargement, Gestion des commandes "développeur" (Tapez /help)')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Fonctionnalités expérimentales :')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Création d\'une structure mathématique')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Création des méthodes de structure (création du golpex-code, cf /doc golpexCode)')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Création des objets de structure et affectation à des variables')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Ajout des commandes /newClass /calc et /doc')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Capacités du chatbot :')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Répondre à des questions/ des tâches')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Programmer des algorithmes simples')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Aller sur Wikipédia')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Faire des graphiques')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Générer des images avec un prompt')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text(' - Donner des infos sur Golpex')
+												)
+												.append(
+													new Element('p')
+														.class('font-exo')
+														.text('Fonctionnement globale du chatbot :')
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_2_1_plan(0).png']
+														]))
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_2_1_plan(1).png']
+														]))
+												)
+												.append(
+													new Element('img').attrFromMap(new Map([
+															['src', 'ressource/img2p_2_1_plan(2).png']
+														]))
+												)
+										)
+								)
+								// bubble 2p_...
+								.append(
+									new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb')
+										.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+										.append(
+											new Element('title-h1', {text : 'Versions : 2nd Prototype'})
+												.class('large-text')
+										)
+										.append(
+											new Element('title-h1', {text : '[~ année 2023]'})
+												.class('large-text')
+										)
+								)
+								
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : PROJECT-page
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('page-project', ({id, title, text_under}) => {
+
+			return new Element('page', {
+					id,
+					title,
+					text_under,
+					innerContainer : new Element('container')
+						.append(
+							//SECTION 1
+							new Element('section').class('spacer-large-pt', 'center', 'flex-column', 'wrapper')
+								.append(
+									new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb')
+										.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+										.append(
+											new Element('title-h1', {text : 'Rendre les Mathématiques libres et jouables'})
+											.class('large-text')
+										)
+										.append(
+											new Element('title-h1', {text : 'Golpex est un projet qui veut prouver que les Mathématiques peuvent être jouées comme n\'importe quel jeu vidéo'})
+											.class('medium-text', 'text-left')
+										)
+								)
+								
+						)
+						.append(
+							// SECTION 2
+							new Element('section').css({
+								backgroundImage: 'url(ressource/fresquetd41.png)',
+							    backgroundSize: 'auto 100%',
+							    backgroundPosition: 'center',
+							})
+							.append(
+								new Element('div')
+								.class('filter', 'flex-grow1').css({
+									    height: 'var(--vh)',
+    									backgroundImage: 'linear-gradient(45deg, var(--color-white-quarter), var(--color-red-semi))',
+								})
+							)
+
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : CONTACT-page
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('page-contact', ({id, title, text_under}) => {
+
+			return new Element('page', {
+					id,
+					title,
+					text_under,
+					innerContainer : new Element('container')
+						.append(
+							//SECTION 1
+							new Element('section').class('spacer-large-pt', 'center', 'flex-column', 'wrapper')
+								.append(
+									new Element('div').class('bubble', 'wrapper', 'spacer-medium-pt', 'spacer-medium-pb')
+										.attrFromMap( new Map([['data-inviewport' , 'slide']]))
+										.append(
+											new Element('title-h1', {text : 'yt discord mail'})
+										)
+								)
+								
+						)
+						.append(
+							// SECTION 2
+							new Element('section')
+							.append(
+								new Element('div')
+							)
+
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-ALCHEMY
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('app-alchemy', ({id, title, input_placeholder, input_text_under}) => {
+
+			return new Element('app-input', {
+					id,
+					title,
+					input_placeholder,
+					input_text_under,
+					innerContainer : new Element('div')
+						.append(
+							new Element('output')
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-IDLE
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('app-idle', ({id, title, input_placeholder, input_text_under}) => {
+
+			return new Element('app-input', {
+					id,
+					title,
+					input_placeholder,
+					input_text_under,
+					innerContainer : new Element('div')
+						.append(
+							new Element('output')
+						)
+						.append(
+							new Element('output')
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-MENU
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('app-menu', ({id, title, input_placeholder, input_text_under}) => {
+
+			return new Element('app-input', {
+					id,
+					title,
+					input_placeholder,
+					input_text_under,
+					innerContainer : new Element('div')
+						.append(
+							new Element('output')
+						)
+						.append(
+							new Element('output')
+						)
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : app-ALGEBRITY
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('app-algebrity', ({id, title, input_placeholder, input_text_under}) => {
+
+			return new Element('app-input', {
+					id,
+					title,
+					input_placeholder,
+					input_text_under,
+					innerContainer : new Element('div')
+						.class('flex-row')
+						.append(
+							new Element('div').css({width : '100%'})
+								.append(
+									new Element('code-textarea', {placeholder : "Programmer en Algebrity ici"})
+								)
+						)
+						.append(
+							new Element('output').css({width : '70%', maxWidth : '500px'})
+								.css({
+									overflow : 'auto',
+									backgroundColor: 'var(--color-white-semi)',
+									padding: '10px',
+									fontFamily : 'Exo',
+									//whiteSpace: 'pre',
+								})
+						)
+						
+				})
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : nav-option
+		*/
+
+		Element.customElements.set('nav-option', ({text, destination}) => {
+			//
+			return new Element('span')
+				.class('nav-option')
+				.addEventListener( 'click' , () => {
+					if (destination) {
+						GO_TO_RENDERER(destination);
+					}
+					
+				})
+				.text(text)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : slide
+		*/
+
+		Element.customElements.set('slide', ({btn_text, text, destination}) => {
+			//
+			return new Element('div')
+				.class('slide', 'in-shadow-dark', 'text-white', 'flex-column', 'flex-gap20')
+				.append(
+					new Element('fun-button', {
+						text : btn_text,
+						destination,
+					})
+				)
+				.append(
+					new Element('span')
+						.class('wrapper')
+						.text(text)
+				)
+				.element
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : slider
+																		PAS GENERALISABLE !
+		*/
+
+		Element.customElements.set('slider', ({}) => {
+
+			let slider;
+
+			function goToSlide(n) {
+
+				if (!slider) return
+
+				const slides = slider.getElementsByClassName('slides')[0];
+				const child = slides.children[n];
+
+				slides.scrollTo({
+					left: child.offsetLeft - slides.offsetLeft,
+					//top: child.offsetTop - slides.offsetTop,
+					behavior: 'smooth'
+				});
+			}
+
+			//
+
+			slider = new Element('div')
+				.class('slider')
+				.append(
+					new Element('nav')
+						.class('flex-sb')
+						.append(
+							new Element('a')
+								.attrFromMap(
+									new Map([['onclick', () => goToSlide(0) ]])
+								)
+								.text(1)
+						)
+						.append(
+							new Element('a')
+								.attrFromMap(
+									new Map([['onclick', () => goToSlide(1) ]])
+								)
+								.text(2)
+						)
+						.append(
+							new Element('a')
+								.attrFromMap(
+									new Map([['onclick', () => goToSlide(2) ]])
+								)
+								.text(3)
+						)
+						.append(
+							new Element('a')
+								.attrFromMap(
+									new Map([['onclick', () => goToSlide(3) ]])
+								)
+								.text(4)
+						)
+						.append(
+							new Element('a')
+								.attrFromMap(
+									new Map([['onclick', () => goToSlide(4) ]])
+								)
+								.text(5)
+						)
+				)
+				.append(
+					new Element('div')
+						.class('slides')
+						.append(
+							new Element('slide',{
+								text : "ChatBot & Mathématiques, demandez ce que vous voulez !",
+								btn_text : "chatbot",
+								destination : 'appChatbot'
+							})
+						)
+						.append(
+							new Element('slide',{
+								text : "Le monde des maths libres",
+								btn_text : "MathWorld",
+								destination : 'appMathWorld'
+							})
+						)
+						.append(
+							new Element('slide',{
+								text : "Le plaisir d'un monde de la création",
+								btn_text : "SandBox",
+								destination : 'appSandbox'
+							})
+						)
+						.append(
+							new Element('slide',{
+								text : "Discord, Youtube, Mail",
+								btn_text : "Contact",
+								destination : 'contact-page'
+							})
+						)
+						.append(
+							new Element('slide',{
+								text : "Les infos sur le projet Golpex !",
+								btn_text : "Informations",
+								destination : 'project-page'
+							})
+						)
+				).element
+
+			//
+			return slider
+		})
+
+		/*
+		=======================================================================================================
+												ELEMENT : ---
+		*/
+		
+	</script>
+
+</head>
+
+
+<body onload="
+// load customElements
+Element.loadComponents();
+
+// then init apps
+const apps = [...RENDERERS_INIT.keys()];
+apps.map( app => RENDERERS_INIT.get(app)() );
+
+">
+
+<!--
+===============================================================================================================
+===============================================================================================================
+												APP ALCHEMY
+===============================================================================================================
+GO_TO_RENDERER('appAlchemy')
+-->
+<div id='lab' class="display-none">
+	<prompt-input placeholder="Tapez une commande"></prompt-input>
+	<code-input placeholder="Tapez une commande"></code-input>
+	<fa-icon name="tree" ></fa-icon>
+	<fa-icon name="bars" ></fa-icon>
+	<back-button></back-button>
+	<fun-button text='alchemy' destination='appAlchemy'></fun-button>
+	<fake-button></fake-button>
+	<app-topbar title="Titre : Test"></app-topbar>
+	<app-bottombar placeholder="Titre : Test" text_under="message sous le prompt"></app-bottombar>
+	<youtube videoid="S7i3ugniyjg"></youtube>
+</div>
+
+<app-chatbot id="appChatbot" title="ChatBot & maths" input_placeholder="Demandez quelque chose" input_text_under="v0.3"></app-chatbot>
+<app-input id="appMathWorld" title="Math-World" input_placeholder="Demandez quelque chose" input_text_under="v0.1"></app-input>
+<app-input id="appSandbox" title="Sandbox" input_placeholder="Demandez quelque chose" input_text_under="v0.1"></app-input>
+<app-idle id="appIdle" title="Idle & Craft Game" input_placeholder="Demandez quelque chose" input_text_under="v0.1"></app-idle>
+<app-alchemy id="appAlchemy" title="Alchemy Game" input_placeholder="Tapez : element1,element2" input_text_under="v0.2"></app-alchemy>
+
+<app-algebrity id="appAlgebrity" title="Algebrity" input_placeholder="Demander un calcul. Exemple : A.add(B)" input_text_under="v0.1 by Golto"></app-algebrity>
+
+<!-- chatbot -->
+<script src="./app_math.js" type="module"></script>
+<!-- alchemy -->
+<script src="./app_alchemy.js" type="module"></script>
+<!-- idle -->
+<script src="./app_idle.js" type="module"></script>
+<!-- algebrity -->
+<script src="./app_algebrity.js" type="module"></script>
+
+
+<page-advancement id="advancement-page" title="Avancements" text_under="by Golto"></page-advancement>
+<page-project id="project-page" title="Projet Golpex" text_under="by Golto"></page-project>
+<page-contact id="contact-page" title="Contact" text_under="by Golto"></page-contact>
+<app-menu id="appMenu" title="Navigation" input_placeholder="Demandez quelque chose" input_text_under="by Golto"></app-menu>
+
+<!-- menu -->
+<script src="./app_menu.js" type="module"></script>
+
+<!--
+===============================================================================================================
+===============================================================================================================
+												MAIN PAGE
+===============================================================================================================
+-->
+<main id='main-page' class="">
+
+	<div class="main">
+		<!--
+===============================================================================================================
+												HEADER
+		-->
+		<header>
+
+			<div class="wrapper sticky blur" id="navbar">
+				<nav class="spacer-small-pb spacer-small-pt">
+					<div class="nav-core">
+						<a class="logo-link" href="#">
+							<div class="nav-logo-core">
+								<img src="logo.svg"/>
+							</div>
+						</a>
+						<nav class="nav-items-core">
+							<nav-option text="ChatBot" destination="appChatbot"></nav-option>
+							<nav-option text="Avancements" destination="advancement-page"></nav-option>
+							<nav-option text="Projet" destination="project-page"></nav-option>
+							<nav-option text="Contact" destination="contact-page"></nav-option>
+							<nav-option text="Navigation" destination="appMenu"></nav-option>
+							<nav-input placeholder="Comment puis-je vous aider ?"></nav-input>
+							<div class="nav-back" onclick="
+								document.getElementById('navbar').querySelectorAll('.nav-items-core')[0].classList.remove('active')">
+								<i class="fa-solid fa-arrow-left"></i>
+							</div>
+						</nav>
+						<div class="nav-bars" onclick="
+								document.getElementById('navbar').querySelectorAll('.nav-items-core')[0].classList.add('active')">
+							<i class="fa-solid fa-bars"></i>
+						</div>
+					</div>
+				</nav>
+			</div>
+
+			<script type="module">
+				window.onscroll = function() {onScroll()};
+
+				let navbar = document.getElementById("navbar");
+				let offsetTop = navbar.offsetTop;
+				let height = navbar.getBoundingClientRect().height;
+
+				function onScroll() {
+					// navbar sticky
+					if (window.pageYOffset >= offsetTop) {
+						navbar.classList.add("sticky")
+					}
+					else {
+						navbar.classList.remove("sticky");
+					}
+
+					// navbar changement de couleur
+					
+					if (window.pageYOffset + height > window.innerHeight) {
+						navbar.classList.add("text-white");
+						navbar.classList.add("logo-bright");
+					}
+					else {
+						navbar.classList.remove("text-white");
+						navbar.classList.remove("logo-bright");
+					}
+				}
+			</script>
+
+			<div class="cover spacer-large-pt header-bg">
+				<div class="cover wrapper">
+					<div class="header-core center cover">
+						<!-- LOGO < ((golpex < slogan) < (cards(2 max) : chatbot + ?))-->
+
+						
+						<div class="flex-center center-line cover flex-column" data-inviewport="slide">
+							<div class="logo-container">
+								<img src="logo.svg">
+							</div>
+							<div class="name-golpex">
+								Golpex
+							</div>
+						</div>
+						<div class="center-line cover flex-center flex-column">
+							<div class="flex-column wrapper">
+								<h1 class="large-text text-center">
+								Jouez aux mathématiques libres
+								</h1>
+								<p class="medium-text wrapper spacer-small-pt">
+									Les maths seront un jeu vidéo pour tout niveau
+								</p>
+							</div>
+							<div class="wrapper"></div>
+							<div class="spacer-small-pt spacer-medium-pb">
+								<fun-button text="ChatBot" destination="appChatbot"></fun-button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<hr>
+		<!--
+===============================================================================================================
+												MAIN
+		-->
+		<main id="main-sections">
+		<div class="filter">
+
+			<!-- -->
+			<div class="wrapper">
+				<aside>
+					
+				</aside>
+			</div>
+			<div class="wrapper">
+				<!--
+				-------------------------------------------------------------
+										 SECTION
+				-->
+				<section class="center spacer-large-pb spacer-large-pt">
+					
+					<div class="container">
+						<div class="cards">
+							<card text="Discuter avec un chatbot à propos de maths et autres sujets" url='ressource/triangles.svg' btn_text="ChatBot" media="video" destination="appChatbot"></card>
+							<card text="Proof-of-concept : Fabriquez des items et des crafts à l'infini" url='ressource/triangles.svg' btn_text="Idle Game" destination="appIdle"></card>
+							<card text="Proof-of-concept : Un jeu similaire à Little Alchemy" url='ressource/tmps23d0r8v.png' btn_text="Alchemy Game" destination="appAlchemy"></card>
+							<!--<card text="Voyager dans un monde où les maths sont libres" url='ressource/triangles.svg' btn_text="Math-World" destination="appMathWorld"></card>
+							<card text="Construisez dans un monde virtuel" url='ressource/tmps23d0r8v.png' btn_text="SandBox" destination="appSandbox"></card>-->
+						</div>
+					</div>
+					
+					
+				</section>
+
+				<hr>
+				<!--
+				-------------------------------------------------------------
+										 SECTION
+				-->
+				<section class="center spacer-large-pb spacer-large-pt">
+
+					<style type="text/css">
+						.slider {
+							width: 300px;
+							text-align: center;
+							overflow: hidden;
+						}
+
+						.slides {
+								display: flex;
+								
+								overflow-x: auto;
+								scroll-snap-type: x mandatory;
+								
+								
+								
+								scroll-behavior: smooth;
+								-webkit-overflow-scrolling: touch;
+								
+								/*
+								scroll-snap-points-x: repeat(300px);
+								scroll-snap-type: mandatory;
+								*/
+						}
+
+						.slides::-webkit-scrollbar {
+							width: 10px;
+							height: 10px;
+						}
+						.slides::-webkit-scrollbar-thumb {
+							background: var(--color-black);
+							border-radius: 10px;
+						}
+						.slides::-webkit-scrollbar-track {
+							background: transparent;
+						}
+						.slides > div.slide {
+							scroll-snap-align: start;
+							flex-shrink: 0;
+							width: 300px;
+							height: 300px;
+							margin-right: 50px;
+							border-radius: 10px;
+							background-color: var(--color-select_9);
+							transform-origin: center center;
+							transform: scale(1);
+							transition:  0.3s;
+							position: relative;
+							
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						}
+						.slides > div.slide:hover {
+							background-color: var(--color-select);
+						}
+
+						.slider > nav > a {
+							display: inline-flex;
+							width: 2.5rem;
+							height: 2.5rem;
+							background: var(--color-black);
+							text-decoration: none;
+							align-items: center;
+							justify-content: center;
+							border-radius: 50%;
+							margin: 0 0 0.5rem 0;
+							position: relative;
+							color: var(--color-white);
+							transition-duration: 0.3s;
+						}
+						.slider > nav > a:hover {
+							cursor: pointer;
+							background-color: var(--color-white);
+							color: var(--color-black);
+						}
+						.slider > nav > a:active {
+
+							background-color: var(--color-orange);
+						}
+						.slider > nav > a:focus {
+							background-color: var(--color-black);
+						}
+
+						/* Don't need button navigation */
+						@supports (scroll-snap-type) {
+							.slider > nav > a {
+								display: flex;
+							}
+						}
+					</style>
+					
+					<div class="center">
+
+						<slider></slider>
+<!--
+
+						<div class="slider">
+							<script type="text/javascript">
+								function goToSlide(n) {			// à refaire
+									
+									const item = document.getElementById(`slide-${n}`);
+									const items = item.parentElement;
+									
+									items.scrollLeft = items.clientWidth * (n-1)
+								}
+							</script>
+							<nav>
+								<a onclick="goToSlide(1)">1</a>
+								<a onclick="goToSlide(2)">2</a>
+								<a onclick="goToSlide(3)">3</a>
+								<a onclick="goToSlide(4)">4</a>
+								<a onclick="goToSlide(5)">5</a>
+							</nav>
+
+							<div class="slides">
+								<slide id="slide-1" text="ChatBot & Mathématiques"></slide>
+								<slide id="slide-2" text="Math-World"></slide>
+								<slide id="slide-3" text="SandBox"></slide>
+								<slide id="slide-4" text="Contact"></slide>
+								<slide id="slide-5" text="Informations"></slide>
+							</div>
+						</div>-->
+
+
+
+					</div>
+
+
+				</section>
+
+				<hr>
+				<!--
+				-------------------------------------------------------------
+										 SECTION
+				-->
+				<section>
+
+					<style type="text/css">
+
+						input.width-control {
+							width: 500px;
+						}
+						@media (max-width: 800px) {
+							input.width-control {
+								width: 300px;
+							}
+						}
+
+						@media (max-width: 450px) {
+							input.width-control {
+								width: 200px;
+							}
+						}
+						input.prompt {
+							border-radius: 0;
+							border: none;
+							background-color: var(--color-white-semi);
+							background-image: url('./logo.svg');
+							background-size: contain;
+							background-repeat: no-repeat;
+							padding: 12px 20px 12px 60px;
+						}
+						input.prompt:hover {
+							outline-color: var(--color-black);
+							outline-style: solid;
+							outline-width: 0.5px;
+						}
+
+						input.prompt:focus-visible {
+							outline-color: var(--color-black);
+							outline-style: solid;
+							outline-width: 2px;
+						}
+
+						input.code {
+							border-radius: 0;
+							border: none;
+							font-family: 'JetBrains mono',monospace;
+							color: var(--color-white);
+							background-color: var(--color-select_9);
+							background-image: url('./logo.svg');
+							background-size: contain;
+							background-repeat: no-repeat;
+							padding: 12px 20px 12px 60px;
+						}
+						input.code:hover {
+							outline-color: var(--color-black);
+							outline-style: solid;
+							outline-width: 0.5px;
+						}
+
+						input.code:focus-visible {
+							outline-color: var(--color-black);
+							outline-style: solid;
+							outline-width: 2px;
+						}
+
+						textarea.code {
+							border-radius: 0;
+							border: none;
+							font-family: 'JetBrains mono',monospace;
+							color: var(--color-white);
+							background-color: var(--color-black);
+							outline: none;
+							padding: 15px;
+							width: 100%;
+							height: 100%;
+							resize: none;
+						}
+
+						textarea.code::-webkit-scrollbar {
+							width: 10px;
+							height: 10px;
+						}
+						textarea.code::-webkit-scrollbar-thumb {
+							background: var(--color-white);
+							border-radius: 10px;
+						}
+						textarea.code::-webkit-scrollbar-track {
+							background: transparent;
+						}
+
+						input.nav {
+							border-radius: 0;
+							border: none;
+							border-radius: 100px;
+							background-color: var(--color-white-semi);
+							padding: 12px 20px 12px 20px;
+							position: absolute;
+							right: 10px;
+							top: calc(var(--gutter-cap) * 2.5);
+						}
+						input.nav:hover {
+							outline-color: var(--color-black);
+							outline-style: solid;
+							outline-width: 0.5px;
+						}
+
+						input.nav:focus-visible {
+							outline-color: var(--color-black);
+							outline-style: solid;
+							outline-width: 2px;
+						}
+
+						@media (min-width : 0px) and (max-width : 900px) {
+							input.nav {
+								background-color: var(--color-white);
+								color: var(--color-black);
+								position: relative;
+								right: 0;
+								top: 0;
+								z-index: 1;
+							}
+						}
+						
+					</style>
+					
+					<!--
+					<pdf-canvas path="ressource/pdf/Fiches_AnalyseNumerique2.pdf" page='1'></pdf-canvas>
+					<pdf-canvas path="ressource/pdf/Fiches_AnalyseNumerique2.pdf" page='2'></pdf-canvas>
+					<pdf-canvas path="ressource/pdf/Fiches_AnalyseNumerique2.pdf" page='3'></pdf-canvas>
+					-->
+
+					<div class="wrapper flex-column flex-gap20">
+
+					L3S2
+
+					<a href="./ressource/pdf/Fiches_AnalyseNumerique2.pdf"> -> L3S2 / Analyse Numérique</a>
+					<a href="./ressource/pdf/Fiches_Statistiques.pdf"> -> L3S2 / Statistiques</a>
+					<a href="./ressource/pdf/Fiches_CalculDifferentielEquationsDifferentielles.pdf"> -> L3S2 / Calcul différentiel</a>
+					<a href="./ressource/pdf/Fiches_FonctionsAnalytiques.pdf"> -> L3S2 / Fonctions analytiques</a>
+					<a href="./ressource/pdf/Fiches_TheorieGroupes.pdf"> -> L3S2 / Théorie des groupes</a>
+
+					L3S1
+
+					<a href="./ressource/pdf/Fiche_X31M010_Probabilites_continues__Convergences.pdf"> -> L3S1 / Probabilités continues</a>
+					<a href="./ressource/pdf/Fiche_X31M020_Algebre_Lineaire__Bilineaire_II.pdf"> -> L3S1 / Algèbre Bilinéaire</a>
+					<a href="./ressource/pdf/Fiche_X31M030_Analyse_Numerique_I.pdf"> -> L3S1 / Analyse Numérique</a>
+					<a href="./ressource/pdf/Fiche_X31M040_Topologie__Calcul_Differentiel.pdf"> -> L3S1 / Topologie</a>
+					<a href="./ressource/pdf/Fiche_X31M050_Integration_2.pdf"> -> L3S1 / Intégration (Lebesgue)</a>
+
+					<a href="./ressource/pdf/Livret_Mesure.pdf"> -> L3S1 / Théorie de la mesure</a>
+
+					L2S1
+<!--
+					<a href="https://www.editions-ellipses.fr/PDF/9782340024137_extrait.pdf">Algèbre linéaire</a>
+					<a href="http://exo7.emath.fr/cours/ch_intpar.pdf">Intégration : Intégrals dépendant d'un paramètre</a>
+					<a href="http://exo7.emath.fr/cours/ch_intimp.pdf">Intégration : Intégrals impropres</a>
+					Fonction de plusieurs variables ??
+					<a href="http://exo7.emath.fr/cours/ch_series.pdf">Séries numériques</a>
+					<a href="http://exo7.emath.fr/cours/ch_groupe.pdf">Groupes et symétries</a>
+					Mécaniques du point ??
+-->
+					<a href="./ressource/pdf/SeriesNumeriquesEtProbabilitesDiscretes.pdf">Probabilités et séries numériques</a>
+					<a href="./ressource/pdf/Integration1.pdf">Intégration</a>
+					<a href="./ressource/pdf/GroupesEtSymetrie.pdf">Groupes et symétries</a>
+					<a href="./ressource/pdf/FonctionsDePlusieursVariables.pdf">Fonctions de plusieurs variables</a>
+					<a href="./ressource/pdf/AlgebreLineaireEtApplications.pdf">Algèbre linéaire</a>
+
+					L2S2
+
+					<p>Probabilités appliquées</p>
+					<p>Algèbre bilinéaire</p>
+					<p>Suites et série de fonctions</p>
+					<p>Méthodes numériques</p>
+					<p>Géométrie affine</p>
+					<p>Suppléments</p>
+
+					</div>
+
+				</section>
+
+				<hr>
+				<!--
+				-------------------------------------------------------------
+										 SECTION
+				-->
+				<section>
+					section 4
+				</section>
+
+				<hr>
+				<!--
+				-------------------------------------------------------------
+				-->
+				<!--
+				-------------------------------------------------------------
+				-->
+			</div>
+		</div>
+		</main>
+		<!--
+===============================================================================================================
+												FOOTER
+		-->
+		<footer>
+			<!-- -->
+			<div class="wrapper">
+				<div class="spacer-huge-pt spacer-huge-pb flex-column center-line flex-gap20">
+					<div class="logo-container">
+						<img src="logo.svg">
+					</div>
+					<div class="flex-row flex-gap20">
+						<a class="large-text" href="https://www.youtube.com/channel/UC3lRCtBb8ssim8FdTqZ-hug" target="_blank" title="Youtube's channel">
+							<i class="fa-brands fa-youtube"></i>
+						</a> 
+						<a class="large-text" href="https://discord.gg/WnWpuHj5SA" target="_blank" title="Discord Server">
+							<i class="fa-brands fa-discord"></i>
+						</a>
+						<a class="large-text" href="mailto:guillaumefoucaudmath@gmail.com" target="_blank" title="e-mail adress">
+							<i class="fa-solid fa-envelope"></i>
+						</a>
+						
+					</div>
+					<div class="medium-text text-center">
+						Version p2.3.0 by Golto (FOUCAUD Guillaume)
+					</div>
+					<div>
+						© Tous droits réservés
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+</main>
+
+		<!--
+===============================================================================================================
+												REDIRECTION
+		-->
+
+	<script type="text/javascript">
+		let RENDERERS_COUNT = 0;
+		let RENDERERS_RUNNING = new Map;
+		let RENDERERS_INIT = new Map;
+		let CURRENT_RENDERER = 'main-page';
+
+		/*
+		'main-page'
+		'app-sandbox'
+		...
+		*/
+
+		function SWITCH_OFF(renderer){
+			document.getElementById(renderer).classList.add('display-none');
+			RENDERERS_RUNNING.set(renderer,false);
+		}
+
+		function SWITCH_ON(renderer){
+			document.getElementById(renderer).classList.remove('display-none');
+			RENDERERS_RUNNING.set(renderer,true);
+		}
+
+		function GO_TO_RENDERER(renderer){
+			SWITCH_OFF(CURRENT_RENDERER);
+			SWITCH_ON(renderer);
+			CURRENT_RENDERER = renderer;
+		}
+
+		function GO_TO(renderer){
+			if (destinations[renderer]) {
+				destinations[renderer]()
+			}
+			
+		}
+
+		// à faire
+
+		let destinations = {
+			'main-page' : () => {
+				GO_TO_RENDERER('main-page')
+			}
+		}
+
+		/* --------------------------------------------------- */
+
+	</script>
+
+		<!--
+===============================================================================================================
+												IN-VIEWPORT
+		-->
+
+	<script type="text/javascript">
+		//Toggle animations when visible
+		//https://stackoverflow.com/questions/27462306/css3-animate-elements-if-visible-in-viewport-page-scroll
+
+
+		/*
+		use data-inviewport="NAME" in HTML elements like that : <a data-inviewport="slide">example</a>
+		
+		use [data-inviewport="NAME"] in CSS like that :
+
+		[data-inviewport="slide"] { 
+			transition: 2s ease-out;
+			opacity: 0.0;
+			transform: translate(0, -20%);
+		}
+		[data-inviewport="slide"].is-inViewport { 
+			opacity: 1.0; 
+			transform: translate(0, 0);
+		}
+		*/
+
+		const inViewport = (entries, observer) => {
+			entries.forEach(entry => {
+			entry.target.classList.toggle("is-inViewport", entry.isIntersecting);
+			});
+		};
+
+		const Obs = new IntersectionObserver(inViewport);
+		const obsOptions = {}; //See: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options
+
+		// Attach observer to every [data-inviewport] element:
+		const ELs_inViewport = document.querySelectorAll('[data-inviewport]');
+		ELs_inViewport.forEach(EL => {
+			Obs.observe(EL, obsOptions);
+		});
+	</script>
+
+</body>
