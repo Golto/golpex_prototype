@@ -1,0 +1,1448 @@
+
+/*
+darkorange :	#ff8c00 : rgba(255, 140, 0, 1)
+blanc : 			#f4f4f4 : rgba(244, 244, 244, 1)
+noir : 				#1f1f1f :	rgba(31, 31, 31, 1)
+pyrole : 			#DD232F
+golpex-rouge	#ff4d4d
+*/
+
+
+/*
+
+
+		:hover - This pseudo-class is applied to an element when the user hovers over it with a pointing device, such as a mouse or trackpad.
+
+		:active - This pseudo-class is applied to an element when it is being activated by the user. This could be clicking on a link or button, for example.
+
+		:focus - This pseudo-class is applied to an element when it is receiving input focus. This could be through tabbing between inputs or clicking on an input element.
+
+		:focus-visible - This pseudo-class is applied to an element when it is receiving keyboard focus, but not when it is receiving focus through a pointing device. It is used to provide a visible indicator of focus only for keyboard users.
+
+		:focus-within - This pseudo-class is applied to a parent element when any of its child elements are receiving input focus. It is used, for example, to change the styles of a container when the user is interacting with any input elements within it.
+
+		:visited - This pseudo-class is applied to a link element (<a>) after it has been visited by the user. It is used to style visited links differently from non-visited links.
+
+		:target - This pseudo-class is applied to an element (typically an anchor <a> element) when its ID matches the URL fragment identifier. It is used to change the styles of the targeted element when it is linked to.
+
+*/
+
+/* ---------------------------------------------- MAIN OBJECTS ---------------------------------------------- */
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+::selection {
+	background-color: rgba(31, 31, 31, 0.5);
+	color: rgba(244, 244, 244, 1);
+}
+
+body{
+	background-color: #f4f4f4;
+	color: #1f1f1f;
+
+	font-weight: bold;
+	font-family: 'Geologica', 'Helvetica', 'Arial', sans-serif;
+	letter-spacing: 1.2px;
+	font-size: 14px;
+	color: #1f1f1f;
+	line-height: 1.7em;
+	font-weight: 500;
+}
+
+header{
+	height: 100vh;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.0);
+	background-size: cover;
+}
+
+main{
+	width: 100%;
+	background-color: #f4f4f4;
+	background-size: cover;
+}
+
+main section {
+	height: 100vh;
+	overflow: hidden;
+}
+
+footer{
+	width: 100%;
+	color: #f4f4f4;
+	background-color: #1f1f1f;
+	background-size: cover;
+	padding: 10px 0px;
+}
+
+a {
+	text-decoration: none;
+	color: #1f1f1f;
+}
+
+h1{
+	text-align: center;
+}
+
+h2{
+	text-align: center;
+}
+
+h3{
+	text-align: center;
+}
+
+h4{
+	text-align: center;
+}
+
+h5{
+	text-align: center;
+}
+
+h6{
+	text-align: center;
+}
+
+ul {
+	list-style: none;
+}
+
+/* ---------------------------------------------- BACKGROUND GRADIENT MAIN ---------------------------------------------- */
+
+.backgroundGradient{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	margin: auto;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;  
+	overflow: hidden;
+	border-radius: 0px;
+	opacity: 40%;
+	z-index: -1;
+
+	background-color: #f4f4f4;
+}
+
+.backgroundGradient div{
+	position: absolute;
+	border-radius: 50%;
+	animation: gradient 4s infinite;
+}
+
+@keyframes gradient{
+	70% {
+		transform: scale(1.5) translate(200px);
+	}
+}
+
+.backgroundGradient div:nth-child(1){
+	height: 50%;
+	width: 60%;
+	background-color: rgba(255, 191, 128, 1.0);
+	left: 5%;
+	top: 0%;
+	animation-duration: 9s;
+
+}
+
+.backgroundGradient div:nth-child(2){
+	height: 45%;
+	width: 80%;
+	background-color: rgba(255, 133, 102, 1.0);
+	left: 45%;
+	top: 0%;
+	animation-duration: 7s;
+
+}
+
+.backgroundGradient div:nth-child(3){
+	height: 40%;
+	width: 30%;
+	background-color: rgba(255, 133, 102, 1.0);
+	left: 0%;
+	top: 35%;
+	animation-duration: 6s;
+
+}
+
+.backgroundGradient div:nth-child(4){
+	height: 90%;
+	width: 55%;
+	background-color: rgba(255, 191, 128, 1.0);
+	left: 40%;
+	top: 60%;
+	animation-duration: 5s;
+}
+
+.backgroundGradient:after{
+	position: absolute;
+	content: "";
+	height: 100%;
+	width: 100%;
+	backdrop-filter: blur(100px);
+}
+
+/* ---------------------------------------------- BACKGROUND GRADIENT SECTIONS ---------------------------------------------- */
+
+/* ----------------------- SECTION 1 ----------------------- */
+.gradient01 {
+	background: linear-gradient(to right, rgba(255, 140, 0, 0.4) 0%, rgba(255, 102, 153, 0.5) 100%);/*255, 153, 102 */
+	animation: gradient01 4s infinite;
+}
+
+@keyframes gradient01{
+	30% {
+		background-color: rgba(255, 140, 0, 0.2);
+	}
+	30% {
+		background-color: rgba(255, 102, 153, 0.2);
+	}
+}
+/* ----------------------- SECTION 2 ----------------------- */
+.gradient02 {
+	background: radial-gradient(circle at 200px 800px, rgba(255, 80, 80, 0.7) 0%, rgba(255, 204, 102, 0.5) 100%);/*255, 153, 102 */
+	animation: gradient02 4s infinite;
+}
+
+@keyframes gradient02{
+	30% {
+		background-color: rgba(255, 80, 80, 0.2);
+	}
+	30% {
+		background-color: rgba(255, 204, 102, 0.2);
+	}
+}
+/* ----------------------- SECTION 3 ----------------------- */
+.gradient03 {
+	background: radial-gradient(circle at 200px 800px, rgba(255, 80, 80, 0.7) 0%, rgba(255, 204, 102, 0.5) 100%);/*255, 153, 102 */
+	animation: gradient03 4s infinite;
+}
+
+@keyframes gradient03{
+	30% {
+		background-color: rgba(255, 80, 80, 0.2);
+	}
+	30% {
+		background-color: rgba(255, 204, 102, 0.2);
+	}
+}
+/* ----------------------- SECTION 4 ----------------------- */
+.gradient04 {
+	background: radial-gradient(circle, rgba(255, 153, 51, 0.4) 0%, rgba(255, 102, 204, 0.7) 200%);/*255, 153, 102 */
+	animation: gradient04 4s infinite;
+}
+
+@keyframes gradient04{
+	30% {
+		background-color: rgba(255, 102, 204, 0.2);
+	}
+	30% {
+		background-color: rgba(255, 153, 51, 0.2);
+	}
+}
+/* ----------------------- SECTION 5 ----------------------- */
+/* ----------------------- SECTION 6 ----------------------- */
+.gradient06 {
+	background: linear-gradient(to top left, rgba(255, 80, 80, 0.8) 0%, rgba(102, 0, 255, 0.8) 100%);
+	animation: gradient06 4s infinite;
+}
+
+@keyframes gradient06{
+	30% {
+		background-color: rgba(255, 102, 204, 0.6);
+	}
+	30% {
+		background-color: rgba(255, 153, 51, 0.6);
+	}
+}
+/* ----------------------- SECTION 7 ----------------------- */
+.gradient07 {
+	background: linear-gradient(to top left, rgba(255, 111, 111, 0.8) 0%, rgba(104, 34, 255, 0.8) 100%);
+	animation: gradient07 4s infinite;
+}
+
+@keyframes gradient07{
+	30% {
+		background-color: rgba(255, 80, 80, 0.7);
+	}
+	30% {
+		background-color: rgba(255, 204, 102, 0.7);
+	}
+}
+/* ----------------------- SECTION 8 ----------------------- */
+.gradient08 {
+	background: linear-gradient(to top right, rgba(104, 34, 255, 0.8) 0%, rgba(255, 111, 111, 0.8) 100%);
+	animation: gradient08 4s infinite;
+}
+
+@keyframes gradient08{
+	30% {
+		background-color: rgba(255, 80, 80, 0.7);
+	}
+	30% {
+		background-color: rgba(255, 204, 102, 0.7);
+	}
+}
+
+/* ---------------------------------------------- HEADER PAGE ---------------------------------------------- */
+
+header .container {
+	width: 100%;
+	height: 100%;
+}
+
+header .container .column {
+	display: flex;
+	/*padding: 100px 0px 0px 0px;*/ /* remettre pour la nav-bar */
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	/*justify-content: space-evenly;*/
+}
+
+header .container .column > * {
+	margin: 30px;
+}
+
+header .container .column .name-golpex{
+	font-size: 8em;
+	padding: 50px 0px;
+}
+
+header .container .column .description{
+	line-height: 2.3em;
+}
+
+/* ---------------------------------------------- BACKGROUND - main renderer ---------------------------------------------- */
+
+#renderer-main {
+	position: absolute;
+
+	/*pour Ã©viter que le rendu dÃ©borde du body et gÃ©nÃ©re scroll-x*/
+	overflow: hidden;
+	width: 100%;
+}
+
+.blur {
+	position: absolute;
+	background-color: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(20px);
+	width: 100%;
+	height: 100vh;
+}
+
+/* ---------------------------------------------- RENDERERS ---------------------------------------------- */
+
+.renderers {
+	position: absolute;
+
+	/*pour Ã©viter que le rendu dÃ©borde du body et gÃ©nÃ©re scroll-x*/
+	overflow: hidden;
+	width: 100%;
+	height: 100vh;
+
+	background-color: rgba(31, 31, 31, 1.0);
+}
+
+input.prompt[type=text] {
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	background-color: rgba(244, 244, 244, 0.5);
+	background-image: url('./favicon.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	padding: 12px 20px 12px 50px;
+	font-family: Geologica;
+}
+
+input.prompt[type=text]:hover {
+	outline-color: #1f1f1f;
+	outline-style: solid;
+	outline-width: 0.5px;
+}
+
+input.prompt[type=text]:focus-visible {
+	outline-color: #1f1f1f;
+	outline-style: solid;
+	outline-width: 2px;
+}
+
+/* -- menu -- */
+
+#golpexMenu {
+	width: 100%;
+	height: 100%;
+	padding: 40px 0px;
+	box-sizing: border-box;
+}
+
+#golpexMenu .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+#golpexMenu .container > * {
+	margin: 20px;
+}
+
+#golpexMenu .container .output.log{
+	background-color: rgba(244, 244, 244, 0.5);
+	border-radius: 20px;
+	padding: 20px 50px;
+}
+
+#golpexMenu .container .output.bar{
+	background-color: rgba(244, 244, 244, 0.5);
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+#golpexMenu .container .output > * {
+	/*direct children*/
+	height: auto;
+	min-height: 50px;
+}
+
+#golpexMenu .container .output button.element {
+	padding: 0px 10px;
+	margin: 0px 0px;
+	width: 100%;
+	height: 50px;
+	border-radius: 0px;
+	border: none;
+	background-color: rgba(244, 244, 244, 0.2);
+	font-family: Geologica, sans-serif;
+	letter-spacing: 0.1rem;
+	font-size: 1.1rem;
+	overflow: hidden;
+
+	transition: 0.2s;
+}
+
+#golpexMenu .container .output button.element:hover {
+	background-color: rgba(255, 140, 0, 0.5);
+	cursor: pointer;
+}
+
+#golpexMenu .container .output button.element:active {
+	background-color: rgba(255, 140, 0, 1.0);
+	cursor: pointer;
+}
+
+/* -- idle -- */
+
+#golpexIdle {
+	width: 100%;
+	height: 100%;
+	padding: 40px 0px;
+	box-sizing: border-box;
+}
+
+#golpexIdle .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0px 50px;
+}
+
+#golpexIdle .container .nav-bar-app {
+	background-color: rgba(244, 244, 244, 0.7);
+	border-radius: 20px 20px 0px 0px;
+	overflow: clip;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#golpexIdle .container .nav-bar-app button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexIdle .container .nav-bar-app button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+#golpexIdle .container .output {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	background-color: rgba(244, 244, 244, 0.3);
+	min-height: 150px;
+}
+
+#golpexIdle .container .output.items {
+	
+}
+
+#golpexIdle .container .output button.element {
+	padding: 20px;
+	margin: 0px 0px;
+	width: 100%;
+	height: 80px;
+	border-radius: 0px;
+	border: none;
+	background-color: rgba(244, 244, 244, 0.2);
+	font-family: Geologica, sans-serif;
+	letter-spacing: 0.1rem;
+	font-size: 1.3rem;
+	overflow: hidden;
+
+	transition: 0.5s;
+}
+
+#golpexIdle .container .output button.element:hover {
+	background-color: rgba(244, 244, 244, 0.8);
+	cursor: pointer;
+}
+
+#golpexIdle .container .output button.element:active {
+	/* red */
+	background-color: rgba(244, 0, 0, 0.8);
+	cursor: pointer;
+}
+
+#golpexIdle .container .output button.element.isOk:active {
+	/* green */
+	background-color: rgba(0, 244, 0, 0.8);
+	cursor: pointer;
+}
+
+/* -- sandbox -- */
+
+#golpexSandbox {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexSandbox .container {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexSandbox .container button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 0px 0px 20px 0px;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexSandbox .container button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+/* -- linear tower defense -- */
+
+#golpexLinearTD {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexLinearTD .container {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexLinearTD .container button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 0px 0px 20px 0px;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexLinearTD .container button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+/* -- math world -- */
+
+#golpexMathWorld {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexMathWorld .container {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexMathWorld .container button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 0px 0px 20px 0px;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexMathWorld .container button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+/* -- alchemy -- */
+
+#golpexAlchemy {
+	width: 100%;
+	height: 100%;
+	padding: 40px 0px;
+	box-sizing: border-box;
+}
+
+#golpexAlchemy .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0px 50px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#golpexAlchemy .container .nav-bar-app {
+	background-color: rgba(244, 244, 244, 0.7);
+	border-radius: 20px 20px 0px 0px;
+	overflow: clip;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#golpexAlchemy .container .nav-bar-app button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexAlchemy .container .nav-bar-app button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+#golpexAlchemy .container .output {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	background-color: rgba(244, 244, 244, 0.3);
+	padding: 20px;
+}
+
+#golpexAlchemy .container .output.list {
+	height: 100%;
+}
+
+/* -- math chatbot -- */
+
+#golpexMath {
+	width: 100%;
+	height: 100%;
+	/*padding: 40px 0px;*/
+	box-sizing: border-box;
+}
+
+#golpexMath > .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/*padding: 0px 50px;*/
+	width: 100%;
+	box-sizing: border-box;
+}
+
+#golpexMath .container .nav-bar-app {
+	background-color: rgba(244, 244, 244, 0.7);
+	/*border-radius: 20px 20px 0px 0px;*/
+	overflow: clip;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .nav-bar-app button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexMath .container .nav-bar-app button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+#golpexMath .container .output {
+	overflow-x: hidden;
+	overflow-y: scroll;
+	background-color: rgba(244, 244, 244, 0.3);
+	padding: 20px;
+	height: 100%;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .wikipedia {
+	width: calc(100% - 40px);
+	min-height: 500px;
+	min-width: 400px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .mathcha {
+	width: calc(100% - 40px);
+	min-height: 500px;
+	min-width: 400px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .youtube {
+	width: 560px;
+	height: 315px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .huggingface {
+	width: 850px;
+	height: 450px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .desmos {
+	width: 500px;
+	height: 500px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .desmos.graph {
+	width: calc(100% - 40px);
+	height: 500px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	margin: 20px;
+	overflow: clip;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .message {
+	background-color: rgba(244, 244, 244, 0.3);
+	margin: 30px 10px 10px 10px;
+	border-radius: 50px;
+	padding: 30px;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+	/*couleurs au pif*/
+	/*background-image: linear-gradient(#ffd1b582 0%, #ffa7e5c4 100%);*/
+}
+
+#golpexMath .container .output .message .title{
+	padding: 10px;
+	margin: 10px 0px 0px 0px;
+}
+
+
+#golpexMath .container .output .message .container {
+	
+	width: 100%;
+	border-radius: 20px 20px 0px 0px;
+	overflow: clip;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .message .container .code {
+	
+	width: 100%;
+	background: rgba(31, 31, 31, 0.8);
+	padding: 10px;
+	box-sizing: border-box;
+	overflow-x: auto;
+	font-family: 'Jetbrains Mono';
+}
+
+#golpexMath .container .output .message .container .topbar {
+	
+	height: 50px;
+	background: rgba(31, 31, 31, 0.9);
+	display: flex;
+	/*justify-content: flex-end;*/
+	justify-content: space-between;
+}
+
+#golpexMath .container .output .message .container .topbar button {
+	
+	width: 50px;
+	height: 50px;
+	border: none;
+	background: rgb(63, 63, 63, 0.5);
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+#golpexMath .container .output .message .container .topbar button i{
+	
+	color: rgb(244, 244, 244, 1.0);
+	font-size: 1.3rem;
+}
+#golpexMath .container .output .message .container .topbar button:hover {
+	background: rgb(63, 63, 63, 0.7);
+}
+#golpexMath .container .output .message .container .topbar button:active {
+	background: rgb(0, 244, 0, 0.5);
+}
+
+#golpexMath .container .output textarea {
+	resize: vertical;
+	width: calc(100% - 20px);
+	height: auto;
+
+	padding: 20px;
+	margin: 30px 10px 10px 10px;
+
+	border: none;
+	border-radius: 20px;
+	
+	font-size: 1rem;
+	font-family: 'JetBrains mono', monospace;
+	
+	
+	background: rgba(31, 31, 31, 0.8);
+	color: rgba(244, 244, 244, 1.0);
+
+	box-sizing: border-box;
+}
+
+#golpexMath .container .output textarea:focus-visible {
+	outline-style: solid;
+	outline-color: black;
+	outline-width: 0.15rem;
+}
+
+#golpexMath .container .output .class-container {
+	width: calc(100% - 20px);
+	min-height: auto;
+	/*background: rgba(255, 0, 255, 0.5);*/
+	margin: 30px 10px 10px 10px;
+	border-radius: 20px 20px 20px 0px;
+	display: flex;
+	flex-direction: column;
+	overflow: clip;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+}
+
+#golpexMath .container .output .class-container .topbar {
+	width: calc(100% - 00px);
+	height: 50px;
+	background-color: rgba(244, 244, 244, 0.5);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	border-radius: 0px 0px 0px 10px;
+	overflow: clip;
+}
+
+#golpexMath .container .output .class-container .topbar .btn {
+	width: 50px;
+	height: 50px;
+	background-color: rgba(255, 140, 0, 0.3);
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+#golpexMath .container .output .class-container .topbar .btn:hover {
+	background: rgba(255, 140, 0, 0.8);
+}
+
+#golpexMath .container .output .class-container .topbar .btn:active {
+	background: rgba(255, 140, 0, 1.0);
+}
+
+#golpexMath .container .output .class-container .topbar .class{
+	width: 100%;
+	height: auto;
+	background: rgba(244, 244, 244, 0.3);
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+#golpexMath .container .output .class-container .methods { 
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+	background-color: rgba(244, 0, 244, 0.2);
+}
+
+#golpexMath .container .output .class-container .methods .method { /* <=> .topbar */
+	width: 100%;
+	background-color: rgba(244, 244, 244, 0.5);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.closed {
+	height: 0;
+	padding: 0;
+	margin: 0;
+}
+
+#golpexMath .container .output .class-container .methods .method .name {
+	display: flex;
+	align-items: center;
+}
+
+#golpexMath .container .output .class-container .methods .method .btn { /* <=> .topbar .btn */
+	width: 50px;
+	height: 50px;
+	background-color: rgba(255, 140, 0, 0.3);
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+#golpexMath .container .output .class-container .objects {
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
+	background-color: rgba(244, 244, 0, 0.2);
+}
+
+#golpexMath .container .output .class-container .objects .object { /* <=> .topbar */
+	width: 100%;
+	/*height: 50px;*/
+	background-color: rgba(244, 244, 244, 0.5);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#golpexMath .container .output .class-container .objects .object .name {
+	display: flex;
+	align-items: center;
+}
+
+#golpexMath .container .output .class-container .objects .object .btn { /* <=> .topbar .btn */
+	width: 50px;
+	height: 50px;
+	background-color: rgba(255, 140, 0, 0.3);
+	border: none;
+	font-size: 1.5rem;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+#golpexMath .container .output .class-container .bottombar {
+	width: calc(100% - 00px);
+	height: 50px;
+	/*background: rgba(127, 127, 255, 0.5);*/
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#golpexMath .container .output .class-container .bottombar .btn {
+	width: 50%;
+	height: 50px;
+	background: rgba(255, 140, 0, 0.3);
+	font-family: Geologica;
+	font-size: 1.2rem;
+	border: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	transition: 0.3s;
+}
+
+#golpexMath .container .output .class-container .bottombar .btn:hover {
+	background: rgba(255, 140, 0, 0.8);
+}
+
+#golpexMath .container .output .class-container .bottombar .btn:active {
+	background: rgba(255, 140, 0, 1.0);
+	transition: 0;
+}
+
+/* -- section info -- */
+
+#golpexInfo {
+	width: 100%;
+	height: 100%;
+	padding: 40px 0px;
+	box-sizing: border-box;
+}
+
+#golpexInfo .container {
+	height: 100%;
+	width: 100%;
+	padding: 0px 50px;
+	box-sizing: border-box;
+}
+
+#golpexInfo .container .info {
+	background-color: rgba(244, 244, 244, 0.5);
+	padding: 20px 40px;
+	border-radius: 20px;
+	min-width: 300px;
+}
+
+#golpexInfo .container .info .icon {
+	font-size: 8rem;
+	text-align: center;
+	height: 0px;
+}
+
+#golpexInfo .container .info .icon .offset {
+	position: relative;
+	top: -80px;
+	left: 60%;
+}
+
+#golpexInfo .container .info .text {
+	padding: 10px 0px;
+}
+
+/* -- section contact -- */
+
+/* -- math chatbot -- */
+
+#golpexPaint {
+	width: 100%;
+	height: 100%;
+	padding: 0px 0px;
+	box-sizing: border-box;
+}
+
+#golpexPaint > .container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 0px 0px;
+	width: 100%;
+	box-sizing: border-box;
+
+}
+
+#golpexPaint .container .nav-bar-app {
+	background-color: rgba(244, 244, 244, 0.2);
+	border-radius: 0px 0px 0px 0px;
+	overflow: clip;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	box-shadow: 15px 15px 30px 0px rgba(31, 31, 31, 0.5);
+	z-index: 1;
+}
+
+#golpexPaint .container .nav-bar-app button.back{
+	width: 50px;
+	height: 50px;
+	border: none;
+	background-color: rgb(255, 140, 0, 0.5);
+}
+
+#golpexPaint .container .nav-bar-app button.back:hover{
+	background-color: rgb(255, 140, 0, 0.7);
+	cursor: pointer;
+}
+
+/* -- mobile/tablets/laptop/desktop -- */
+
+@media (max-width: 767px) {
+	/* smartphones in portrait mode */
+	
+	header .container .column {
+		transform: scale(0.7);
+	}
+
+	#golpexMenu .container {
+		transform: scale(0.8);
+	}
+	
+	#golpexInfo .container {
+		transform: scale(0.8);
+	}
+
+	footer .container {
+		transform: scale(0.8);
+	}
+
+	#golpexMath > .container {
+		padding: 0px 0px;
+		margin: 0px;
+		border-radius: 0px;
+	}
+
+	#golpexMath .container .output{
+		padding: 0px 0px;
+		margin: 0px;
+		border-radius: 0px;
+	}
+
+	#golpexMath .container .output .desmosGraph {
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	/* smaller tablets and larger smartphones in landscape mode */
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+	/* larger tablets and some smaller laptops */
+}
+
+@media (min-width: 1200px) {
+	/* desktop and laptop computers */
+}
+/* ---------------------------------------------- MAIN LOGO ---------------------------------------------- */
+
+#main-logo {
+	width: 300px;
+	/*margin: 30px;*/
+}
+
+@media screen and (max-height: 500px){
+
+	#main-logo {
+		display: none;
+	}
+}
+
+
+/* ---------------------------------------------- IN-VIEWPORT ---------------------------------------------- */
+
+
+[data-inviewport="fade"] {
+	transition: 3s ease-out;
+	opacity: 0.0;
+}
+
+[data-inviewport="fade"].is-inViewport { 
+	opacity: 1.0;
+}
+
+[data-inviewport="slide"] { 
+	transition: 1.5s ease-out;
+	opacity: 0.0;
+	transform: translate(0, -30%);
+
+}
+			
+[data-inviewport="slide"].is-inViewport { 
+	opacity: 1.0; 
+	transform: translate(0, 0);
+}
+
+/* ---------------------------------------------- ICONS ---------------------------------------------- */
+
+.fa-discord {
+	transition: .5s;
+}
+.fa-discord:hover {
+	color: #5865f2;
+}
+
+.fa-youtube {
+	transition: .5s;
+}
+.fa-youtube:hover {
+	color: #ff0000;
+}
+
+/* ---------------------------------------------- LOADER ---------------------------------------------- */
+
+
+.lds {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+	transition: 0.5s;
+}
+.lds div {
+	display: inline-block;
+	position: absolute;
+	left: 8px;
+	width: 16px;
+	background: #ff8c00;
+	animation: lds 1.2s cubic-bezier(.68,-0.55,.27,1.55) infinite;
+	/*cubic-bezier(0.0, 0.5, 0.5, 1.0)*/
+}
+.lds div:nth-child(1) {
+	left: 8px;
+	animation-delay: -0.24s;
+}
+.lds div:nth-child(2) {
+	left: 32px;
+	animation-delay: -0.12s;
+}
+.lds div:nth-child(3) {
+	left: 56px;
+	animation-delay: 0;
+}
+@keyframes lds {
+	0% {
+		top: 8px;
+		height: 64px;
+	}
+	50%, 100% {
+		top: 24px;
+		height: 32px;
+	}
+}
+
+/*
+<div class="lds"><div></div><div></div><div></div></div>
+*/
+
+/* ---------------------------------------------- UTILS ---------------------------------------------- */
+
+
+.border-box {
+	/* count padding in width */
+	box-sizing: border-box;
+}
+
+.div-centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.div-start {
+	display: flex;
+	justify-content: start;
+	align-items: center;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.full-width {
+	width: 100%;
+}
+
+.empty-height {
+	height: 0;
+}
+
+.empty-width {
+	width: 0;
+}
+
+.view-height {
+	height: 100vh;
+}
+
+.padding {
+	padding: 10px 20px;
+}
+
+.margin {
+	margin: 10px 20px;
+}
+
+.text-size-0_8 {
+	font-size: 0.8em;
+}
+
+.text-size-1_2 {
+	font-size: 1.2em;
+}
+
+.text-size-2 {
+	font-size: 2em;
+}
+
+.text-size-4 {
+	font-size: 4em;
+}
+
+.letter-spacing-5 {
+	letter-spacing: 5px;
+}
+
+.letter-spacing-2 {
+	letter-spacing: 2px;
+}
+
+.text-orange {
+	/*background: -webkit-linear-gradient(0deg, #ff4d4d 0%, #ff8c00 100%);*/ /*orange - more golpex friendly*/
+	background-color: darkorange;
+	background: -webkit-linear-gradient(0deg, #ff4d4d 0%, #cc0066 100%); /*red - more visible*/
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+
+}
+
+.name-golpex {
+	background-color: darkorange;
+	background: -webkit-linear-gradient(45deg, #ff4d4d, #ff8c00 80%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+/* dropdown */
+
+.dropdown {
+	position: relative;
+	cursor: pointer;
+}
+
+.dropdown > button {
+	width: 170px;
+	height: 60px;
+	border: 0;
+	border-radius: 6px;
+	font-family: inherit;
+	font-size: 17px;
+	background-color: #3c3c3c;
+}
+
+.dropdown > .content {
+	position: absolute;
+	z-index: 2;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+	padding: 0px 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	color: #f7f7f7;
+}
+
+.dropdown > .content::after {
+	content: "";
+	position: absolute;
+	bottom: 6px;
+	right: 10%;
+	width: 80%;
+	height: 1px;
+	transform: scaleX(0.0);
+	background-color: rgb(255 255 255 / 30%);
+	transition: 0.3s;
+}
+
+.dropdown:hover > .content::after {
+	transform: scaleX(1.0);
+}
+
+.dropdown > .content > span:last-child {
+	margin-left: auto;
+	transition: 0.3s;
+}
+
+.dropdown:hover > .content > span:last-child {
+	rotate: -180deg;
+}
+
+.dropdown > .menu {
+	position: absolute;
+	z-index: 1;
+	top: -6px;
+	left: 50%;
+	display: grid;
+	width: 110%;
+	padding: 70px 0 6px;
+	border-radius: 6px;
+	translate: -50% 0;
+	visibility: hidden;
+	opacity: 0;
+	scale: 0.85;
+	background-image: linear-gradient(#ea8d8d, #a890fe);
+	transition: 0.3s;
+}
+
+.dropdown:hover > .menu {
+	visibility: visible;
+	opacity: 1;
+	scale: 1;
+}
+
+.dropdown > .menu > a {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	color: #f7f7f7;
+	font-size: 14px;
+	padding: 0 24px;
+}
+
+.dropdown > .menu > a:hover {
+	background-color: rgb(0 0 0 / 10%);
+}
+
+/* inactive */
+
+.inactive{
+	display: none;
+}
