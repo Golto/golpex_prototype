@@ -1,0 +1,237 @@
+
+/* ---------------------------------------------- BODY ---------------------------------------------- */
+
+
+body {
+	margin: 0;
+
+	background: rgb(0,0,0);
+	background: radial-gradient(circle at 400px 200px, rgba(16,16,16,1) 30%, rgba(255,90,0,1) 60%, rgba(16,16,16,1) 80%);
+
+	color: #fff;
+	letter-spacing: 1px;
+	font-family: sans-serif;
+	word-spacing: 1px;
+	line-height: 1.5;
+}
+
+/* ---------------------------------------------- UTILS ---------------------------------------------- */
+
+.disabled {
+	display: none;
+}
+
+.transition {
+	transition-duration: 0.4s;
+}
+
+.screen-high {
+	height: 100vh;
+}
+
+.logo-main {
+	width: 150px;
+}
+
+.name-golpex {
+				
+	background: -webkit-linear-gradient(45deg, red, yellow 80%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.div-centered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 100%
+}
+
+.padding {
+	padding: 20px;
+}
+
+.text-resize3 {
+	font-size: 300%;
+	font-weight: bolder;
+}
+
+.text-resize2 {
+	font-size: 200%;
+	font-weight: bold;
+}
+
+.text-resize1_5 {
+	font-size: 150%;
+	font-weight: bold;
+}
+
+.text-resize1 {
+	font-size: 100%;
+	font-weight: bold;
+}
+
+.text-resize_5 {
+	font-size: 50%;
+}
+
+.text-resize_25 {
+	font-size: 25%;
+}
+
+.text-orange {
+	color: darkorange;
+}
+
+.button {
+	background-color: rgb(255, 90, 0);
+	color: white;
+	border: none;
+	border-radius: 50px;
+	padding: 20px;
+	margin: 5px;
+
+	transition-duration: 0.4s;
+}
+
+.button:hover {
+	background-color: white;
+	color: black;
+}
+
+a {
+	text-decoration: none;
+}
+/* unvisited link */
+a:link {
+	color: white;
+}
+
+/* visited link */
+a:visited {
+	color: white;
+}
+
+/* ---------------------------------------------- RENDERER ---------------------------------------------- */
+#renderer-physics {
+
+}
+
+.renderer-test {
+	touch-action: none;
+	background-color: rgba(0, 0, 0, 0.0);
+}
+
+/* ---------------------------------------------- FLEXBOX ---------------------------------------------- */
+/*refaire navimenu*/
+.navimenu {
+	position: fixed;
+	right: 5%;
+	top: 10%;
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 50px;
+	height: 50px;
+	opacity: 1.0;
+}
+
+.navimenu:hover {
+	opacity: 0.9;
+	height: 500px;
+}
+
+.row {
+	display: -webkit-flex;
+	display: flex;
+}
+
+.column {
+	background-color: inherit;
+}
+
+.column.flex1 {
+	/*background-color: rgba(255, 0, 0, 0.5);*/
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+.column.flex2 {
+	/*background-color: rgba(0, 255, 0, 0.5);*/
+	-webkit-flex: 2;
+	-ms-flex: 2;
+	flex: 2;
+}
+.column.flex3 {
+	/*background-color: rgba(0, 0, 255, 0.5);*/
+	-webkit-flex: 3;
+	-ms-flex: 3;
+	flex: 3;
+}
+
+
+.header {
+	position: sticky;
+	top: 2%;
+	background-color: rgba(0, 0, 0, 0.0);
+	text-align: center;
+	width: 100%;
+	font-size: 35px;
+}
+
+.footer {
+	background-color: rgba(0, 0, 0, 0.0);
+	text-align: center;
+	width: 100%;
+	font-size: 15px;
+}
+
+
+/* ---------------------------------------------- IN-VIEWPORT ---------------------------------------------- */
+
+
+[data-inviewport="fade"] {
+	transition: 3s ease-out;
+	opacity: 0.0;
+}
+
+[data-inviewport="fade"].is-inViewport { 
+	opacity: 1.0;
+}
+
+[data-inviewport="slide"] { 
+	transition: 1.5s ease-out;
+	opacity: 0.0;
+	transform: translate(0, -30%);
+
+}
+			
+[data-inviewport="slide"].is-inViewport { 
+	opacity: 1.0; 
+	transform: translate(0, 0);
+}
+
+/* ---------------------------------------------- ICONS ---------------------------------------------- */
+
+.fa-discord:hover {
+	color: #5865f2;
+}
+.fa-youtube:hover {
+	color: #ff0000;
+}
+
+/* ---------------------------------------------- MOBILE/DESKTOP ---------------------------------------------- */
+
+@media (max-width: 1050px) {
+	.screen-high.row {
+		-webkit-flex-direction: column;
+		flex-direction: column;
+	}
+}
+
+/*pour enlever le header au bout d'un certain temps*/
+@media (){}
+/*position du scroll*/
+/*https://css-tricks.com/indicating-scroll-position-on-a-page-with-css/*/
+
+/*position du curseur*/
+/*https://dev.to/thalitadev/step-by-step-guide-pass-your-cursor-position-using-css-variables-c7b*/

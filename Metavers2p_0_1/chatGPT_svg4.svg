@@ -1,0 +1,34 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+<defs>
+	<filter id="f1" x="0" y="0" width="200%" height="200%">
+	  <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+	  <feColorMatrix result = "matrixOut" in = "offOut" type = "matrix" values = "0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0"/>
+	  <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="2" />
+	  <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+	</filter>
+  </defs>
+
+	<path d="
+M 276 492
+L 348 492 L 384 456 L 420 492
+L 492 492
+L 492 420 L 456 384 L 492 348 
+L 492 276
+L 420 276 L 384 312
+
+C 384 200 472 180 472 36
+C 256 56 40 76 40 220
+C 128 200 92 348 212 396
+C 236 200 276 200 312 384
+C 276 420 276 492 Z
+
+	" 
+	style="fill:#ff4d4d;stroke:black;stroke-width:5;fill-opacity:1.0;stroke-opacity:0.0"
+	filter="url(#f1)"/>
+	
+	<circle cx="128" cy="436" r="56" stroke="black" stroke-width="5" style="fill:#ff9933;stroke:black;stroke-width:5;fill-opacity:1.0;stroke-opacity:0.0"
+	filter="url(#f1)"/>
+
+	
+
+</svg>

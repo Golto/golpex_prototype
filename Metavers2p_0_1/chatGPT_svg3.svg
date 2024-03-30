@@ -1,0 +1,47 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+<defs>
+	<filter id="f1" x="0" y="0" width="200%" height="200%">
+	  <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+	  <feColorMatrix result = "matrixOut" in = "offOut" type = "matrix" values = "0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0"/>
+	  <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="2" />
+	  <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+	</filter>
+  </defs>
+
+	<path d="
+	M 276 492 
+L 348 492 L 384 456 L 420 492
+L 492 492
+L 492 420 L 456 384 L 492 348 
+L 492 276
+L 420 276 L 384 312
+C 380 308, 372 300, 368 296
+L 368 200
+C 364 196, 356 188, 352 184
+L 352 348
+C 348 344, 340 336, 336 332
+L 472 180 L 472 36
+C 476 32, 484 24, 488 20
+L 256 56
+C 252 52, 244 44, 240 40
+L 40 76 L 40 220
+C 44 224, 52 232, 56 236
+L 128 200
+C 124 204, 116 212, 112 216
+L 92 348 L 212 396 L 236 200
+L 276 200 
+C 280 196, 288 188, 292 184
+L 312 384
+L 276 420 Z
+
+
+	" 
+	style="fill:#ff4d4d;stroke:black;stroke-width:5;fill-opacity:1.0;stroke-opacity:0.0"
+	filter="url(#f1)"/>
+	
+	<circle cx="128" cy="436" r="56" stroke="black" stroke-width="5" style="fill:#ff9933;stroke:black;stroke-width:5;fill-opacity:1.0;stroke-opacity:0.0"
+	filter="url(#f1)"/>
+
+	
+
+</svg>
