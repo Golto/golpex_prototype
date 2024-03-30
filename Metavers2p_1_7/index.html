@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Le projet Golpex est une plateforme innovante qui permet aux utilisateurs de découvrir les mathématiques de manière ludique et interactive. En utilisant des éléments de jeu vidéo, les utilisateurs pourront s'immerger dans un univers où ils pourront résoudre des problèmes mathématiques et relever des défis stimulants.
+
+Le but de Golpex est de rendre les mathématiques accessibles et amusantes pour tous les utilisateurs, qu'ils soient débutants ou experts. En utilisant une approche pédagogique basée sur le jeu, Golpex encourage l'apprentissage des mathématiques tout en offrant une expérience utilisateur immersive et divertissante.
+
+Les fonctionnalités de la plateforme incluent des défis, des jeux et des quiz mathématiques, ainsi qu'un système de progression qui permet aux utilisateurs de suivre leur évolution et de relever des défis de plus en plus complexes. Golpex offre également des ressources pédagogiques pour aider les utilisateurs à comprendre les concepts mathématiques de base et à approfondir leur compréhension.
+
+En somme, Golpex est une plateforme passionnante qui permet aux utilisateurs de s'engager dans l'apprentissage des mathématiques de manière amusante et interactive. Si vous êtes à la recherche d'une manière ludique d'apprendre les mathématiques, Golpex est la solution idéale pour vous." />
+	<meta name="author" content="Guillaume FOUCAUD" />
+		<!--<meta name="copyright" content="©" />-->
+
+	<!--Afficher des icônes-->
+	<script src="https://kit.fontawesome.com/b858757988.js" crossorigin="anonymous"></script>
+	<title>Golpex p2.1.7</title>
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<link type="image/png" rel="icon" href="favicon.png">
+
+	<!--<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" id="MathJax-script"></script>-->
+
+	<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+	<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+	<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Exo:wght@600&display=swap" rel="stylesheet">
+	<!--<link href="https://fonts.googleapis.com/css2?family=Georama:wght@600&display=swap" rel="stylesheet">-->
+	<link href="https://fonts.googleapis.com/css2?family=Georama:ital,wght@1,600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
+	<style type="text/css">
+		.fontGeological {
+			font-family: 'Geologica', sans-serif;
+		}
+	</style>
+
+
+
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+	<style>
+	.material-symbols-outlined {
+	  font-variation-settings:
+	  'FILL' 1,
+	  'wght' 400,
+	  'GRAD' 0,
+	  'opsz' 48
+	}
+	</style>
+
+	
+	
+
+</head>
+<body>
+
+	<!--  ========================================== SCRIPT : MathJax Updater ==========================================  -->
+<!--
+	<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js">
+		MathJax.Hub.Config({
+			extensions: ["mml2jax.js"],
+			jax: ["input/MathML", "output/HTML-CSS"]
+		});
+	</script>
+
+	<script>
+		window.updateMaths = function (id) {
+			if (typeof(id) != "string") return 0
+			const element = document.getElementById(id)
+			MathJax.Hub.Queue(["Typeset",MathJax.Hub,element]);
+		}
+	</script>
+
+	-->
+
+	<!--  ========================================== HIDDEN ==========================================  -->
+
+	<!-- ----------------------------- sandbox ----------------------------- -->
+	<div id="golpexSandbox" class="inactive renderers div-centered column" data-inviewport="fade">
+
+		<button onclick="GO_TO_RENDERER('main');" style="position: absolute; left: 0%; top: 0%";>Quitter</button>
+		<div id="golpexSandbox-lds" class="inactive lds" style="position: absolute;"><div></div><div></div><div></div></div>
+
+		<!--
+			obsolète : pour exemple
+	<script type="module">
+		import * as LAIw from'./LittleAIworld.js';
+		//GO_TO_RENDERER('renderer-game');
+		console.warn('quand prêt, retirer : GO_TO_RENDERER(\'renderer-game\');')
+	</script>-->
+
+	</div>
+	<script src='./app_sandbox.js' type="module"></script>
+
+	<!-- ----------------------------- chatbot ----------------------------- -->
+	<div id="golpexChatbot" class="inactive renderers div-centered column linear-gradient06">
+		<button onclick="GO_TO_RENDERER('main');" style="position: absolute; left: 0%; top: 0%";>Quitter</button>
+		<h2 style="position: absolute; top: 20%">CHATBOT</h2>
+		<div id="golpexChatbot-lds" class="inactive lds" style="position: absolute;"><div></div><div></div><div></div></div>
+	</div>
+	<script src='./app_chatbot.js' type="module"></script>
+
+	<!-- ----------------------------- grapher ----------------------------- -->
+	<div id="golpexGrapher" class="inactive renderers div-centered column linear-gradient06">
+		<button onclick="GO_TO_RENDERER('main');" style="position: absolute; left: 0%; top: 0%";>Quitter</button>
+		<h2 style="position: absolute; top: 20%">GRAPHER</h2>
+		<div id="golpexGrapher-lds" class="inactive lds" style="position: absolute;"><div></div><div></div><div></div></div>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML">
+<mn></mn>
+</math>
+	</div>
+
+	<script src='./app_grapher.js' type="module"></script>
+
+	<!-- ----------------------------- craft ----------------------------- -->
+	<div id="golpexCraft" class="inactive renderers div-centered column linear-gradient06">
+		<button onclick="GO_TO_RENDERER('main');" style="position: absolute; left: 0%; top: 0%";>Quitter</button>
+		<h2 style="position: absolute; top: 20%">A CRAFT GAME</h2>
+	</div>
+	<script src='./app_craft.js' type="module"></script>
+
+	<!-- ----------------------------- alchemy ----------------------------- -->
+	<div id="golpexAlchemy" class="inactive renderers div-centered column linear-gradient06">
+
+		<button onclick="GO_TO_RENDERER('main');" style="position: absolute; left: 0%; top: 0%";>Quitter</button>
+		<h2 style="position: absolute; top: 20%">INFINITE ALCHEMY</h2>
+<!--
+		<div class="div-centered row">
+			<label class="custom-file-upload">
+				<input type="file" id="importAlchemy" onchange="importJson()">Load
+			</label>
+			<button onclick="save()">Save</button>
+		</div>
+	-->
+	</div>
+	<script src="./app_alchemy.js" type="module"></script>
+
+	<!-- ----------------------------- idle ----------------------------- -->
+	<div id="golpexIdle" class="inactive renderers div-centered column linear-gradient06">
+
+		<button onclick="GO_TO_RENDERER('main');" style="position: absolute; left: 0%; top: 0%";>Quitter</button>
+		<h2 style="position: absolute; top: 10%">AN IDLE GAME</h2>
+
+		<!--<button id="score">score</button>
+		<button id="clickUpgrade">clickUpgrade</button>
+		<button id="autoUpgrade">autoUpgrade</button>
+		<button id="incrementButton">incrementButton</button>-->
+		<div class="row">
+			<button id="idle_axe"></button>
+			<button id="idle_pickaxe"></button>
+			<button id="idle_craft">CRAFT</button>
+		</div>
+	</div>
+	<script src='./app_idle.js' type="module"></script>
+
+	<!--  ========================================== BACKGROUND ==========================================  -->
+<div id="main">
+
+	<div class="backgroundGradient">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+
+<!--
+	<div id="renderer-main" data-inviewport="fade"></div>
+
+	<div id="renderer-main-blur"></div>
+-->
+
+
+	<!--  ========================================== NAVBAR ==========================================  -->
+	<script type="text/javascript">
+		function getHeightOfElementById(id){
+			const bodyRect = document.body.getBoundingClientRect();
+			const element = document.getElementById(id);
+			elemRect = element.getBoundingClientRect();
+			offset = elemRect.top - bodyRect.top;
+			return offset;
+		}
+	</script>
+<!--
+	<nav>
+		<p class="logo">
+			<img src="./logo.svg" width="30px"> <span class="name-golpex">Golpex</span>
+		</p>
+		<div class="nav-links">
+			<ul>
+				
+				
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('header'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-house"></i><br>Accueil</button></li>
+
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('section1'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-square-root-variable"></i><br>Chatbot</button></li>
+
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('section2'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-globe"></i><br>Infinite Alchemy</button></li>
+
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('section3'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-bug"></i><br>RolePlay</button></li>
+
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('section4'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-info"></i><br>Info</button></li>
+
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('section5'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-envelope"></i><br>Contact</button></li>
+				<li><button onclick="window.scroll({
+						top: getHeightOfElementById('section6'),
+						behavior: 'smooth'
+					});"><i class="fa-solid fa-list"></i><br>TierList</button></li>
+
+			</ul>
+
+
+		</div>
+		<i class="fa-solid fa-bars menu-hamburger"></i>
+	</nav>-->
+
+	<!--  ========================================== HEADER ==========================================  -->
+
+	<header id="header">
+		<div class="div-centered column" data-inviewport="slide">
+			<div class="div-centered column phoneShrink">
+				<img src="./logo.svg" id="main-logo">
+				<span class="name-golpex" style="font-size: 6em;">Golpex</span>
+				<div class="">
+					<h1 class="">Essayez les mathématiques<span class="text-orange"><br> libres</span> et <span class="text-orange">relaxantes</span></h1>
+				</div>
+			</div>
+		</div>
+
+		
+	</header>
+
+	<!--  ========================================== MAIN ==========================================  -->
+
+	<main>
+		<!--  ===================================== SECTION 1 =====================================  -->
+		<section id="section1" class="linear-gradient01">
+			<h1 class="inactive">SECTION 1</h1>
+
+			<div class="div-centered" data-inviewport="slide">
+
+
+				<div id="golpexMenu" class="div-centered column">
+					<h1 class="text-enlarge padding">NAVIGATEUR</h1>
+					<p class="margin">Sections dispo : chatbot, info, contact, alchemy game, tier list</p>
+				</div>
+				<script src='./app_menu.js' type="module"></script>
+
+				<!--<span class="material-symbols-outlined">
+				settings
+				</span>-->
+				
+
+			</div>
+
+			
+		</section>
+		<!--  ===================================== SECTION 2 =====================================  -->
+		<section id="section2" class="inactive linear-gradient02">
+			
+			<div class="div-centered column" data-inviewport="slide">
+				
+				<h1 class="">SECTION 2</h1>
+				
+			</div>
+
+		</section>
+		<!--  ===================================== SECTION 3 =====================================  -->
+		<section id="section3" class="inactive linear-gradient03">
+			
+			<div class="div-centered" data-inviewport="slide">
+				
+				<h1 class="">SECTION 3</h1>
+
+			</div>
+
+		</section>
+
+		<!--  ===================================== SECTION 4 =====================================  -->
+		<section id="section4" class="linear-gradient04">
+			<div class="div-centered" data-inviewport="slide">
+				<h1 class="inactive">SECTION 4</h1>
+
+				<div class="div-centered row">
+					<div style="padding: 60px 30px;" class="div-centered column">
+						<div class="">Ce projet a pour but de permettre<br> à n'importe qui de <span class="text-orange">créer en maths</span>.<br>
+							Il s'adresse aussi bien aux non-initiés <br>qu'aux plus pointilleux du domaine.<br>
+							<br>
+							Aussi, le projet est pensé pour <span class="text-orange">durer dans l'avenir</span>,<br>et utilisera des technologies du web3<br>
+							(IA, blockchain, VR, AR etc...)
+						</div>
+					</div>
+
+					<div class="div-centered column">
+						<div style="">
+							<i class="fa-solid fa-circle-info"></i>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<!--  ===================================== SECTION 5 =====================================  -->
+		<section id="section5" class="linear-gradient05">
+			<div class="div-centered" data-inviewport="slide">
+				<h1 class="inactive">SECTION 5</h1>
+
+				<div class="div-centered row">
+					<div style="padding: 60px 30px;" class="div-centered column">
+						<div class="text-enlarge">
+							Me contacter :<br><br>
+							<a href="https://discord.gg/WnWpuHj5SA" target="_blank" title="Discord Server">
+								<i class="fa-brands fa-discord"></i> Le serveur Discord du projet
+							</a><br>
+							<a href="https://www.youtube.com/channel/UC3lRCtBb8ssim8FdTqZ-hug" target="_blank" title="Youtube's channel">
+								<i class="fa-brands fa-youtube"></i> Ma chaîne Youtube
+							</a> 
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<!--  ===================================== SECTION 6 =====================================  -->
+		<section id="section6" class="linear-gradient06">
+			
+			<div class="div-centered" data-inviewport="slide">
+
+				<div id="conteneur-tier-list" class="div-centered">
+					<div id="boite" class="div-centered column">
+						<canvas id="c"></canvas>
+						<div class="div-centered row">
+							
+							<input type="text" placeholder="Entrez un nom (complet)" id="ajout" class="margin">
+							<button onclick="ajt()" class="plus margin"><span class="div-centered"><i class="fa-solid fa-plus margin"></i> Ajouter</span></button>
+						</div>
+						<pre id="propositions" class="margin div-centered column">
+						</pre>
+					</div>
+					
+					<div class="panneau margin">
+						<div class="margin">Programmé par Louis Syrepret et stylisé par Golto</div>
+						<aside>Utiliser "Importer un classement" pour utiliser une liste déjà prédéterminée.</aside>
+						<div class="column">
+							<button onclick="tele()" class="gerer">Télécharger l'image</button>
+							<input type="file" id="input" onchange="priseencharge()" hidden/>
+							<button onclick="imp()" class="gerer">Importer un classement</button>
+							<button onclick="exp()" class="gerer">Exporter le classement</button>
+							<button onclick="rst()" class="gerer">Remettre à zéro</button>
+							<button onclick="chgAxes()" class="gerer">Changer les axes</button><br>
+						
+						
+							<input type="checkbox" id="axes" name="axes" onchange="revAxes()" class="margin"><label for="axes">Afficher les axes</label>
+							<aside>Quand les axes sont affichés,<br> il n'est plus possible de modifier les positions.</aside>
+							
+							<input type="checkbox" id="sep" name="sep" onchange="revSep()" checked class="margin"><label for="sep">Divisions</label>
+							
+							<select id="style" onchange="styleStyle()" class="margin">
+								<option>Double-degradé n°1</option>
+								<option>Double-degradé n°2</option>
+								<option>Vide</option>
+							</select>
+
+							<select id="points" onchange="stylePoints()" class="margin">
+								<option>Petit disque</option>
+								<option>Grand disque</option>
+								<option>Cercle</option>
+								<option>Carré</option>
+								<option>Étoile</option>
+							</select>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		
+		<script src="app_tiersList.js"></script>
+
+		</section>
+		<!--  ===================================== SECTION 7 =====================================  -->
+		<section id="section7" class="linear-gradient07">
+			<div class="div-centered column" data-inviewport="slide">
+				
+				
+				<!--<div>Tourner votre téléphone en paysage</div>
+				<canvas id="equaLinUlysse" style="transform: scale(0.5);"></canvas>
+		        <script type="module" src="./game_equaLin.js"></script>-->
+
+		        <button onclick="GO_TO_RENDERER('golpexSandbox');">Jouer</button>
+
+			</div>
+			
+		</section>
+
+		<!--  ===================================== SECTION 8 =====================================  -->
+		
+		<!--
+		<section id="section8" class="linear-gradient08">
+			
+			<div class="div-centered" data-inviewport="slide">
+
+
+				<div class="div-centered column">
+					<h1>Golpex Mathmaker Playground</h1><div class="padding"></div>
+					<input type="search" class="search-bar" id="inputMathMaker" style="width: 600px;"  onkeyup="handle(event)" placeholder="Construisez un objet">
+
+					<div class="div-centered row">
+						<pre id="outputMathMakerVariable"></pre>
+						<pre id="outputMathMaker"></pre>
+					</div>
+				</div>
+
+				
+			</div>
+
+		<script src='./MathMakerPlayground.js'></script>
+		</section>
+		-->
+
+		<!--  ===================================== SECTION 8 =====================================  -->
+<!--
+		<section id="section6">
+			<div class="div-centered" data-inviewport="slide">
+				<h1>SECTION 5</h1>
+			</div>
+		</section>
+-->
+	</main>
+
+	<!--  ========================================== FOOTER ==========================================  -->
+
+	<footer>
+		<div class="div-centered spacing">
+			<a href="https://www.youtube.com/channel/UC3lRCtBb8ssim8FdTqZ-hug" target="_blank" title="Youtube's channel">
+				<i class="fa-brands fa-youtube"></i>
+			</a> 
+			<a href="https://discord.gg/WnWpuHj5SA" target="_blank" title="Discord Server">
+				<i class="fa-brands fa-discord"></i>
+			</a>
+		</div>
+		<div class="div-centered small">
+			Version p2.1.7 by Golto (FOUCAUD Guillaume)
+		</div>
+		<div class="div-centered small">
+			© Tous droits réservés
+		</div>
+	</footer>
+	
+</div>
+
+	
+
+	<!--  ========================================== SCRIPT : RENDERERS - Variables ==========================================  -->
+
+	<script type="text/javascript">
+		let RENDERERS_COUNT = 0;
+		let RENDERERS_RUNNING = new Map;
+		let CURRENT_RENDERER = 'main';
+
+		/*
+		'main' : renderer-main + home page (main)
+		'sandbox' : golpexSandbox
+		'chatbot' : golpexChatBot
+		'craft' : golpexCraft
+		...
+		*/
+
+		function SWITCH_OFF(renderer){
+			document.getElementById(renderer).classList.add('inactive');
+			RENDERERS_RUNNING.set(renderer,false);
+		}
+
+		function SWITCH_ON(renderer){
+			document.getElementById(renderer).classList.remove('inactive');
+			RENDERERS_RUNNING.set(renderer,true);
+		}
+
+		function GO_TO_RENDERER(renderer){
+			SWITCH_OFF(CURRENT_RENDERER);
+			SWITCH_ON(renderer);
+			CURRENT_RENDERER = renderer;
+		}
+	</script>
+
+	<!--  ========================================== SCRIPT : THREEJS ==========================================  -->
+
+		<!--<script src="https://threejs.org/examples/js/libs/ammo.wasm.js"></script>-->
+		<!--<script src="https://threejs.org/build/three.module.js" type="module"></script>-->
+
+		<!-- Import maps polyfill -->
+		<!-- Remove this when import maps will be widely supported -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://threejs.org/build/three.module.js",
+					"three/addons/": "https://threejs.org/examples/jsm/"
+				}
+			}
+		</script><!---->
+
+	<!--  ========================================== SCRIPT : Menu hamburger toggler ==========================================  -->
+
+
+	<script>
+		console.warn('menu_hamburger en pause')
+		/*
+		const menuHamburger = document.querySelector(".menu-hamburger")
+		const navLinks = document.querySelector(".nav-links")
+
+		menuHamburger.addEventListener('click',()=>{
+			navLinks.classList.toggle('mobile-menu')
+			menuHamburger.classList.toggle('mobile-menu')
+		})
+		*/
+	</script>
+
+	<!--  ========================================== SCRIPT : NavBar qui disparaît en scrollant ==========================================  -->
+
+
+	<script type="module">
+		console.warn('navbar en pause')
+		/*
+		let previousScrollPos = 0;
+		let nav = document.querySelector('nav');
+		let navHeight = nav.offsetHeight;
+		let timer;
+		nav.classList.add('hideNav');
+
+
+		window.addEventListener('scroll', function(e) {
+			let currentScrollPos = window.pageYOffset;
+
+			if (currentScrollPos > navHeight && currentScrollPos > previousScrollPos) {
+				nav.classList.add('hideNav');
+				clearTimeout(timer);
+			} else {
+			nav.classList.remove('hideNav');
+			}
+		  
+			previousScrollPos = currentScrollPos;
+		});*/
+
+
+
+
+
+
+
+
+//ne pas réutiliser cette partie
+	/*
+		window.addEventListener('mousemove', function(e) {
+			let currentY = e.clientY;
+		  
+			if (currentY > 100) {
+				if (!nav.classList.contains('hideNav')) {
+					timer = setTimeout(function() {
+					nav.classList.add('hideNav');
+					}, 1000);
+				}
+				
+			} else {
+				nav.classList.remove('hideNav');
+				clearTimeout(timer);
+			}
+		});*/
+
+	</script>
+
+
+	<!--  ========================================== SCRIPT : IN-VIEWPORT ==========================================  -->
+
+	<script type="text/javascript">
+		//Toggle animations when visible
+		//https://stackoverflow.com/questions/27462306/css3-animate-elements-if-visible-in-viewport-page-scroll
+
+
+		/*
+		use data-inviewport="NAME" in HTML elements like that : <a data-inviewport="slide">example</a>
+		
+		use [data-inviewport="NAME"] in CSS like that :
+
+		[data-inviewport="slide"] { 
+			transition: 2s ease-out;
+			opacity: 0.0;
+			transform: translate(0, -20%);
+		}
+		[data-inviewport="slide"].is-inViewport { 
+			opacity: 1.0; 
+			transform: translate(0, 0);
+		}
+		*/
+
+		const inViewport = (entries, observer) => {
+		  entries.forEach(entry => {
+			entry.target.classList.toggle("is-inViewport", entry.isIntersecting);
+		  });
+		};
+
+		const Obs = new IntersectionObserver(inViewport);
+		const obsOptions = {}; //See: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API#Intersection_observer_options
+
+		// Attach observer to every [data-inviewport] element:
+		const ELs_inViewport = document.querySelectorAll('[data-inviewport]');
+		ELs_inViewport.forEach(EL => {
+		  Obs.observe(EL, obsOptions);
+		});
+	</script>
+</body>
+
+</html>
