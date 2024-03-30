@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Marching squares.</title>
+    </head>
+    <body>
+        <!-- un objet canvas -->
+        <canvas id="c"></canvas>
+        
+        <script>
+            // Paramètres.
+            let nDivisions = 25; let tailleMorceau = 16; let marge = 10;
+            
+            // Opération nécessaire pour travailler sur le canvas.
+            let c = document.getElementById('c');
+            c.width = nDivisions*tailleMorceau+2*marge;
+            c.height = nDivisions*tailleMorceau+2*marge;
+            let ctx = c.getContext('2d');
+            ctx.translate(marge,marge);
+
+            // On génere une grille de (nDiv+1)*(nDiv+1) points avec 0/1.
+            let grille = [[]];
+            for(let i = 0; i<=nDivisions; i++){
+                grille[i] = [];
+                for(let j = 0; j<=nDivisions; j++){
+                    grille[i][j] = (Math.random()>0.5)?1:0;
+                }
+            }
+
+            // La liste des lignes qu'il faut pour chaque configuration, sous la forme d'une liste de lignes données par [ax,ay,bx,by] pour chaque configuration.
+            // En fait, seulement la moitié, les autres se déduisent par symétrie.
+            const l = [[[]],[[0.5,0,0,0.5]],[[0.5,0,1,0.5]],[[0,0.5,1,0.5]],
+            [[0,0.5,0.5,1]],[[0.5,0,0.5,1]],[[0,0.5,1,0.5],[0.5,0,0.5,1]],[[0.5,1,1,0.5]]];
+
+            function G(y) {return Math.min(y,15-y);}
+
+            // Dessin sur le canvas : les lignes de niveau.
+            ctx.lineWidth = 3; ctx.strokeStyle = '#d00'; ctx.lineCap = 'round';
+            for(let i = 0; i<nDivisions; i++){
+                for(let j = 0; j<nDivisions; j++){
+                    // Calcul de l'indice dans la liste.
+                    let bin = G(grille[i][j]+2*grille[i+1][j]+4*grille[i][j+1]+8*grille[i+1][j+1]);
+                    for(let k = 0; k<l[bin].length; k++){
+                        // Code pour dessiner une ligne.
+                        ctx.beginPath();
+                        ctx.moveTo(tailleMorceau*(i+l[bin][k][0]), tailleMorceau*(j+l[bin][k][1]));
+                        ctx.lineTo(tailleMorceau*(i+l[bin][k][2]), tailleMorceau*(j+l[bin][k][3]));
+                        ctx.stroke();
+                        ctx.closePath();
+                    }
+                }
+            }
+            
+            // Dessin : les points.
+            for(let i = 0; i<=nDivisions; i++){
+                for(let j = 0; j<=nDivisions; j++){
+                    // Pour choisir une couleur en fonction de la valeur de grille[i][j].
+                    ctx.fillStyle = (grille[i][j] == 0)?"#ccc":"#555";
+                    // Code pour dessiner une ligne.
+                    ctx.beginPath();
+                    ctx.arc(i*tailleMorceau,j*tailleMorceau,tailleMorceau/4,0,2*Math.PI);
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+        </script>
+    </body>
+</html>

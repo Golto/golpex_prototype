@@ -1,0 +1,4 @@
+{ 
+	player0 : { name : golto, position : 10  },
+	player1 : { name : julosolong, position : 5  },
+}
