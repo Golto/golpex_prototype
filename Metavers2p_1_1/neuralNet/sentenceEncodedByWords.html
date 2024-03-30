@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--https://www.youtube.com/watch?v=D-XzAeVvMkg&list=PLRqwX-V7Uu6YIeVA3dNxbR9PYj4wV31oQ&index=2-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>tensorflow</title>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		//tf.tensor([1,2,3]).print()
+
+
+		function getWordsFromSentences(s){
+			return s.toLowerCase().replaceAll('.','').replaceAll(',','').replaceAll('\'',' ').split(' ')
+		}
+
+
+		/*const vocabEntry = getWordsFromSentences("La vie est courte, alors il est important de profiter de chaque instant. Il faut apprécier les choses simples, comme une promenade dans la nature ou un bon repas entre amis. Les moments de bonheur sont souvent cachés dans les petites choses de la vie, donc il est important de les chercher. Les relations sont également très importantes, donc il est essentiel de passer du temps avec les gens que l'on aime. Les erreurs sont inévitables, mais il ne faut pas avoir peur de les faire. Elles sont des occasions d'apprendre et de grandir. En fin de compte, la vie est ce que l'on en fait, alors il est important de prendre le contrôle de son destin et de faire de son mieux pour être heureux et accompli. Le soleil brille haut dans le ciel bleu. Les oiseaux volent dans les arbres verts. L'eau claire coule dans la rivière rapide. Les enfants jouent sur l'herbe douce. Les fleurs colorées poussent dans le champ large. Les nuages blancs flottent dans le vent frais. Le chat noir dort sur le tapis chaud. Les étoiles brillent dans la nuit noire. La lune argentée éclaire la terre sombre. Les insectes bourdonnent autour de la lampe électrique. Life is short, so it is important to enjoy every moment. You should appreciate the simple things, like a walk in nature or a good meal with friends. Moments of happiness are often hidden in the little things in life, so it is important to look for them. Relationships are also very important, so it is essential to spend time with the people you love. Mistakes are inevitable, but you should not be afraid to make them. They are opportunities to learn and grow. In the end, life is what you make of it, so it is important to take control of your destiny and do your best to be happy and fulfilled. The sun shines high in the blue sky. Birds fly in the green trees. Clear water flows in the fast river. Children play on the soft grass. Colorful flowers grow in the wide field. White clouds float in the cool wind. The black cat sleeps on the warm carpet. Stars shine in the black night. The silvery moon illuminates the dark earth. Insects buzz around the electric lamp. La vida es corta, así que es importante disfrutar de cada momento. Hay que apreciar las cosas simples, como un paseo por la naturaleza o una buena comida entre amigos. Los momentos de felicidad a menudo se esconden en las pequeñas cosas de la vida, por lo que es importante buscarlas. Las relaciones también son muy importantes, por lo que es esencial pasar tiempo con las personas que amamos. Los errores son inevitables, pero no debemos tener miedo de cometerlos. Son oportunidades para aprender y crecer. Al final, la vida es lo que hacemos de ella, por lo que es importante tomar el control de nuestro destino y hacer todo lo posible para ser feliz y realizado. El sol brilla alto en el cielo azul. Los pájaros vuelan en los árboles verdes. El agua clara fluye en el río rápido. Los niños juegan en la hierba suave. Las flores coloridas crecen en el campo amplio. Las nubes blancas flotan en el viento fresco. El gato negro duerme en la alfombra cálida. Las estrellas brillan en la noche oscura. La luna plateada ilumina la tierra oscura. Los insectos zumban alrededor de la lámpara eléctrica.");*/
+		const vocabEntry = getWordsFromSentences(
+			"le la les un une des être avoir faire dire aller voir pouvoir vouloir devoir prendre donner dire savoir penser trouver croire aimer travailler manger boire dormir marcher courir sauter chanter jouer lire écrire parler comprendre écouter regarder sentir vivre mourir temps jour nuit semaine mois année vie mort homme femme enfant ami famille maison ville pays monde travail école étudiant professeur livre film musique art sport nature mer montagne rivière arbre fleur animal chien chat oiseau cheval vache mouton voiture avion train vélo moto vêtement chaussure chapeau sac nourriture fruit légume pain viande poisson fromage vin bière eau thé café sucre sel huile vinaigre argent banque carte voyage vacances billet passeport téléphone ordinateur internet télévision film musique livre journal radio photo vidéo jeu cadeau fête anniversaire mariage naissance mort amour amitié famille travail argent santé bonheur paix guerre liberté justice égalité fraternité religion politique culture science technologie environnement énergie climat pollution développement économie entreprise industrie commerce marché produit service client publicité communication marketing management ressources humaines formation recherche innovation projet qualité sécurité norme réglementation fiscalité droit contrat assurance propriété impôt dette investissement épargne bourse banque finance économie, a able about above accept according account across act active activity actually add address administration admit adult affect after again against age agency agent ago agree agreement ahead air all allow almost alone along already also although always American among amount analysis and animal another answer any anyone anything appear apply approach area argue arm around arrive art article artist as ask assume at attack attention attorney audience author authority available avoid away baby back bad bag ball bank bar base be beat beautiful because become bed before begin behavior behind believe benefit best better between beyond big bill billion bit black blood blue board body book born both box boy break bring brother budget build building business but buy by call camera campaign can cancer candidate capital car card care career carry case catch cause cell center central century certain certainly chair challenge chance change character charge check child choice choose church citizen city civil claim class clear clearly close coach cold collection college color come commercial common community company compare computer concern condition conference Congress consider consumer contain continue control cost could country couple course court cover create crime cultural culture cup current customer cut dark data daughter day dead deal death debate decade decide decision deep defense degree Democrat democratic describe design despite detail determine develop development die difference different difficult dinner direction director discover discuss discussion disease do doctor dog door down draw dream drive drop drug during each early east easy eat economic economy edge education effect effort eight either election else employee end energy enjoy enough enter entire environment environmental especially establish even evening event ever every everybody everyone everything evidence exactly example executive exist expect experience expert explain eye face fact factor fail fall family far fast father fear federal feel feeling few field fight figure fill film final finally financial find fine finger finish fire firm first fish five floor fly focus follow food foot for force foreign forget form former forward four free friend from front full fund future game garden gas general generation get girl give glass go goal good government house time day work year way person place thing man woman child company group problem point week the, el la de que y a en un ser se no haber por con su para como estar tener le lo todo pero más hacer o poder decir este ir otro ese la si me ya ver porque dar cuando él muy sin vez mucho saber qué sobre mi alguno mismo yo también hasta año dos querer entre así primero desde grande español mexicano bajo mayor segundo casa trabajo agua niño camino país vida padre madre hermano hermana amigo amor tiempo momento cosa lugar gente noche día mano pie cuerpo mente ojo boca nariz cabello piel corazón alma amor odio risa lágrima tristeza felicidad" +
+			"Le ciel est bleu et le soleil brille. Les oiseaux chantent dans les arbres verts. Les fleurs colorées poussent dans le jardin. Les enfants jouent dans le parc. La rivière coule doucement. Les nuages blancs flottent dans le ciel. Le chat dort sur le tapis doux. Les étoiles brillent dans la nuit. Les voitures passent sur la route. Les gens marchent dans la rue. Les feux de circulation clignotent en rouge et en vert. Les avions volent dans le ciel. Les chiens aboient dans la rue. Les gens parlent au téléphone. Les magasins sont ouverts. Les feuilles tombent des arbres en automne. Les fourmis marchent sur le sol. Les papillons volent dans les jardins. Les araignées tissent des toiles. Les souris courent dans les champs. Les vaches broutent dans les prés. Les moutons bêlent dans les collines. Les oies volent en formation en V. Les abeilles butinent les fleurs. Les grenouilles sautent dans l'étang. Les poissons nagent dans la rivière. Les libellules planent dans l'air. Les criquets chantent dans les champs. Les sauterelles sautent dans les hautes herbes. Le matin, je me réveille tôt et je prends une douche. Ensuite, je prépare mon petit déjeuner et je bois un café. Après cela, je vais travailler à pied car j'habite près de mon bureau. J'aime bien mon travail car je travaille avec des collègues sympas. Le soir, je rentre chez moi et je prépare mon dîner. J'aime cuisiner, donc je fais souvent des plats différents. Après le dîner, je regarde un peu la télévision ou je lis un livre avant d'aller me coucher." +
+			"The sun shines bright in the clear blue sky. Birds chirp happily in the tall trees. A cool breeze blows through the green grass. Children laugh and play on the soft sand. Flowers bloom in the garden, showing their beautiful colors. The clouds drift lazily in the sky, casting shadows below. A friendly dog barks happily at its owner. The stars twinkle in the dark night sky. The moon glows brightly in the darkness. Insects buzz around the bright light. I love to read books in my free time. Playing games is a great way to have fun with friends. Walking in the park is a relaxing activity. Cooking is a skill that takes practice to master. Swimming in the pool is a refreshing way to cool off in the summer. Watching movies is a great way to escape reality for a while. Writing poetry is a way to express your feelings and emotions. Dancing is a fun way to exercise and express yourself. Singing is a great way to release stress and feel happy. Traveling is a wonderful way to explore new places and cultures. I woke up early this morning and had a cup of coffee. Then, I walked my dog in the park and enjoyed the fresh air. After that, I went to work and had a busy day at the office. I had a sandwich for lunch and chatted with my colleagues during the break. In the evening, I watched a movie on Netflix and ate some popcorn. Finally, I went to bed and fell asleep quickly." +
+			"También me gusta leer libros y ver películas. El verano es mi estación favorita porque hace sol y podemos ir a la playa. Me encanta comer paella y tortilla de patatas. Mi color favorito es el azul y mi animal favorito es el perro. Espero que tengas un buen día. Me gusta mucho la comida italiana. Hoy es un día hermoso para salir a caminar. La música me hace sentir feliz y relajado. Mis amigos son muy divertidos y amables. Siempre trato de ser amable y respetuoso con los demás. Me encanta leer libros interesantes en mi tiempo libre. A veces me gusta cocinar platos nuevos y experimentales. Los perros son animales muy leales y amorosos. La naturaleza es hermosa y debemos cuidarla. Disfruto mucho viajar y conocer nuevos lugares y culturas. Hola, ¿cómo estás? Me llamo María y vivo en Madrid. Me gusta mucho leer libros y escuchar música. Hoy es un día soleado y hace calor, así que voy a ir a la playa con mis amigos. El fin de semana pasado fui al cine y vi una película muy interesante. En mi tiempo libre también me gusta hacer deporte y salir a pasear por el parque. Ahora estoy estudiando español en línea para mejorar mi habilidad en el idioma. ¿Y tú, qué te gusta hacer en tu tiempo libre?"
+			)
+		const vocabSet = new Set(vocabEntry)
+		const vocab = [...vocabSet.values()]
+
+		const sentencesFR = "Le ciel est bleu et le soleil brille. Les oiseaux chantent dans les arbres verts. Les fleurs colorées poussent dans le jardin. Les enfants jouent dans le parc. La rivière coule doucement. Les nuages blancs flottent dans le ciel. Le chat dort sur le tapis doux. Les étoiles brillent dans la nuit. Les voitures passent sur la route. Les gens marchent dans la rue. Les feux de circulation clignotent en rouge et en vert. Les avions volent dans le ciel. Les chiens aboient dans la rue. Les gens parlent au téléphone. Les magasins sont ouverts. Les feuilles tombent des arbres en automne. Les fourmis marchent sur le sol. Les papillons volent dans les jardins. Les araignées tissent des toiles. Les souris courent dans les champs. Les vaches broutent dans les prés. Les moutons bêlent dans les collines. Les oies volent en formation en V. Les abeilles butinent les fleurs. Les grenouilles sautent dans l'étang. Les poissons nagent dans la rivière. Les libellules planent dans l'air. Les criquets chantent dans les champs. Les sauterelles sautent dans les hautes herbes. Le matin, je me réveille tôt et je prends une douche. Ensuite, je prépare mon petit déjeuner et je bois un café. Après cela, je vais travailler à pied car j'habite près de mon bureau. J'aime bien mon travail car je travaille avec des collègues sympas. Le soir, je rentre chez moi et je prépare mon dîner. J'aime cuisiner, donc je fais souvent des plats différents. Après le dîner, je regarde un peu la télévision ou je lis un livre avant d'aller me coucher.".split('.')
+
+		const sentencesEN = "The sun shines bright in the clear blue sky. Birds chirp happily in the tall trees. A cool breeze blows through the green grass. Children laugh and play on the soft sand. Flowers bloom in the garden, showing their beautiful colors. The clouds drift lazily in the sky, casting shadows below. A friendly dog barks happily at its owner. The stars twinkle in the dark night sky. The moon glows brightly in the darkness. Insects buzz around the bright light. I love to read books in my free time. Playing games is a great way to have fun with friends. Walking in the park is a relaxing activity. Cooking is a skill that takes practice to master. Swimming in the pool is a refreshing way to cool off in the summer. Watching movies is a great way to escape reality for a while. Writing poetry is a way to express your feelings and emotions. Dancing is a fun way to exercise and express yourself. Singing is a great way to release stress and feel happy. Traveling is a wonderful way to explore new places and cultures. I woke up early this morning and had a cup of coffee. Then, I walked my dog in the park and enjoyed the fresh air. After that, I went to work and had a busy day at the office. I had a sandwich for lunch and chatted with my colleagues during the break. In the evening, I watched a movie on Netflix and ate some popcorn. Finally, I went to bed and fell asleep quickly.".split('.')
+
+		const sentencesES = "También me gusta leer libros y ver películas. El verano es mi estación favorita porque hace sol y podemos ir a la playa. Me encanta comer paella y tortilla de patatas. Mi color favorito es el azul y mi animal favorito es el perro. Espero que tengas un buen día. Me gusta mucho la comida italiana. Hoy es un día hermoso para salir a caminar. La música me hace sentir feliz y relajado. Mis amigos son muy divertidos y amables. Siempre trato de ser amable y respetuoso con los demás. Me encanta leer libros interesantes en mi tiempo libre. A veces me gusta cocinar platos nuevos y experimentales. Los perros son animales muy leales y amorosos. La naturaleza es hermosa y debemos cuidarla. Disfruto mucho viajar y conocer nuevos lugares y culturas. Hola, ¿cómo estás? Me llamo María y vivo en Madrid. Me gusta mucho leer libros y escuchar música. Hoy es un día soleado y hace calor, así que voy a ir a la playa con mis amigos. El fin de semana pasado fui al cine y vi una película muy interesante. En mi tiempo libre también me gusta hacer deporte y salir a pasear por el parque. Ahora estoy estudiando español en línea para mejorar mi habilidad en el idioma. ¿Y tú, qué te gusta hacer en tu tiempo libre?".split('.')
+
+		function encodeSentence(sentence){
+
+			//Sentence -> Vector
+			const words = getWordsFromSentences(sentence);
+			const wordFreqs = vocab.map(word => words.filter(w => w === word).length); // Comptage des fréquences
+			const encodedSentence = tf.tensor1d(wordFreqs);
+
+			return wordFreqs
+		}
+
+		//test = encodeSentence("La vie courte")
+
+		// model --------------------------------
+		
+		const model = tf.sequential();
+		const inputSize = vocab.length; // taille vocab
+		const hiddenSize = 50;
+		const outputSize = 3; // nombre de langues à prédire
+
+		// Ajout de la couche cachée
+		model.add(tf.layers.dense({
+		  units: hiddenSize,
+		  inputShape: [inputSize],
+		  activation: 'relu'
+		}));
+
+		// Ajout de la couche de sortie
+		model.add(tf.layers.dense({
+		  units: outputSize,
+		  activation: 'softmax'
+		}));
+
+		// Compilation du modèle
+		model.compile({
+		  optimizer: tf.train.adam(),
+		  loss: 'categoricalCrossentropy',
+		  metrics: ['accuracy']
+		});
+
+		model.summary()
+
+		const trainingData = [];
+		const trainingLabels = [];
+
+		for (let sentence of sentencesFR) {
+			trainingData.push(sentence);
+			trainingLabels.push('fr')
+		}
+		for (let sentence of sentencesEN) {
+			trainingData.push(sentence);
+			trainingLabels.push('en')
+		}
+		for (let sentence of sentencesES) {
+			trainingData.push(sentence);
+			trainingLabels.push('es')
+		}
+
+
+
+		const Xpre = trainingData.map(encodeSentence)
+		const X = []
+		for (let array of Xpre) {
+			X.push(...array)
+		}
+
+		Ypre = trainingLabels.map(label => {
+		  if (label === "fr") return [1,0,0];
+		  if (label === "en") return [0,1,0];
+		  if (label === "es") return [0,0,1];
+		})
+		const Y = []
+		for (let array of Ypre) {
+			Y.push(...array)
+		}
+
+		const xTrain = tf.tensor2d(X, [trainingData.length, inputSize]);
+		const yTrain = tf.tensor2d(Y, [trainingData.length, outputSize]);
+
+		/*model.fit(xTrain, yTrain, {
+		  epochs: 40,
+		  batchSize: 3,
+		  validationSplit: 0.2,
+		});*/
+		model.fit(xTrain,yTrain).then(()=>{
+			console.log('finish');
+			let res = model.predict(tf.tensor2d(Xpre[0], [1, inputSize])).dataSync()
+			console.log(trainingData[0],res)
+		})
+
+		/*
+		sans dataSync : retourne tenseur
+		avec dataSync : retourne liste
+		*/
+		let result = model.predict(tf.tensor2d(Xpre[0], [1, inputSize])).dataSync()
+		console.log(trainingData[0],result)
+
+		function prediction(sentence){
+			return model.predict(tf.tensor2d(encodeSentence(sentence), [1, inputSize])).dataSync()
+		}
+
+
+		/*
+		for(let i = 0; i < trainingData.length; i++) {
+		    console.log(model.predict(tf.tensor2d([trainingData[i]], [1, inputSize])).dataSync());
+		}*/
+		
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+
+	<!--
+	
+	M = moveto
+	L = lineto
+	H = horizontal lineto
+	V = vertical lineto
+	C = curveto
+	S = smooth curveto
+	Q = quadratic Bézier curve
+	T = smooth quadratic Bézier curveto
+	A = elliptical Arc
+	Z = closepath
+
+	-->
+	<!--
+	<path d="
+	M 100 300 L 100 200 L 50 200
+	L 50 70 L 250 70 L 450 70
+	L 450 200 L 400 200 L 400 400
+	L 270 400 L 270 200 L
+	" 
+	style="fill:red;stroke:black;stroke-width:5;fill-opacity:0.00;stroke-opacity:0.00"/>
+-->
+
+
+
+
+
+
+<!--
+	<rect x="0" y="0" width="512" height="512"
+	style="fill:blue;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+
+	<rect x="256" y="256" width="256" height="256"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+-->
+
+	<!--(512-80)/6 = 72 = 1/6   :40px + 1/6 + 2/3 + 1/6 + 40px -->
+<!--
+	<rect x="20" y="0" width="472" height="512"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+
+	<rect x="20" y="36" width="472" height="144"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+	<rect x="20" y="56" width="472" height="144"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+	<rect x="20" y="76" width="472" height="144"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+
+	<rect x="40" y="20" width="432" height="472"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+
+	<rect x="92" y="348" width="120" height="48"
+	style="fill:orange;stroke:black;stroke-width:1;fill-opacity:0.01;stroke-opacity:1.0" />
+-->
+	<!--x0 = 256+20 y0 = 512-20-->
+	<!--bas du X : 256px + 20px + 1/3 + 1/6 + 1/6 + 1/3 + 20px : 1/3 = 72-->
+<defs>
+	<filter id="f1" x="0" y="0" width="200%" height="200%">
+	  <feOffset result="offOut" in="SourceGraphic" dx="20" dy="20" />
+	  <feColorMatrix result = "matrixOut" in = "offOut" type = "matrix" values = "0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0"/>
+	  <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="2" />
+	  <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+	</filter>
+  </defs>
+
+	<path d="
+	M 276 492 
+	L 348 492 L 384 456 L 420 492
+	L 492 492
+	L 492 420 L 456 384 L 492 348 
+	L 492 276
+	L 420 276 L 384 312
+
+	L 384 200 L 472 180 L 472 36
+	L 256 56
+	L 40 76 L 40 220 L 128 200
+
+	L 92 348 L 212 396 L 236 200
+	L 276 200 
+
+	L 312 384
+	L 276 420 Z
+
+
+	" 
+	style="fill:#ff4d4d;stroke:black;stroke-width:5;fill-opacity:1.0;stroke-opacity:0.0"
+	filter="url(#f1)"/>
+	
+	
+	
+<!--
+	<circle cx="128" cy="456" r="36" stroke="black" stroke-width="5" style="fill:orange;stroke:black;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.1" />-->
+	<circle cx="128" cy="436" r="56" stroke="black" stroke-width="5" style="fill:#ff9933;stroke:black;stroke-width:5;fill-opacity:1.0;stroke-opacity:0.0"
+	filter="url(#f1)"/>
+
+	
+
+</svg>

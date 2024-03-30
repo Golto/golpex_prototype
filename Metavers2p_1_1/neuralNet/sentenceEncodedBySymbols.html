@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--https://www.youtube.com/watch?v=D-XzAeVvMkg&list=PLRqwX-V7Uu6YIeVA3dNxbR9PYj4wV31oQ&index=2-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>tensorflow</title>
+	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+
+</head>
+<body>
+	<script type="text/javascript">
+		//tf.tensor([1,2,3]).print()
+
+
+		function getWordsFromSentences(s){
+			return s.toLowerCase().replaceAll('.','').replaceAll(',','').replaceAll('\'',' ').split(' ')
+		}
+
+		const vocab = 'abcdefghijklmnopqrstuvwxyzéèàç,;.?îïêëâäûüôöñìíùú¿'.split('')
+
+		const sentencesFR = "Le ciel est bleu et le soleil brille. Les oiseaux chantent dans les arbres verts. Les fleurs colorées poussent dans le jardin. Les enfants jouent dans le parc. La rivière coule doucement. Les nuages blancs flottent dans le ciel. Le chat dort sur le tapis doux. Les étoiles brillent dans la nuit. Les voitures passent sur la route. Les gens marchent dans la rue. Les feux de circulation clignotent en rouge et en vert. Les avions volent dans le ciel. Les chiens aboient dans la rue. Les gens parlent au téléphone. Les magasins sont ouverts. Les feuilles tombent des arbres en automne. Les fourmis marchent sur le sol. Les papillons volent dans les jardins. Les araignées tissent des toiles. Les souris courent dans les champs. Les vaches broutent dans les prés. Les moutons bêlent dans les collines. Les oies volent en formation en V. Les abeilles butinent les fleurs. Les grenouilles sautent dans l'étang. Les poissons nagent dans la rivière. Les libellules planent dans l'air. Les criquets chantent dans les champs. Les sauterelles sautent dans les hautes herbes. Le matin, je me réveille tôt et je prends une douche. Ensuite, je prépare mon petit déjeuner et je bois un café. Après cela, je vais travailler à pied car j'habite près de mon bureau. J'aime bien mon travail car je travaille avec des collègues sympas. Le soir, je rentre chez moi et je prépare mon dîner. J'aime cuisiner, donc je fais souvent des plats différents. Après le dîner, je regarde un peu la télévision ou je lis un livre avant d'aller me coucher.".split('.')
+
+		const sentencesEN = "The sun shines bright in the clear blue sky. Birds chirp happily in the tall trees. A cool breeze blows through the green grass. Children laugh and play on the soft sand. Flowers bloom in the garden, showing their beautiful colors. The clouds drift lazily in the sky, casting shadows below. A friendly dog barks happily at its owner. The stars twinkle in the dark night sky. The moon glows brightly in the darkness. Insects buzz around the bright light. I love to read books in my free time. Playing games is a great way to have fun with friends. Walking in the park is a relaxing activity. Cooking is a skill that takes practice to master. Swimming in the pool is a refreshing way to cool off in the summer. Watching movies is a great way to escape reality for a while. Writing poetry is a way to express your feelings and emotions. Dancing is a fun way to exercise and express yourself. Singing is a great way to release stress and feel happy. Traveling is a wonderful way to explore new places and cultures. I woke up early this morning and had a cup of coffee. Then, I walked my dog in the park and enjoyed the fresh air. After that, I went to work and had a busy day at the office. I had a sandwich for lunch and chatted with my colleagues during the break. In the evening, I watched a movie on Netflix and ate some popcorn. Finally, I went to bed and fell asleep quickly.".split('.')
+
+		const sentencesES = "También me gusta leer libros y ver películas. El verano es mi estación favorita porque hace sol y podemos ir a la playa. Me encanta comer paella y tortilla de patatas. Mi color favorito es el azul y mi animal favorito es el perro. Espero que tengas un buen día. Me gusta mucho la comida italiana. Hoy es un día hermoso para salir a caminar. La música me hace sentir feliz y relajado. Mis amigos son muy divertidos y amables. Siempre trato de ser amable y respetuoso con los demás. Me encanta leer libros interesantes en mi tiempo libre. A veces me gusta cocinar platos nuevos y experimentales. Los perros son animales muy leales y amorosos. La naturaleza es hermosa y debemos cuidarla. Disfruto mucho viajar y conocer nuevos lugares y culturas. Hola, ¿cómo estás? Me llamo María y vivo en Madrid. Me gusta mucho leer libros y escuchar música. Hoy es un día soleado y hace calor, así que voy a ir a la playa con mis amigos. El fin de semana pasado fui al cine y vi una película muy interesante. En mi tiempo libre también me gusta hacer deporte y salir a pasear por el parque. Ahora estoy estudiando español en línea para mejorar mi habilidad en el idioma. ¿Y tú, qué te gusta hacer en tu tiempo libre?".split('.')
+
+		function encodeSentence(sentence){
+
+			//Sentence -> Vector
+			const length = sentence.length + 0.0001 // ne pas diviser par 0
+			const symbols = sentence.split('')
+			const symbolFreqs = vocab.map(symbol => symbols.filter(s => s === symbol).length); // Comptage des fréquences
+			const normalizedFreqs = symbolFreqs.map(v => v/length)
+
+			return normalizedFreqs
+		}
+
+		// model --------------------------------
+		
+		const model = tf.sequential();
+		const inputSize = vocab.length; // taille vocab
+		const hiddenSize = 20;
+		const outputSize = 3; // nombre de langues à prédire
+
+		// Ajout de la couche cachée
+		model.add(tf.layers.dense({
+		  units: hiddenSize,
+		  inputShape: [inputSize],
+		  activation: 'sigmoid'
+		}));
+
+		// Ajout de la couche de sortie
+		model.add(tf.layers.dense({
+		  units: outputSize,
+		  activation: 'softmax'
+		}));
+
+		// Compilation du modèle
+		model.compile({
+		  optimizer: tf.train.adam(),
+		  loss: 'categoricalCrossentropy',
+		  metrics: ['accuracy']
+		});
+
+		model.summary()
+
+		const trainingData = [];
+		const trainingLabels = [];
+
+		for (let sentence of sentencesFR) {
+			trainingData.push(sentence);
+			trainingLabels.push('fr')
+		}
+		for (let sentence of sentencesEN) {
+			trainingData.push(sentence);
+			trainingLabels.push('en')
+		}
+		for (let sentence of sentencesES) {
+			trainingData.push(sentence);
+			trainingLabels.push('es')
+		}
+
+
+
+		const Xpre = trainingData.map(encodeSentence)
+		const X = []
+		for (let array of Xpre) {
+			X.push(...array)
+		}
+
+		Ypre = trainingLabels.map(label => {
+		  if (label === "fr") return [1,0,0];
+		  if (label === "en") return [0,1,0];
+		  if (label === "es") return [0,0,1];
+		})
+		const Y = []
+		for (let array of Ypre) {
+			Y.push(...array)
+		}
+
+		const xTrain = tf.tensor2d(X, [trainingData.length, inputSize]);
+		const yTrain = tf.tensor2d(Y, [trainingData.length, outputSize]);
+
+		model.fit(xTrain, yTrain, {
+		  batchSize: 3,
+		}).then(()=>{
+			console.log('finish');
+		});
+		/*
+		model.fit(xTrain,yTrain).then(()=>{
+			console.log('finish');
+			let res = model.predict(tf.tensor2d(Xpre[0], [1, inputSize])).dataSync()
+			console.log(trainingData[0],res)
+		})*/
+
+		/*
+		sans dataSync : retourne tenseur
+		avec dataSync : retourne liste
+		*/
+		let result = model.predict(tf.tensor2d(Xpre[0], [1, inputSize])).dataSync()
+		console.log(trainingData[0],result)
+
+		function prediction(sentence){
+			return model.predict(tf.tensor2d(encodeSentence(sentence), [1, inputSize])).dataSync()
+		}
+
+
+		/*
+		for(let i = 0; i < trainingData.length; i++) {
+		    console.log(model.predict(tf.tensor2d([trainingData[i]], [1, inputSize])).dataSync());
+		}*/
+		
+	</script>
+
+</body>
+</html>
