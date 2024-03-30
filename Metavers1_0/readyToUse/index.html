@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Metavers vp1.0</title>
+	<link rel="icon" type="image/png" href="favicon.png">
+
+	<link rel="stylesheet" href="style.css">
+	<script src="https://kit.fontawesome.com/b858757988.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+	<!--RENDERING-->
+	<div class="canvasAreaBehind" id="sandbox0">
+		<div class="canvasAreaBehind" id="sandbox0World"></div>
+		<div class="canvasAreaInFront" id="sandbox0CSS3"></div>
+	</div><!--old gen-->
+
+	<div class="canvasAreaBehind" id="sandbox">
+		<div class="canvasAreaBehind" id="sandboxWorld"></div>
+		<div class="canvasAreaInFront" id="sandboxCSS3"></div>
+	</div>
+
+	<div class="canvasAreaBehind" id="hub">
+		<div class="canvasAreaBehind" id="hubWorld"></div>
+		<div class="canvasAreaInFront" id="hubCSS3"></div>
+	</div>
+
+	<div class="canvasAreaBehind" id="labo">
+		<div class="canvasAreaBehind" id="laboWorld"></div>
+		<div class="canvasAreaInFront" id="laboCSS3"></div>
+	</div>
+
+	<!--PAGE-->
+	<div id="welcome">
+
+	
+		<div class="animationSquare"></div>
+
+
+	<!-- Header -->
+	<div class="header">
+		<!--logo.https://www.w3schools.com/html/html5_svg.asp-->
+		
+		<span>
+			<span id="title">Gol</span><img src="./logo.svg" width="150" />
+		</span>
+		
+		
+		
+		
+
+
+		<!--<h1>Golpex</h1>-->
+		<p><b>Version p1.0</b> by <b>Golto (FOUCAUD Guillaume)</b></p>
+		<p>© Tout droit réservé</p>
+	</div>
+
+	<!-- Navigation Bar -->
+	<div class="navbar">
+		<a href="https://hubs.mozilla.com/"><i class="fa-solid fa-link"></i> Salles entre potes</a>
+		<a href="https://bruno-simon.com/"><i class="fa-solid fa-link"></i> Jeu de Bruno Simon</a>
+		<a href="#" onclick="init('hub')" id="hubInitBtn"><i class="fa-solid fa-play"></i> hub</a>
+		<a href="#" onclick="init('sandbox')" id="sandboxInitBtn"><i class="fa-solid fa-play"></i> sandbox</a>
+		<a href="#" onclick="init('labo')" id="laboInitBtn"><i class="fa-solid fa-play"></i> labo</a>
+	</div>
+
+	<div class="infobar">
+		<p class="leftAligned"> * Renseignez-vous ci-dessous en ce qui concerne les contrôles sur PC ou interface tactile (mobile/tablette/mac)</p>
+	</div>
+
+	<!-- The flexible grid (content) -->
+	<div class="row">
+		<div class="side">
+			<!--
+			<i class="fa-solid fa-bars"></i>
+			<i class="fa-solid fa-bars-staggered"></i>
+			<i class="fa-solid fa-folder"></i>
+			<i class="fa-solid fa-folder-open"></i>
+			<i class="fa-solid fa-copy"></i>
+			<br>
+			<i class="fa-solid fa-floppy-disk"></i>
+			<i class="fa-solid fa-download"></i>
+			<i class="fa-solid fa-upload"></i>
+			<i class="fa-solid fa-computer"></i>
+			<i class="fa-solid fa-laptop"></i>
+			<i class="fa-solid fa-mobile-screen"></i>
+			<br>
+			<i class="fa-solid fa-trash"></i>
+			<i class="fa-solid fa-check"></i>
+			<i class="fa-solid fa-xmark"></i>
+			<i class="fa-solid fa-crop-simple"></i>
+			<i class="fa-solid fa-pen"></i>
+			<i class="fa-solid fa-plus"></i>
+			<i class="fa-solid fa-minus"></i>
+			<i class="fa-solid fa-link"></i>
+			<i class="fa-solid fa-angle-down"></i>
+			<i class="fa-solid fa-angle-up"></i>
+		-->
+
+			<h2>Version prototype 1.0</h2>
+			<h2>Actuel</h2>
+			<h5>xx août 2022</h5>
+			<br>
+			<p class="leftAligned">
+				Golpex version p1.0 : Réécriture totale, Objets de CSS3Renderer pris en charge, Build-Mode
+			</p>
+
+			<br>
+
+			<h2>Versions antérieures</h2>
+			<h5>janvier 2022 à juillet 2022</h5>
+			<br>
+			<p><b>Golpex version p0.1 [janvier 2022]</b></p>
+			<p class="leftAligned">Créations d'objets three.js</p>
+			<br>
+			<p><b>Golpex version p0.2 [février 2022]</b></p>
+			<p class="leftAligned">Création/Gestion des chunks (client only)</p>
+			<br>
+			<p><b>Golpex version p0.3 [mars 2022]</b></p>
+			<p class="leftAligned">Lumière + génération d'un 2D-terrain</p>
+			<br>
+			<p><b>Golpex version p0.4 [avril 2022]</b></p>
+			<p class="leftAligned">vue FPS + collision/gravité</p>
+			<br>
+			<p><b>Golpex version p0.5 [mai 2022]</b></p>
+			<p class="leftAligned">génération procédurale (client only)</p>
+			<br>
+			<p><b>Golpex version p0.6 [juin 2022]</b></p>
+			<p class="leftAligned">génération procédurale MarchingCubes, grottes/Lune (client only)</p>
+			<br>
+			<p><b>Golpex version p0.7 [juillet 2022]</b></p>
+			<p>(non publié)</p>
+			<p class="leftAligned">Test du build-mode et terraforming</p>
+			<br>
+
+		</div> <!--side end-->
+		<div class="main">
+
+			<div class="blockPost">
+
+				<div class="blockPost-title" >
+					<h1><i class="fa-solid fa-gamepad"></i> "Gameplay"</h1>
+				</div>
+
+				<div class="blockPost-content" >
+
+					<h3>Deux modes</h3>
+					<br>
+					<p>SIMPLE -> utilisateur affecté par la gravité</p>
+					<p>CREATIVE -> utilisateur non-affecté par la gravité</p>
+					<br>
+					<h3>Mode de construction</h3>
+					<br>
+					<p>Chaque bloc a sa propre grille adapté à la taille du bloc. Par exemple, si un bloc fait 0.5 sur sa largeur, alors vous pouvez placer deux fois ce bloc sur la largeur.</p>
+					<br>
+					<p>Chaque bloc a sa propre grille rotative. Un bloc peut être placé selon plusieurs rotations différentes (en général 8).</p>
+					<br>
+					<p>Possibilité d'importer ses propres blocs à condition qu'ils soient au format .json et compatible avec la librairie three.js, pour cela dans la console, tapez <span style="color:red;" class="shadow">Block.loadGeometryJson(<span style="color:orange;font-style: italic;" class="shadow">path</span>)</span> si vous avez un fichier geometry.json, ou <span style="color:red;" class="shadow">Block.loadObjJson(<span style="color:orange;font-style: italic;" class="shadow">path</span>)</span> si vous avez un fichier 3DObject.json</p>
+					<br>
+					<h3>Accès au monde virtuel</h3>
+					<p>Pour accéder au monde virtuel, appuyez sur le bouton <a class="btn"><i class="fa-solid fa-play"></i></a> en haut à gauche dans la barre de navigation</p>
+
+				</div>
+
+			</div>
+
+			<div class="blockPost">
+
+
+				<div class="blockPost-title" >
+					<h1>Contrôles Ordinateur</h1>
+					<h1> <i class="fa-solid fa-desktop"></i> <i class="fa-solid fa-laptop"></i> ( PC / Mac / MacBook )</h1>
+				</div>
+
+				<div class="blockPost-content" >
+				
+					<p class="leftAligned">Z Q S D : déplacements avant gauche arrière droite</p>
+					<p class="leftAligned">SOURIS : rotations caméra</p>
+					<p class="leftAligned">O : séléctionner le bloc suivant (par défaut : aucun bloc)</p>
+					<p class="leftAligned">M : séléctionner le mode de jeu suivant (par défaut : 'CREATIVE')</p>
+					<p class="leftAligned">CLIC GAUCHE : supprimer le bloc visé</p>
+					<p class="leftAligned">CLIC DROIT : placer le bloc séléctionné à l'endroit visé</p>
+					<p class="leftAligned">ESPACE : sauter - s'envoler/monter (SIMPLE - CREATIVE)</p>
+					<p class="leftAligned">SHIFT : . - descendre (SIMPLE - CREATIVE)</p>
+
+				</div>
+
+			</div>
+
+			<div class="blockPost">
+				
+
+				<div class="blockPost-title" >
+					<h1>❌ Contrôles Mobile </h1>
+					<h1><i class="fa-solid fa-mobile-screen"></i> <i class="fa-solid fa-tablet-screen-button"></i> ( Téléphones / Tablettes )</h1>
+				</div>
+				<div class="blockPost-content" >indisponible</div>
+
+
+			</div>
+			
+			<div class="blockPost">
+				
+
+				<div class="blockPost-title" >
+					<h1>❌ <i class="fa-solid fa-vr-cardboard"></i> Réalité virtuelle</h1>
+				</div>
+				<div class="blockPost-content" >indisponible</div>
+			</div>
+
+			<div class="blockPost">
+				
+
+				<div class="blockPost-title" >
+					<h1>❌ <i class="fa-solid fa-video"></i> Cam tracker</h1>
+				</div>
+				<div class="blockPost-content" >indisponible</div>
+			</div>
+
+			<div class="blockPost">
+				
+
+				<div class="blockPost-title" >
+					<h1>❌ <i class="fa-solid fa-globe"></i> Multijoueur</h1>
+				</div>
+				<div class="blockPost-content" >indisponible</div>
+			</div>
+
+			<div class="blockPost">
+				
+
+				<div class="blockPost-title" >
+					<h1>❌ Metamask / <i class="fa-brands fa-ethereum"></i> Ethereum / NFT </h1>
+				</div>
+				<div class="blockPost-content" >indisponible</div>
+			</div>
+
+			<div class="blockPost">
+				<div class="blockPost-arrow"> <i class="fa-solid fa-angle-down"></i> </div>
+				<div class="blockPost-title" >title</div>
+				<div class="blockPost-content" >content</div>
+			</div>
+
+
+
+		</div> <!--main end-->
+	</div><!--row end-->
+
+	<!-- Footer -->
+	<div class="footer">
+		<i class="fa-brands fa-google"></i>
+		<a href="https://www.instagram.com/gi_le_spatieux/" target="blank"> <i class="fa-brands fa-instagram"></i> </a>
+		<i class="fa-brands fa-discord"></i>
+		<i class="fa-brands fa-twitter"></i>
+		<i class="fa-brands fa-github"></i>
+		<a href="https://www.youtube.com/channel/UC3lRCtBb8ssim8FdTqZ-hug"><i class="fa-brands fa-youtube"></i></a>
+	</div>
+	
+	</div><!--welcome end-->
+
+	<!--LIBS-->
+	<script src="./THREE.js"></script>
+
+	<!--SCRIPTING-->
+	<script src="./GOLPEX.js"></script>
+	
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script><!--twitter-->
+	<script src="https://unpkg.com/embeddable-nfts/dist/nft-card.min.js"></script><!--opensea-->
+
+</body>
+</html>
